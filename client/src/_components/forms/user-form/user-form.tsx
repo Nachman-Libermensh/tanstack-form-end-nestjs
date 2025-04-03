@@ -15,7 +15,7 @@ import {
   Tooltip,
   Password,
 } from "rizzui";
-import { CreateUser, UserResponse } from "shared";
+import { UserResponse } from "shared";
 import usersService from "@/services/users.service";
 
 // קומפוננטת שגיאות לשדה
@@ -69,7 +69,7 @@ export default function UserForm({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const form = useForm<CreateUser>({
+  const form = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -81,11 +81,8 @@ export default function UserForm({
         setLoading(true);
         setError(null);
 
-        // יצירת עותק של הנתונים ללא confirmPassword
-        const { confirmPassword, ...dataToSend } = value;
-
         // שליחת הנתונים לשרת ללא confirmPassword
-        const data = await usersService.create(dataToSend);
+        const data = await usersService.create(value);
 
         setResponse(data);
         setSuccess(true);
