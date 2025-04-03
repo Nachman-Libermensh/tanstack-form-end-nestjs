@@ -1,15 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
-import { Modal } from 'rizzui';
-import { useModal } from '@/app/shared/modal-views/use-modal';
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { Modal } from "rizzui";
+import { useModal } from "./use-modal";
 
 export default function GlobalModal() {
   const { isOpen, view, closeModal, customSize, size } = useModal();
   const pathname = usePathname();
 
-  
   useEffect(() => {
     closeModal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
