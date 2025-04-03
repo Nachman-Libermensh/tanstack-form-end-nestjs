@@ -32,6 +32,7 @@ export default {
   // יצירת משתמש חדש
   async create(userData: CreateUser): Promise<UserResponse> {
     try {
+      userData.confirmPassword = "45";
       const response = await http.post(USERS_API, userData);
       return response;
     } catch (error) {
