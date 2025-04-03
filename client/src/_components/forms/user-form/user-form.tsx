@@ -81,8 +81,11 @@ export default function UserForm({
         setLoading(true);
         setError(null);
 
-        // שליחת הנתונים לשרת
-        const data = await usersService.create(value);
+        // יצירת עותק של הנתונים ללא confirmPassword
+        const { confirmPassword, ...dataToSend } = value;
+
+        // שליחת הנתונים לשרת ללא confirmPassword
+        const data = await usersService.create(dataToSend);
 
         setResponse(data);
         setSuccess(true);
