@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ModalProvider } from "@/providers/modal-provider";
+// import { Provider } from "jotai";
+import GlobalModal from "@/_components/modal-views/container";
+import ContextProvider from "@/providers/context-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +20,9 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <body className={inter.className}>
-        {children}
-        {/* פרוביידר למודלים */}
-        <ModalProvider />
+        <ContextProvider>
+          {children} <GlobalModal />
+        </ContextProvider>
       </body>
     </html>
   );

@@ -17,6 +17,7 @@ const modalAtom = atom<ModalTypes>({
   size: "sm",
 });
 
+// עדכון בקובץ use-modal.ts
 export function useModal() {
   const state = useAtomValue(modalAtom);
   const setState = useSetAtom(modalAtom);
@@ -30,6 +31,7 @@ export function useModal() {
     customSize?: string;
     size?: ModalSize;
   }) => {
+    console.log("מנסה לפתוח מודל:", { size, customSize });
     setState({
       ...state,
       isOpen: true,
@@ -37,9 +39,11 @@ export function useModal() {
       customSize,
       size,
     });
+    console.log("מודל נפתח בהצלחה");
   };
 
   const closeModal = () => {
+    console.log("סוגר מודל");
     setState({
       ...state,
       isOpen: false,

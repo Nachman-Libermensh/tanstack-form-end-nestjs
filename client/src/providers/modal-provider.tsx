@@ -1,12 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const ModalContainer = dynamic(
-  () => import("@/_components/modal-views/container"),
-  { ssr: false }
-);
+import GlobalModal from "@/_components/modal-views/container";
 
 export function ModalProvider() {
-  return <ModalContainer />;
+  return <GlobalModal />;
 }

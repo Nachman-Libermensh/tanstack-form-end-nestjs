@@ -1,24 +1,39 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "rizzui";
+import UserForm from "@/_components/forms/user-form/user-form";
+import Popup from "@/_components/Popup";
 import { useModal } from "@/_components/modal-views/use-modal";
-import dynamic from "next/dynamic";
-
-// טעינה דינמית של המודל
-const UserRegisterModal = dynamic(
-  () =>
-    import("@/_components/forms/user-form/user-form").then(
-      (mod) => mod.default
-    ),
-  { ssr: false }
-);
 
 export default function Home() {
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
+  const [, setModalType] = useState<string | null>(null);
 
+  // פונקציה משופרת לפתיחת טופס הרשמה
   const handleOpenRegisterModal = () => {
+    console.log("מנסה לפתוח את טופס ההרשמה");
+    setModalType("register");
     openModal({
-      view: <UserRegisterModal />,
+      view: (
+        <Popup
+          title="הרשמת משתמש חדש"
+          onClose={() => {
+            closeModal();
+            setModalType(null);
+          }}
+        >
+          <div className="bg-white p-4 rounded">
+            <UserForm
+              onClose={() => {
+                closeModal();
+                setModalType(null);
+              }}
+              showHeader={false}
+            />
+          </div>
+        </Popup>
+      ),
       size: "lg",
     });
   };
@@ -31,10 +46,16 @@ export default function Home() {
       <p className="text-gray-600 mb-8 text-center max-w-lg">
         דוגמה זו מציגה שילוב של טפסים מתקדמים עם Tanstack Form, NestJS ו-NextJS.
       </p>
-
-      <Button onClick={handleOpenRegisterModal} size="lg" className="px-8">
-        פתח טופס הרשמה
-      </Button>
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Button
+          onClick={handleOpenRegisterModal}
+          size="lg"
+          className="px-8"
+          variant="solid"
+        >
+          פתח טופס הרשמה
+        </Button>
+      </div>
     </main>
   );
 }
