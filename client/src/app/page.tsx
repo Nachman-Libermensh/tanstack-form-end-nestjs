@@ -76,7 +76,7 @@ export default function App() {
         console.log("dataToSend", dataToSend);
 
         // שליחת הנתונים לשרת NestJS
-        const res = await fetch("http://localhost:3000/users", {
+        const res = await fetch("http://localhost:3031/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
