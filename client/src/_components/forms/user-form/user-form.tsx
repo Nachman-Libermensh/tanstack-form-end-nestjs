@@ -18,21 +18,111 @@ import {
 import { createUserSchema, UserResponse } from "shared";
 import usersService from "@/services/users.service";
 
-// קומפוננטת שגיאות לשדה
+// Password strength indicator component
+function PasswordStrengthIndicator({ password }: { password: string }) {
+  const getStrength = (pass: string) => {
+    if (!pass) return 0;
+    let strength = 0;
+
+    // Length check
+    if (pass.length >= 8) strength += 1;
+
+    // Uppercase check
+    if (/[A-Z]/.test(pass)) strength += 1;
+
+    // Lowercase check
+    if (/[a-z]/.test(pass)) strength += 1;
+
+    // Number check
+    if (/[0-9]/.test(pass)) strength += 1;
+
+    // Special character check
+    if (/[^A-Za-z0-9]/.test(pass)) strength += 1;
+
+    return strength;
+  };
+
+  const strength = getStrength(password);
+  const percentage = (strength / 5) * 100;
+
+  const getColor = () => {
+    if (strength < 2) return "bg-red-500";
+    if (strength < 4) return "bg-yellow-500";
+    return "bg-green-500";
+  };
+
+  const getLabel = () => {
+    if (strength < 2) return "חלשה";
+    if (strength < 4) return "בינונית";
+    return "חזקה";
+  };
+
+  if (!password) return null;
+
+  return (
+    <div className="mt-2 mb-3">
+      <div className="flex justify-between items-center mb-1">
+        <Text className="text-xs text-gray-500">עוצמת סיסמה</Text>
+        <Text
+          className={`text-xs font-medium ${
+            strength < 2
+              ? "text-red-500"
+              : strength < 4
+              ? "text-yellow-500"
+              : "text-green-500"
+          }`}
+        >
+          {getLabel()}
+        </Text>
+      </div>
+      <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+        <div
+          className={`h-full ${getColor()} transition-all duration-300 ease-out`}
+          style={{ width: `${percentage}%` }}
+        ></div>
+      </div>
+    </div>
+  );
+}
+
+// Field info component with improved design
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   if (field.state.meta.isTouched && field.state.meta.errors.length) {
+    // Extract the message property from each error object
+    const errorMessages = field.state.meta.errors.map((err) =>
+      typeof err === "object" && err !== null && "message" in err
+        ? err.message
+        : String(err)
+    );
+
     return (
-      <Text className="text-red-500 text-sm mt-1 transition-all duration-300">
-        {field.state.meta.errors.join(", ")}
-      </Text>
+      <div className="flex items-start mt-1.5 text-red-500 animate-fadeIn">
+        <FiX className="mt-0.5 mr-1 flex-shrink-0" />
+        <Text className="text-sm font-medium">{errorMessages.join(", ")}</Text>
+      </div>
     );
   }
 
   if (field.state.meta.isValidating) {
     return (
-      <Text className="text-blue-500 text-sm mt-1 transition-all duration-300">
-        בודק...
-      </Text>
+      <div className="flex items-center mt-1.5 text-blue-500 animate-pulse">
+        <FiInfo className="mr-1 flex-shrink-0" />
+        <Text className="text-sm">בודק...</Text>
+      </div>
+    );
+  }
+
+  // Show success icon when field is valid and has been touched
+  if (
+    field.state.meta.isTouched &&
+    !field.state.meta.errors.length &&
+    field.state.value
+  ) {
+    return (
+      <div className="flex items-center mt-1.5 text-green-500 animate-fadeIn">
+        <FiCheck className="mr-1 flex-shrink-0" />
+        <Text className="text-sm">תקין</Text>
+      </div>
     );
   }
 
@@ -84,7 +174,6 @@ export default function UserForm({
         setLoading(true);
         setError(null);
 
-        // שליחת הנתונים לשרת ללא confirmPassword
         const data = await usersService.create(value);
 
         setResponse(data);
