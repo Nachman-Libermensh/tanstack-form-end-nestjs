@@ -13,13 +13,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { createUserSchema, UserResponse } from "shared";
+
 import usersService from "@/services/users.service";
 import { GenericForm } from "../GenericForm";
 import { FormField } from "../FormField";
 import { CheckIcon, XIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
+import { createUserSchema, UserResponse } from "shared";
 
 // Password input component
 function PasswordInput({
@@ -126,8 +127,8 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
             strength < 2
               ? "text-red-500"
               : strength < 4
-              ? "text-amber-500"
-              : "text-green-500"
+                ? "text-amber-500"
+                : "text-green-500"
           }`}
         >
           {getLabel()}
@@ -281,7 +282,7 @@ export default function UserForm({
           dir="rtl"
           className="space-y-4"
         >
-          <FormField name="name">
+          <FormField<string> name="name">
             {({ value, onChange, onBlur, error }) => {
               return (
                 <div className="space-y-2">
@@ -308,7 +309,7 @@ export default function UserForm({
             }}
           </FormField>
 
-          <FormField name="email">
+          <FormField<string> name="email">
             {({ value, onChange, onBlur, error }) => (
               <div className="space-y-2">
                 <Label htmlFor="email">כתובת אימייל</Label>
@@ -334,7 +335,7 @@ export default function UserForm({
             )}
           </FormField>
 
-          <FormField name="password">
+          <FormField<string> name="password">
             {({ value, onChange, onBlur, error }) => (
               <div className="space-y-2">
                 <PasswordInput
@@ -360,7 +361,7 @@ export default function UserForm({
             )}
           </FormField>
 
-          <FormField name="confirmPassword">
+          <FormField<string> name="confirmPassword">
             {({ value, onChange, onBlur, error }) => (
               <div className="space-y-2">
                 <PasswordInput
