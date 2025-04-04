@@ -15,7 +15,7 @@ import {
   Tooltip,
   Password,
 } from "rizzui";
-import { UserResponse } from "shared";
+import { createUserSchema, UserResponse } from "shared";
 import usersService from "@/services/users.service";
 
 // קומפוננטת שגיאות לשדה
@@ -76,6 +76,9 @@ export default function UserForm({
       password: "",
       confirmPassword: "",
     },
+    validators: {
+      onChange: createUserSchema,
+    },
     onSubmit: async ({ value }) => {
       try {
         setLoading(true);
@@ -111,6 +114,7 @@ export default function UserForm({
       return () => clearTimeout(timer);
     }
   }, [success]);
+  // console.log("createUserSchema", createUserSchema);
 
   return (
     <div className="w-full">
@@ -151,14 +155,6 @@ export default function UserForm({
       >
         <form.Field
           name="name"
-          validators={{
-            onChange: ({ value }) =>
-              !value
-                ? "שם הוא שדה חובה"
-                : value.length < 2
-                ? "שם חייב להכיל לפחות 2 תווים"
-                : undefined,
-          }}
           children={(field) => (
             <>
               <Input
@@ -178,14 +174,6 @@ export default function UserForm({
 
         <form.Field
           name="email"
-          validators={{
-            onChange: ({ value }) =>
-              !value
-                ? "אימייל הוא שדה חובה"
-                : !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-                ? "אימייל לא תקין"
-                : undefined,
-          }}
           children={(field) => (
             <>
               <Input
@@ -206,18 +194,6 @@ export default function UserForm({
 
         <form.Field
           name="password"
-          validators={{
-            onChange: ({ value }) =>
-              !value
-                ? "סיסמה היא שדה חובה"
-                : value.length < 8
-                ? "סיסמה חייבת להכיל לפחות 8 תווים"
-                : !/[A-Z]/.test(value)
-                ? "סיסמה חייבת להכיל לפחות אות גדולה אחת"
-                : !/[0-9]/.test(value)
-                ? "סיסמה חייבת להכיל לפחות ספרה אחת"
-                : undefined,
-          }}
           children={(field) => (
             <>
               <Password
@@ -237,16 +213,6 @@ export default function UserForm({
 
         <form.Field
           name="confirmPassword"
-          validators={{
-            onChange: ({ value }) => {
-              const password = form.getFieldValue("password");
-              return !value
-                ? "אימות סיסמה הוא שדה חובה"
-                : value !== password
-                ? "הסיסמאות אינן תואמות"
-                : undefined;
-            },
-          }}
           children={(field) => (
             <>
               <Password

@@ -11,13 +11,12 @@ interface AvatarPopupProps {
   onClose?: () => void;
 }
 const Popup = ({ children, title, onClose }: AvatarPopupProps) => {
-
   //colorPresetName
 
   const { closeModal } = useModal();
 
   return (
-    <div className="w-full p-5">
+    <div className="w-full p-5 bg-white rounded-lg shadow-lg flex flex-col justify-between">
       <div className="flex items-center justify-between mb-5">
         {title ? (
           <Title className={`text-lg font-bold  `}>{title}</Title>
