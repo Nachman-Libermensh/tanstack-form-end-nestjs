@@ -4,7 +4,8 @@ node_modules
 
 # Environment files
 .env
-.env.*
+# .env.* // if you want to keep env files for different environments, uncomment this line
+# TODO: change this in production
 !.env.example
 
 # Build output
