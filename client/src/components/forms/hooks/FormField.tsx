@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from "react";
 import { useFormContext } from "./form-core";
 import { BaseFieldProps, SelectOption } from "./form-core";
@@ -42,7 +41,7 @@ export const FormField = ({
   }
 
   return (
-    <form name={name}>
+    <form.AppField name={name}>
       {(field) => {
         // אם סוג השדה הוא "custom" והרכיב render קיים
         if (type === "custom" && render) {
@@ -62,7 +61,7 @@ export const FormField = ({
         switch (type) {
           case "textarea":
             return (
-              <field.
+              <field.TextAreaField
                 label={label}
                 placeholder={placeholder}
                 helperText={helperText}
@@ -122,6 +121,6 @@ export const FormField = ({
             );
         }
       }}
-    </form>
+    </form.AppField>
   );
 };
