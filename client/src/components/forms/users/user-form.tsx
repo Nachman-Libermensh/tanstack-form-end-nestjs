@@ -127,8 +127,8 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
             strength < 2
               ? "text-red-500"
               : strength < 4
-                ? "text-amber-500"
-                : "text-green-500"
+              ? "text-amber-500"
+              : "text-green-500"
           }`}
         >
           {getLabel()}
@@ -234,8 +234,6 @@ export default function UserForm({
     setTouchedFields((prev) => ({ ...prev, [name]: true }));
   };
 
-  const formRef = React.useRef<HTMLFormElement>(null);
-
   return (
     <div className="w-full">
       {showHeader && (
@@ -272,154 +270,139 @@ export default function UserForm({
         }}
         onSubmit={handleSubmit}
       >
-        <form
-          ref={formRef}
-          onSubmit={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // טיפול בשליחת הטופס מתבצע בקומפוננטת GenericForm
-          }}
-          dir="rtl"
-          className="space-y-4"
-        >
-          <FormField<string> name="name">
-            {({ value, onChange, onBlur, error }) => {
-              return (
-                <div className="space-y-2">
-                  <Label htmlFor="name">שם מלא</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={value}
-                    onBlur={() => {
-                      onBlur();
-                      handleFieldBlur("name");
-                    }}
-                    onChange={(e) => onChange(e.target.value)}
-                    placeholder="הכנס את שמך המלא"
-                    dir="rtl"
-                  />
-                  <FieldInfo
-                    error={error}
-                    value={value}
-                    touched={touchedFields["name"]}
-                  />
-                </div>
-              );
-            }}
-          </FormField>
-
-          <FormField<string> name="email">
-            {({ value, onChange, onBlur, error }) => (
+        <FormField<string> name="name">
+          {({ value, onChange, onBlur, error }) => {
+            return (
               <div className="space-y-2">
-                <Label htmlFor="email">כתובת אימייל</Label>
+                <Label htmlFor="name">שם מלא</Label>
                 <Input
-                  id="email"
-                  name="email"
-                  type="email"
+                  id="name"
+                  name="name"
                   value={value}
                   onBlur={() => {
                     onBlur();
-                    handleFieldBlur("email");
+                    handleFieldBlur("name");
                   }}
                   onChange={(e) => onChange(e.target.value)}
-                  placeholder="your@email.com"
-                  dir="ltr"
+                  placeholder="הכנס את שמך המלא"
+                  dir="rtl"
                 />
                 <FieldInfo
                   error={error}
                   value={value}
-                  touched={touchedFields["email"]}
+                  touched={touchedFields["name"]}
                 />
               </div>
-            )}
-          </FormField>
+            );
+          }}
+        </FormField>
 
-          <FormField<string> name="password">
-            {({ value, onChange, onBlur, error }) => (
-              <div className="space-y-2">
-                <PasswordInput
-                  label="סיסמה"
-                  id="password"
-                  name="password"
-                  value={value}
-                  onBlur={() => {
-                    onBlur();
-                    handleFieldBlur("password");
-                  }}
-                  onChange={(e) => onChange(e.target.value)}
-                  placeholder="הזן סיסמה"
-                  dir="ltr"
-                />
-                <PasswordStrengthIndicator password={value} />
-                <FieldInfo
-                  error={error}
-                  value={value}
-                  touched={touchedFields["password"]}
-                />
-              </div>
-            )}
-          </FormField>
+        <FormField<string> name="email">
+          {({ value, onChange, onBlur, error }) => (
+            <div className="space-y-2">
+              <Label htmlFor="email">כתובת אימייל</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={value}
+                onBlur={() => {
+                  onBlur();
+                  handleFieldBlur("email");
+                }}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder="your@email.com"
+                dir="ltr"
+              />
+              <FieldInfo
+                error={error}
+                value={value}
+                touched={touchedFields["email"]}
+              />
+            </div>
+          )}
+        </FormField>
 
-          <FormField<string> name="confirmPassword">
-            {({ value, onChange, onBlur, error }) => (
-              <div className="space-y-2">
-                <PasswordInput
-                  label="אימות סיסמה"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={value}
-                  onBlur={() => {
-                    onBlur();
-                    handleFieldBlur("confirmPassword");
-                  }}
-                  onChange={(e) => onChange(e.target.value)}
-                  placeholder="הזן את הסיסמה שוב"
-                  dir="ltr"
-                />
-                <FieldInfo
-                  error={error}
-                  value={value}
-                  touched={touchedFields["confirmPassword"]}
-                />
-              </div>
-            )}
-          </FormField>
+        <FormField<string> name="password">
+          {({ value, onChange, onBlur, error }) => (
+            <div className="space-y-2">
+              <PasswordInput
+                label="סיסמה"
+                id="password"
+                name="password"
+                value={value}
+                onBlur={() => {
+                  onBlur();
+                  handleFieldBlur("password");
+                }}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder="הזן סיסמה"
+                dir="ltr"
+              />
+              <PasswordStrengthIndicator password={value} />
+              <FieldInfo
+                error={error}
+                value={value}
+                touched={touchedFields["password"]}
+              />
+            </div>
+          )}
+        </FormField>
 
-          <div className="flex gap-3 pt-4">
+        <FormField<string> name="confirmPassword">
+          {({ value, onChange, onBlur, error }) => (
+            <div className="space-y-2">
+              <PasswordInput
+                label="אימות סיסמה"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={value}
+                onBlur={() => {
+                  onBlur();
+                  handleFieldBlur("confirmPassword");
+                }}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder="הזן את הסיסמה שוב"
+                dir="ltr"
+              />
+              <FieldInfo
+                error={error}
+                value={value}
+                touched={touchedFields["confirmPassword"]}
+              />
+            </div>
+          )}
+        </FormField>
+
+        <div className="flex gap-3 pt-4">
+          <Button
+            type="submit"
+            className="flex-1"
+            size="lg"
+            disabled={loading}
+            onClick={}
+          >
+            {loading ? (
+              <>
+                <span className="animate-spin mr-2">⏳</span> שולח...
+              </>
+            ) : (
+              "שלח"
+            )}
+          </Button>
+
+          {onClose && (
             <Button
-              type="submit"
+              type="button"
               className="flex-1"
               size="lg"
-              disabled={loading}
-              onClick={() =>
-                formRef.current?.dispatchEvent(
-                  new Event("submit", { cancelable: true, bubbles: true })
-                )
-              }
+              variant="outline"
+              onClick={onClose}
             >
-              {loading ? (
-                <>
-                  <span className="animate-spin mr-2">⏳</span> שולח...
-                </>
-              ) : (
-                "שלח"
-              )}
+              ביטול
             </Button>
-
-            {onClose && (
-              <Button
-                type="button"
-                className="flex-1"
-                size="lg"
-                variant="outline"
-                onClick={onClose}
-              >
-                ביטול
-              </Button>
-            )}
-          </div>
-        </form>
+          )}
+        </div>
       </GenericForm>
 
       {error && (

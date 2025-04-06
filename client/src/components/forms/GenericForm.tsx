@@ -58,6 +58,8 @@ export function GenericForm<TValues extends Record<string, any>>({
     },
     validators: { onChange: schema },
   });
+  const {} = form;
+  console.log(form);
 
   return (
     <FormContext.Provider value={{ form: form as unknown as FormApi<TValues> }}>
