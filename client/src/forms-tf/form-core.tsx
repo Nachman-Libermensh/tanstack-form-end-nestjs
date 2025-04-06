@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm } from "@tanstack/react-form";
-import { formContext } from "./form-context";
+import { createFormHook, useForm } from "@tanstack/react-form";
+import { formContext, fieldContext } from "./form-context";
 import { FormField } from "./form-field";
 
 type FormProviderProps = {
@@ -20,6 +20,12 @@ export const FormProvider = ({
     console.log("עליך למלא את הפונקציה הזו כדי לשלוח את הטופס");
   },
 }: FormProviderProps) => {
+  const {} = createFormHook({
+    formContext,
+    fieldContext,
+    fieldComponents: [FormField],
+    formComponents: [],
+  });
   const form = useForm({
     defaultValues,
     validators,

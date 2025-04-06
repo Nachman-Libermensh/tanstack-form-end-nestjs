@@ -7,7 +7,7 @@ export const Exam = () => {
       <h1>Exam</h1>
       <FormProvider>
         <h2>Form Provider</h2>
-        <FormField />
+
         <p>Use this component to wrap your form fields and submit button.</p>
         <p>It provides the context for the form.</p>
         <p>It also handles the form submission.</p>
