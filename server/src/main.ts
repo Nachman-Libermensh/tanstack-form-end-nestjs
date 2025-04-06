@@ -15,6 +15,7 @@ async function bootstrap() {
       transform: true, // המרה אוטומטית לטיפוס המבוקש
     }),
   );
+  app.setGlobalPrefix('api'); // הגדרת פריפיקס לכל ה-API
 
   await app.listen(3031);
 }
