@@ -1,0 +1,61 @@
+{
+  "title": "Playground",
+  "description": "Build and design forms visually",
+  "librarySelector": "Select UI Library:",
+  "libraries": {
+    "shadcn": "Shadcn UI",
+    "rizzui": "RizzUI"
+  },
+  "tabs": {
+    "builder": "Form Builder",
+    "preview": "Preview",
+    "code": "Code"
+  },
+  "dragZone": {
+    "title": "Drop Zone",
+    "placeholder": "Drag and drop components here"
+  },
+  "components": {
+    "title": "Available Components",
+    "fields": {
+      "text": "Text",
+      "number": "Number",
+      "email": "Email",
+      "password": "Password",
+      "select": "Select",
+      "checkbox": "Checkbox",
+      "radio": "Radio",
+      "textarea": "Textarea",
+      "date": "Date",
+      "file": "File"
+    },
+    "sections": {
+      "fieldset": "Fieldset",
+      "repeatableGroup": "Repeatable Group",
+      "tabs": "Tabs",
+      "grid": "Grid"
+    }
+  },
+  "fieldSettings": {
+    "title": "Field Settings",
+    "name": "Field Name",
+    "label": "Label",
+    "placeholder": "Placeholder",
+    "required": "Required",
+    "defaultValue": "Default Value",
+    "validation": "Validation"
+  },
+  "codePreview": {
+    "clientCode": "React Code",
+    "serverCode": "Server DTO",
+    "schema": "Zod Schema"
+  },
+  "actions": {
+    "addField": "Add Field",
+    "addSection": "Add Section",
+    "delete": "Delete",
+    "duplicate": "Duplicate",
+    "copyCode": "Copy Code",
+    "save": "Save as Template"
+  }
+}

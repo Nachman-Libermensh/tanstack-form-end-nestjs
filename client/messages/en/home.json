@@ -1,13 +1,104 @@
 {
-  "title": "Home Page",
-  "about": "About",
-  "welcome": "Welcome {name}",
-  "email": "Email: {email}",
-  "status": {
-    "employer": "Status: Employer",
-    "employee": "Status: Employee"
+  "title": "TanStack Form with NestJS Integration Research",
+  "description": "Developing a comprehensive strategy for advanced form management",
+  "intro": "This project focuses on researching and developing advanced methods for form management, combining:",
+  "technologies": {
+    "tanstack": {
+      "name": "TanStack Form",
+      "description": "Modern and lightweight form management library"
+    },
+    "nestjs": {
+      "name": "NestJS",
+      "description": "Powerful and modular server-side framework"
+    },
+    "typescript": {
+      "name": "TypeScript",
+      "description": "For complete type safety between client and server"
+    },
+    "zod": {
+      "name": "Zod",
+      "description": "For consistent data validation across all application layers"
+    }
   },
-  "logout": "Logout",
-  "login": "Login",
-  "pleaseLogin": "Please login to continue"
+  "goals": {
+    "title": "Research Goals",
+    "items": {
+      "unified_api": {
+        "title": "Unified and Generic API",
+        "description": "Creating a consistent interface for different forms"
+      },
+      "consistent_validation": {
+        "title": "Consistent Validation",
+        "description": "Using the same validation mechanism on client and server"
+      },
+      "generic_components": {
+        "title": "Generic Components",
+        "description": "Creating advanced and generic form components"
+      },
+      "code_sharing": {
+        "title": "Code Sharing",
+        "description": "Sharing definitions between client and server"
+      }
+    }
+  },
+  "examples": {
+    "title": "Form Examples",
+    "basic": {
+      "login": {
+        "title": "Login Form",
+        "description": "Basic login form with username and password"
+      },
+      "contact": {
+        "title": "Contact Form",
+        "description": "Simple contact form with basic fields"
+      },
+      "subscribe": {
+        "title": "Newsletter Subscription",
+        "description": "Simple subscription form with email validation"
+      }
+    },
+    "advanced": {
+      "multistep": {
+        "title": "Multi-step Form",
+        "description": "Complex form divided into multiple steps"
+      },
+      "fileupload": {
+        "title": "File Upload",
+        "description": "Form with file upload and preview capabilities"
+      },
+      "dynamic": {
+        "title": "Dynamic Fields",
+        "description": "Form with dynamic addition and removal of fields"
+      }
+    },
+    "complex": {
+      "nested": {
+        "title": "Nested Forms",
+        "description": "Form with nested and complex data structure"
+      },
+      "conditional": {
+        "title": "Conditional Logic",
+        "description": "Form with conditional fields and logic"
+      },
+      "wizard": {
+        "title": "Form Wizard",
+        "description": "Advanced wizard form with validation at each step"
+      }
+    }
+  },
+  "categories": {
+    "basic": "Basic Forms",
+    "advanced": "Advanced Forms",
+    "complex": "Complex Forms"
+  },
+  "viewExample": "View Example",
+  "liveDemo": "Live Demo",
+  "viewUserFormExample": "View User Form Example",
+  "userFormWithTanStack": "User Form with TanStack Form",
+  "footer": {
+    "copyright": "TanStack Form + NestJS Research Project",
+    "documentation": "Documentation",
+    "contribute": "Contribute",
+    "license": "License"
+  }
 }

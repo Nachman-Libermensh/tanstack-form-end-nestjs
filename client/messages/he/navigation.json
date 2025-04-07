@@ -1,4 +1,33 @@
 {
-  "home": "דף הבית",
-  "about": "אודות"
+  "home": "בית",
+  "howItWorks": "איך זה עובד",
+  "playground": "פלייגראונד",
+
+  "language": "שפה",
+  "categories": {
+    "basic": "טפסים בסיסיים",
+    "advanced": "טפסים מתקדמים",
+    "complex": "טפסים מורכבים"
+  },
+  "examples": {
+    "examples": "דוגמאות",
+    "login": "טופס התחברות",
+    "contact": "טופס יצירת קשר",
+    "subscribe": "הרשמה לניוזלטר",
+    "multistep": "טופס רב-שלבי",
+    "fileupload": "העלאת קבצים",
+    "dynamic": "שדות דינמיים",
+    "nested": "טפסים מקוננים",
+    "conditional": "לוגיקה מותנית",
+    "wizard": "אשף טפסים"
+  },
+  "theme": {
+    "light": "בהיר",
+    "dark": "כהה",
+    "system": "מערכת"
+  },
+  "localeSwitcher": {
+    "switchLocale": "החלף ל-{locale}",
+    "currentLocale": "שפה נוכחית: {locale}"
+  }
 }

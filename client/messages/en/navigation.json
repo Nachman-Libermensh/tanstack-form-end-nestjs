@@ -1,4 +1,33 @@
 {
   "home": "Home",
-  "about": "About"
+  "howItWorks": "How It Works",
+  "playground": "Playground",
+  "language": "Language",
+  "categories": {
+    "basic": "Basic Forms",
+    "advanced": "Advanced Forms",
+    "complex": "Complex Forms"
+  },
+  "examples": {
+    "examples": "Examples",
+
+    "login": "Login Form",
+    "contact": "Contact Form",
+    "subscribe": "Newsletter Subscription",
+    "multistep": "Multi-step Form",
+    "fileupload": "File Upload",
+    "dynamic": "Dynamic Fields",
+    "nested": "Nested Forms",
+    "conditional": "Conditional Logic",
+    "wizard": "Form Wizard"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "localeSwitcher": {
+    "switchLocale": "Switch to {locale}",
+    "currentLocale": "Current language: {locale}"
+  }
 }

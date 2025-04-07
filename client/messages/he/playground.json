@@ -1,0 +1,61 @@
+{
+  "title": "פלייגראונד",
+  "description": "בנה ועצב טפסים בצורה ויזואלית",
+  "librarySelector": "בחר ספריית UI:",
+  "libraries": {
+    "shadcn": "Shadcn UI",
+    "rizzui": "RizzUI"
+  },
+  "tabs": {
+    "builder": "בניית טופס",
+    "preview": "תצוגה מקדימה",
+    "code": "קוד"
+  },
+  "dragZone": {
+    "title": "אזור גרירה",
+    "placeholder": "גרור ושחרר רכיבים לכאן"
+  },
+  "components": {
+    "title": "רכיבים זמינים",
+    "fields": {
+      "text": "טקסט",
+      "number": "מספר",
+      "email": "אימייל",
+      "password": "סיסמה",
+      "select": "בחירה",
+      "checkbox": "תיבת סימון",
+      "radio": "כפתור רדיו",
+      "textarea": "אזור טקסט",
+      "date": "תאריך",
+      "file": "קובץ"
+    },
+    "sections": {
+      "fieldset": "קבוצת שדות",
+      "repeatableGroup": "קבוצה חוזרת",
+      "tabs": "לשוניות",
+      "grid": "רשת"
+    }
+  },
+  "fieldSettings": {
+    "title": "הגדרות שדה",
+    "name": "שם השדה",
+    "label": "תווית",
+    "placeholder": "טקסט מקום שמור",
+    "required": "שדה חובה",
+    "defaultValue": "ערך ברירת מחדל",
+    "validation": "תיקוף"
+  },
+  "codePreview": {
+    "clientCode": "קוד React",
+    "serverCode": "DTO לצד שרת",
+    "schema": "סכמת Zod"
+  },
+  "actions": {
+    "addField": "הוסף שדה",
+    "addSection": "הוסף מקטע",
+    "delete": "מחק",
+    "duplicate": "שכפל",
+    "copyCode": "העתק קוד",
+    "save": "שמור כתבנית"
+  }
+}

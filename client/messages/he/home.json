@@ -1,13 +1,104 @@
 {
-  "title": "דף הבית",
-  "about": "אודות",
-  "welcome": "ברוך הבא {name}",
-  "email": "אימייל: {email}",
-  "status": {
-    "employer": "סטטוס: מעסיק",
-    "employee": "סטטוס: עובד"
+  "title": "מחקר ולימוד אינטגרציית TanStack Form עם NestJS",
+  "description": "גיבוש אסטרטגיה מקיפה לניהול טפסים מתקדמים",
+  "intro": "פרויקט זה עוסק במחקר ופיתוח שיטות עבודה מתקדמות לניהול טפסים, תוך שילוב:",
+  "technologies": {
+    "tanstack": {
+      "name": "TanStack Form",
+      "description": "ספריית ניהול טפסים מודרנית וקלה"
+    },
+    "nestjs": {
+      "name": "NestJS",
+      "description": "מסגרת עבודה לפיתוח שרת צד שרת חזקה ומודולרית"
+    },
+    "typescript": {
+      "name": "TypeScript",
+      "description": "לבטיחות טיפוסים מלאה בין צד לקוח לשרת"
+    },
+    "zod": {
+      "name": "Zod",
+      "description": "לאימות נתונים עקבי בכל שכבות האפליקציה"
+    }
   },
-  "logout": "התנתק",
-  "login": "התחברות",
-  "pleaseLogin": "אנא התחבר כדי להמשיך"
+  "goals": {
+    "title": "מטרות המחקר",
+    "items": {
+      "unified_api": {
+        "title": "API אחיד וגנרי",
+        "description": "יצירת ממשק עבודה אחיד לטפסים שונים"
+      },
+      "consistent_validation": {
+        "title": "אימות נתונים עקבי",
+        "description": "שימוש באותו מנגנון אימות בצד הלקוח והשרת"
+      },
+      "generic_components": {
+        "title": "קומפוננטות גנריות",
+        "description": "יצירת קומפוננטות טופס מתקדמות וגנריות"
+      },
+      "code_sharing": {
+        "title": "שיתוף קוד",
+        "description": "שיתוף הגדרות בין צד הלקוח לשרת"
+      }
+    }
+  },
+  "examples": {
+    "title": "דוגמאות טפסים",
+    "basic": {
+      "login": {
+        "title": "טופס התחברות",
+        "description": "טופס התחברות בסיסי עם שם משתמש וסיסמה"
+      },
+      "contact": {
+        "title": "טופס יצירת קשר",
+        "description": "טופס פשוט ליצירת קשר עם שדות בסיסיים"
+      },
+      "subscribe": {
+        "title": "טופס הרשמה לניוזלטר",
+        "description": "טופס הרשמה פשוט עם אימות כתובת אימייל"
+      }
+    },
+    "advanced": {
+      "multistep": {
+        "title": "טופס רב-שלבי",
+        "description": "טופס מורכב המחולק למספר שלבים"
+      },
+      "fileupload": {
+        "title": "העלאת קבצים",
+        "description": "טופס עם תמיכה בהעלאת ותצוגה מקדימה של קבצים"
+      },
+      "dynamic": {
+        "title": "שדות דינמיים",
+        "description": "טופס עם אפשרות להוספה והסרה דינמית של שדות"
+      }
+    },
+    "complex": {
+      "nested": {
+        "title": "טפסים מקוננים",
+        "description": "טופס עם מבנה נתונים מקונן ומורכב"
+      },
+      "conditional": {
+        "title": "לוגיקה מותנית",
+        "description": "טופס עם שדות ולוגיקה תלויי-תנאי"
+      },
+      "wizard": {
+        "title": "אשף טפסים",
+        "description": "טופס מתקדם בתצורת אשף עם תיקוף בכל שלב"
+      }
+    }
+  },
+  "categories": {
+    "basic": "טפסים בסיסיים",
+    "advanced": "טפסים מתקדמים",
+    "complex": "טפסים מורכבים"
+  },
+  "viewExample": "צפה בדוגמה",
+  "liveDemo": "דוגמה חיה",
+  "viewUserFormExample": "צפה בדוגמת טופס משתמש",
+  "userFormWithTanStack": "טופס משתמש עם TanStack Form",
+  "footer": {
+    "copyright": "פרויקט מחקר TanStack Form + NestJS",
+    "documentation": "תיעוד",
+    "contribute": "תרומה",
+    "license": "רישיון"
+  }
 }
