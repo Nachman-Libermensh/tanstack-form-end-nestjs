@@ -1,0 +1,13 @@
+{
+  "title": "דף הבית",
+  "about": "אודות",
+  "welcome": "ברוך הבא {name}",
+  "email": "אימייל: {email}",
+  "status": {
+    "employer": "סטטוס: מעסיק",
+    "employee": "סטטוס: עובד"
+  },
+  "logout": "התנתק",
+  "login": "התחברות",
+  "pleaseLogin": "אנא התחבר כדי להמשיך"
+}

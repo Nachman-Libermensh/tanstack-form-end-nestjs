@@ -1,0 +1,11 @@
+{
+  "pageTitle": "About | My App",
+  "title": "About the Application",
+  "description": "Our application is an innovative platform combining advanced authentication with multilingual support.",
+  "features": {
+    "title": "Key Features",
+    "item1": "Full Hebrew and English support",
+    "item2": "Secure authentication system",
+    "item3": "Modern and user-friendly interface"
+  }
+}

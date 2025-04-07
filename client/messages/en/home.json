@@ -1,0 +1,13 @@
+{
+  "title": "Home Page",
+  "about": "About",
+  "welcome": "Welcome {name}",
+  "email": "Email: {email}",
+  "status": {
+    "employer": "Status: Employer",
+    "employee": "Status: Employee"
+  },
+  "logout": "Logout",
+  "login": "Login",
+  "pleaseLogin": "Please login to continue"
+}
