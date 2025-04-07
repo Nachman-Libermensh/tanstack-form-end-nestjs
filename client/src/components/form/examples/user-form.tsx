@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import { createUserSchema } from "shared";
-import { useAppForm } from ".";
+import { useAppForm } from "..";
 
 const UserForm = () => {
   const form = useAppForm({
@@ -18,28 +18,29 @@ const UserForm = () => {
       onSubmit: createUserSchema,
     },
   });
+  const { AppField } = form;
   return (
     <form
-      className="flex flex-col gap-2 w-[400px]"
+      className="flex flex-col gap-2"
       onSubmit={(e) => {
         e.preventDefault();
         e.stopPropagation();
         form.handleSubmit();
       }}
     >
-      <form.AppField
+      <AppField
         name="name"
         children={(field) => <field.TextField label="שם" />}
       />
-      <form.AppField
+      <AppField
         name="email"
         children={(field) => <field.TextField type="email" label="דואל" />}
       />
-      <form.AppField
+      <AppField
         name="password"
         children={(field) => <field.TextField type="password" label="סיסמה" />}
       />
-      <form.AppField
+      <AppField
         name="confirmPassword"
         children={(field) => (
           <field.TextField type="password" label="אימות סיסמה" />
