@@ -375,13 +375,7 @@ export default function UserForm({
         </FormField>
 
         <div className="flex gap-3 pt-4">
-          <Button
-            type="submit"
-            className="flex-1"
-            size="lg"
-            disabled={loading}
-            onClick={}
-          >
+          <Button type="submit" className="flex-1" size="lg" disabled={loading}>
             {loading ? (
               <>
                 <span className="animate-spin mr-2">⏳</span> שולח...
