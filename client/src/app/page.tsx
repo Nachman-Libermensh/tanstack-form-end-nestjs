@@ -17,47 +17,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { UserResponse } from "shared";
 import { GithubIcon, MoonIcon, SunIcon } from "lucide-react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import UserForm from "@/components/form/examples/user-form";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [userResponse, setUserResponse] = useState<UserResponse | null>(null);
-  const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Header - מתוח מקצה לקצה */}
-      <header className="w-full bg-background border-b">
-        <div className="flex h-16 items-center justify-between px-4">
-          <h1 className="text-xl font-bold">TanStack Form + NestJS</h1>
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              {theme === "dark" ? (
-                <SunIcon className="h-5 w-5" />
-              ) : (
-                <MoonIcon className="h-5 w-5" />
-              )}
-              <span className="sr-only">החלף ערכת נושא</span>
-            </Button>
-            <Link
-              href="https://github.com"
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-            >
-              <GithubIcon className="h-4 w-4" />
-              <span>GitHub</span>
-            </Link>
-          </div>
-        </div>
-      </header>
-
+    <>
       {/* Main Content - מתוח מקצה לקצה */}
       <main className="flex-1 w-full">
         <div className="w-full px-0">
@@ -138,35 +106,6 @@ export default function Home() {
               </div>
             </CardContent>
           </Card>
-
-          {userResponse && (
-            <Card className="border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-800 rounded-none border-x-0 mt-6">
-              <CardHeader className="px-4 md:px-6">
-                <CardTitle className="text-green-700 dark:text-green-300 text-lg">
-                  הבקשה נשלחה בהצלחה!
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="px-4 md:px-6">
-                <div className="flex flex-col gap-3">
-                  <div className="flex border-b pb-2">
-                    <div className="w-1/4 font-medium">מזהה:</div>
-                    <div>{userResponse.user.id}</div>
-                  </div>
-                  <div className="flex border-b pb-2">
-                    <div className="w-1/4 font-medium">שם:</div>
-                    <div>{userResponse.user.name}</div>
-                  </div>
-                  <div className="flex border-b pb-2">
-                    <div className="w-1/4 font-medium">אימייל:</div>
-                    <div dir="ltr">{userResponse.user.email}</div>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm text-muted-foreground">
-                  הנתונים נשלחו לשרת NestJS ונשמרו בהצלחה
-                </p>
-              </CardContent>
-            </Card>
-          )}
         </div>
       </main>
 
@@ -198,6 +137,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

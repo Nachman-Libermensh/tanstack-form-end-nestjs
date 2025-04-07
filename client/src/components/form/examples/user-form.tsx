@@ -38,13 +38,13 @@ const UserForm = () => {
       />
       <AppField
         name="password"
-        children={(field) => <field.TextField type="password" label="סיסמה" />}
+        children={(field) => (
+          <field.PasswordInput showStrengthIndicator label="סיסמה" />
+        )}
       />
       <AppField
         name="confirmPassword"
-        children={(field) => (
-          <field.TextField type="password" label="אימות סיסמה" />
-        )}
+        children={(field) => <field.PasswordInput label="אימות סיסמה" />}
       />
 
       <form.AppForm>
