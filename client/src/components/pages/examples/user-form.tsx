@@ -1,8 +1,8 @@
 /* eslint-disable react/no-children-prop */
+import { useAppForm } from "@/components/shadcn-form";
 import { createUserSchema } from "shared";
-import { useAppForm } from "..";
 
-const UserForm = () => {
+const SimpleUserForm = () => {
   const form = useAppForm({
     defaultValues: {
       name: "",
@@ -53,4 +53,4 @@ const UserForm = () => {
     </form>
   );
 };
-export default UserForm;
+export default SimpleUserForm;

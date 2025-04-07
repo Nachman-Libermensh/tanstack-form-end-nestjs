@@ -7,17 +7,29 @@ import { Toaster } from "@/components/ui/sonner";
 import Link from "next/link";
 import { GithubIcon } from "lucide-react";
 import ToggleTheme from "@/components/toggle-theme";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Navigation from "@/components/navigation";
 import LanguageSwitcher from "@/components/language-switcher";
 
-export const metadata: Metadata = {
-  title: "מערכת טפסים מתקדמת",
-  description: "מערכת לניהול טפסים באמצעות TanStack Form ו-Next.js",
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  return {
+    title: t("site.title"),
+    description: t("site.description"),
+  };
+}
 
 export default async function RootLayout({
   children,

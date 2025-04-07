@@ -19,9 +19,10 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import Link from "next/link";
-import UserForm from "@/components/form/examples/user-form";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDirection } from "@/hooks/use-direction";
+import SimpleUserForm from "@/components/pages/examples/user-form";
 
 export default function Home() {
   const t = useTranslations("home");
@@ -183,7 +184,7 @@ export default function Home() {
                     <DialogHeader>
                       <DialogTitle>{t("userFormWithTanStack")}</DialogTitle>
                     </DialogHeader>
-                    <UserForm />
+                    <SimpleUserForm />
                   </DialogContent>
                 </Dialog>
               </div>

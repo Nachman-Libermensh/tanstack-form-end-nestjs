@@ -8,6 +8,7 @@ const namespaces = [
   "about",
   "navigation",
   "playground",
+  "metadata", // הוספנו namespace חדש למטה-דאטה
 ] as const;
 const loadNamespaceMessages = async (locale: string, namespace: string) => {
   try {

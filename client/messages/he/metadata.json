@@ -1,0 +1,62 @@
+{
+  "site": {
+    "title": "מערכת טפסים מתקדמת | TanStack Form + NestJS",
+    "description": "מערכת לניהול טפסים מתקדמים באמצעות TanStack Form ו-NestJS עם תמיכה בצד לקוח וצד שרת"
+  },
+  "home": {
+    "title": "בית | TanStack Form + NestJS",
+    "description": "מערכת לניהול טפסים מתקדמים - בית"
+  },
+  "playground": {
+    "title": "פלייגראונד | TanStack Form + NestJS",
+    "description": "בנה טפסים בצורה ויזואלית באמצעות גרירה ושחרור"
+  },
+  "howItWorks": {
+    "title": "איך זה עובד | TanStack Form + NestJS",
+    "description": "הסבר מעמיק על הזרימה ועבודה עם TanStack Form ו-NestJS"
+  },
+  "examples": {
+    "basic": {
+      "login": {
+        "title": "טופס התחברות | דוגמאות",
+        "description": "דוגמה לטופס התחברות בסיסי עם שם משתמש וסיסמה"
+      },
+      "contact": {
+        "title": "טופס יצירת קשר | דוגמאות",
+        "description": "דוגמה לטופס פשוט ליצירת קשר עם שדות בסיסיים"
+      },
+      "subscribe": {
+        "title": "טופס הרשמה לניוזלטר | דוגמאות",
+        "description": "דוגמה לטופס הרשמה פשוט עם אימות כתובת אימייל"
+      }
+    },
+    "advanced": {
+      "multistep": {
+        "title": "טופס רב-שלבי | דוגמאות",
+        "description": "דוגמה לטופס מורכב המחולק למספר שלבים"
+      },
+      "fileupload": {
+        "title": "העלאת קבצים | דוגמאות",
+        "description": "דוגמה לטופס עם תמיכה בהעלאת ותצוגה מקדימה של קבצים"
+      },
+      "dynamic": {
+        "title": "שדות דינמיים | דוגמאות",
+        "description": "דוגמה לטופס עם אפשרות להוספה והסרה דינמית של שדות"
+      }
+    },
+    "complex": {
+      "nested": {
+        "title": "טפסים מקוננים | דוגמאות",
+        "description": "דוגמה לטופס עם מבנה נתונים מקונן ומורכב"
+      },
+      "conditional": {
+        "title": "לוגיקה מותנית | דוגמאות",
+        "description": "דוגמה לטופס עם שדות ולוגיקה תלויי-תנאי"
+      },
+      "wizard": {
+        "title": "אשף טפסים | דוגמאות",
+        "description": "דוגמה לטופס מתקדם בתצורת אשף עם תיקוף בכל שלב"
+      }
+    }
+  }
+}

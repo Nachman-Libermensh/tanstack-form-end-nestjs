@@ -1,0 +1,62 @@
+{
+  "site": {
+    "title": "Advanced Form System | TanStack Form + NestJS",
+    "description": "Advanced form management system using TanStack Form and NestJS with client and server support"
+  },
+  "home": {
+    "title": "Home | TanStack Form + NestJS",
+    "description": "Advanced form management system - Home"
+  },
+  "playground": {
+    "title": "Playground | TanStack Form + NestJS",
+    "description": "Build forms visually using drag and drop"
+  },
+  "howItWorks": {
+    "title": "How It Works | TanStack Form + NestJS",
+    "description": "Deep explanation of the flow and working with TanStack Form and NestJS"
+  },
+  "examples": {
+    "basic": {
+      "login": {
+        "title": "Login Form | Examples",
+        "description": "Example of a basic login form with username and password"
+      },
+      "contact": {
+        "title": "Contact Form | Examples",
+        "description": "Example of a simple contact form with basic fields"
+      },
+      "subscribe": {
+        "title": "Newsletter Subscription | Examples",
+        "description": "Example of a simple subscription form with email validation"
+      }
+    },
+    "advanced": {
+      "multistep": {
+        "title": "Multi-step Form | Examples",
+        "description": "Example of a complex form divided into multiple steps"
+      },
+      "fileupload": {
+        "title": "File Upload | Examples",
+        "description": "Example of a form with file upload and preview capabilities"
+      },
+      "dynamic": {
+        "title": "Dynamic Fields | Examples",
+        "description": "Example of a form with dynamic addition and removal of fields"
+      }
+    },
+    "complex": {
+      "nested": {
+        "title": "Nested Forms | Examples",
+        "description": "Example of a form with nested and complex data structure"
+      },
+      "conditional": {
+        "title": "Conditional Logic | Examples",
+        "description": "Example of a form with conditional fields and logic"
+      },
+      "wizard": {
+        "title": "Form Wizard | Examples",
+        "description": "Example of an advanced wizard form with validation at each step"
+      }
+    }
+  }
+}
