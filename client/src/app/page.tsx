@@ -21,7 +21,7 @@ import { UserResponse } from "shared";
 import { GithubIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import UserForm from "@/components/forms/yt/user-form";
+import UserForm from "@/components/form/examples/user-form";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -133,8 +133,6 @@ export default function Home() {
                       <DialogTitle>טופס משתמש עם TanStack Form</DialogTitle>
                     </DialogHeader>
                     <UserForm />
-                    {/* <Exam /> */}
-                    {/* <UserForm /> */}
                   </DialogContent>
                 </Dialog>
               </div>
