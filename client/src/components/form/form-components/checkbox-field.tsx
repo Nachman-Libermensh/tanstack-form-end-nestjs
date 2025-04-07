@@ -1,5 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { useFieldContext } from ".";
+import { useFieldContext } from "..";
 import { Label } from "@/components/ui/label";
 
 type CheckboxFieldProps = {
