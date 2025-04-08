@@ -6,9 +6,12 @@
     "code": "Code",
     "loginFormTitle": "Account Login",
     "loginFormDescription": "Enter your credentials to access your account",
+    "backToExamples": "Back to examples",
+    "securityNotice": "Secure information - not sent to any server in this example",
     "tipTitle": "Try it out!",
     "tipDescription": "Use the demo credentials to see a successful login, or try different values to see validation and error handling in action.",
     "keyFeaturesTitle": "Key Features",
+    "exploreMoreExamples": "Explore more examples",
     "features": {
       "validation": {
         "title": "Client-side Validation",
@@ -26,6 +29,11 @@
         "title": "Reusable Components",
         "description": "Form components are designed to be reusable across your application."
       }
+    },
+    "more": {
+      "contact": "Contact Form",
+      "multistep": "Multi-step Form",
+      "fileupload": "File Upload Form"
     },
     "codeTab": {
       "form": "Form Component",

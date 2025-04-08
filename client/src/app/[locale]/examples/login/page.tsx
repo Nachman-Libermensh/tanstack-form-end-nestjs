@@ -32,7 +32,11 @@ export default function LoginFormExamplePage() {
             href="/examples"
             className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft className="h-4 w-4" />
+            {direction === "rtl" ? (
+              <ArrowLeft className="h-4 w-4 rotate-180" />
+            ) : (
+              <ArrowLeft className="h-4 w-4" />
+            )}
             <span>{t("backToExamples")}</span>
           </Link>
         </Button>

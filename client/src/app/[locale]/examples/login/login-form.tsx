@@ -44,7 +44,7 @@ export default function LoginForm() {
     >
       <form.FormLayout>
         {/* פרטים אישיים */}
-        <form.FormSection title="פרטים אישיים">
+        <form.FormSection title={t("personalDetails")}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <form.AppField
               name="email"
@@ -72,10 +72,10 @@ export default function LoginForm() {
 
         <div className="flex justify-end gap-3 mt-2">
           <Button variant="outline" className="min-w-[100px]">
-            ביטול
+            {t("cancel")}
           </Button>
           <Button type="submit" className="min-w-[100px]">
-            צור משתמש
+            {t("submit")}
           </Button>
         </div>
       </form.FormLayout>
