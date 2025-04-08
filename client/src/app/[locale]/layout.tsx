@@ -20,6 +20,7 @@ import LanguageSwitcher from "@/components/language-switcher";
 import LibrarySwitcher from "@/components/library-switcher";
 import { Link } from "@/i18n/navigation";
 import { getDirection } from "@/lib/get-dir";
+import Background from "./bacground";
 
 export async function generateMetadata({
   params: { locale },
@@ -50,7 +51,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={getDirection(locale)} suppressHydrationWarning>
-      <body className="min-h-screen bg-background text-foreground antialiased relative before:absolute before:inset-0 before:-z-10 before:opacity-[0.15] before:bg-[radial-gradient(circle_at_20%_35%,var(--primary)_0%,transparent_25%),radial-gradient(circle_at_75%_44%,var(--accent)_0%,transparent_20%),radial-gradient(circle_at_5%_75%,var(--secondary)_0%,transparent_25%)] before:bg-[length:150%_150%] before:animate-[pulse_20s_ease-in-out_infinite_alternate] dark:before:opacity-[0.08]">
+      <body className="min-h-screen bg-background text-foreground antialiased relative">
+        {/* Modern dynamic background */}
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+          {/* We remove the base gradient to let the more vibrant background shine through */}
+          <Background />
+        </div>
+
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider
             attribute="class"
