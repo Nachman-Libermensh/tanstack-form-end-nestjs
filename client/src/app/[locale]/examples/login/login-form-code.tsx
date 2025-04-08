@@ -1,16 +1,12 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
-import { useDirection } from "@/hooks/use-direction";
 import { CodeBlock } from "@/components/ui/code-block";
 
 export function LoginFormCode() {
   // שינוי נתיב התרגומים כאן גם
-  const tLogin = useTranslations("examples.login");
   const t = useTranslations("examples.login.form");
-  const direction = useDirection();
 
   const formCode = `export default function LoginForm() {
     const defaultValues = {
@@ -88,35 +84,81 @@ export function LoginFormCode() {
       .max(100, "Password is too long"),
   });
   type ILoginData = z.infer<typeof loginSchema>;`;
-  const dtoCode = `// Your page code will go here`;
+  const dtoCode = `import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class LoginDto {
+  @ApiProperty({
+    example: 'user@example.com',
+    description: 'User email address',
+    required: true
+  })
+  @IsEmail({}, { message: 'Invalid email format' })
+  @IsNotEmpty({ message: 'Email is required' })
+  @Transform(({ value }) => typeof value === 'string' ? value.trim().toLowerCase() : value)
+  email: string;
+
+  @ApiProperty({
+    example: 'securePassword123',
+    description: 'User password',
+    required: true,
+    minLength: 6,
+    maxLength: 100
+  })
+  @IsString()
+  @Length(6, 100, { 
+    message: (args) => args.constraints[0] === args.value.length 
+      ? 'Password must be at least 6 characters' 
+      : 'Password is too long'
+  })
+  password: string;
+}
+
+// Usage in controller
+@Post('login')
+async login(@Body() loginDto: LoginDto) {
+  // Body is automatically validated thanks to ValidationPipe
+  return this.authService.login(loginDto);
+}
+
+// Optional - validation pipe setup in main.ts
+app.useGlobalPipes(
+  new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true
+  })
+);
+  `;
   // Add schema and page code variables here when available
 
   return (
-    <Card className="bg-card/60 backdrop-blur-sm">
-      <div className="p-6">
-        <Tabs defaultValue="form" dir={direction}>
-          <TabsList className="mb-4">
-            <TabsTrigger value="form">{tLogin("codeTab.form")}</TabsTrigger>
-            <TabsTrigger value="schema">{tLogin("codeTab.schema")}</TabsTrigger>
-            <TabsTrigger value="page">{tLogin("codeTab.page")}</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="form" className="mt-0">
-            <CodeBlock
-              language="tsx"
-              filename="login-form.tsx"
-              code={formCode}
-            />
-          </TabsContent>
-
-          <TabsContent value="schema" className="mt-0">
-            <CodeBlock language="tsx" filename="schema.ts" code={schemaCode} />
-          </TabsContent>
-
-          <TabsContent value="page" className="mt-0">
-            <CodeBlock language="ts" filename="login.dto.ts" code={dtoCode} />
-          </TabsContent>
-        </Tabs>
+    <Card className="bg-card/60">
+      <div className="px-6">
+        <CodeBlock
+          language="tsx"
+          filename="login-form.tsx"
+          tabs={[
+            {
+              name: "client/login-form.tsx",
+              code: formCode,
+              highlightLines: [11, 12, 13, 14, 15, 16, 17, 18, 19],
+              language: "tsx",
+            },
+            {
+              name: "server/login.dto.ts",
+              code: dtoCode,
+              // highlightLines: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+              language: "ts",
+            },
+            {
+              name: "shared/login.schema.ts",
+              code: schemaCode,
+              highlightLines: [8],
+            },
+          ]}
+        />
       </div>
     </Card>
   );
