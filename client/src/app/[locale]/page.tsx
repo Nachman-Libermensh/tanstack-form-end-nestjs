@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useTranslations } from "next-intl";
@@ -18,7 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDirection } from "@/hooks/use-direction";
@@ -32,169 +31,189 @@ export default function Home() {
     <>
       {/* Main Content */}
       <main className="flex-1 w-full">
-        <div className="w-full px-0">
-          <Card className="rounded-none border-x-0">
-            <CardHeader className="px-4 md:px-6">
-              <CardTitle className="text-center text-2xl sm:text-3xl">
-                {t("title")}
-              </CardTitle>
-              <CardDescription className="text-center text-base sm:text-lg">
-                {t("description")}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-4 md:px-6">
-              <div className="prose dark:prose-invert max-w-none">
-                <p className="text-base">{t("intro")}</p>
+        {/* Hero Section - אינו מסתיר את הרקע */}
+        <section className="py-12 md:py-16 px-4 md:px-6 text-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            {t("title")}
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            {t("description")}
+          </p>
+          <p className="text-base max-w-2xl mx-auto">{t("intro")}</p>
+        </section>
 
-                {/* List of technologies */}
-                <ul className="my-6 list-disc pl-6 space-y-2">
-                  {["tanstack", "nestjs", "typescript", "zod"].map((tech) => (
-                    <li key={tech}>
-                      <strong>{t(`technologies.${tech}.name`)}</strong> -{" "}
-                      {t(`technologies.${tech}.description`)}
-                    </li>
-                  ))}
-                </ul>
+        {/* Technologies Section - עם רקע שקוף */}
+        <section className="py-10 px-4 md:px-6">
+          <div className="max-w-5xl mx-auto bg-background/60 backdrop-blur-sm rounded-lg p-6 border">
+            <h2 className="text-2xl font-semibold mb-6">{t("title")}</h2>
+            <ul className="grid sm:grid-cols-2 gap-4">
+              {["tanstack", "nestjs", "typescript", "zod"].map((tech) => (
+                <li key={tech} className="bg-card/80 p-4 rounded-lg border">
+                  <h3 className="font-medium text-lg mb-2">
+                    {t(`technologies.${tech}.name`)}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {t(`technologies.${tech}.description`)}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-                <h3 className="text-xl font-semibold mt-8 mb-4">
-                  {t("goals.title")}
-                </h3>
-
-                {/* Ordered list of goals */}
-                <ol className="list-decimal pl-6 space-y-3">
-                  {[
-                    "unified_api",
-                    "consistent_validation",
-                    "generic_components",
-                    "code_sharing",
-                  ].map((goal, index) => (
-                    <li key={goal}>
-                      <strong>{t(`goals.items.${goal}.title`)}</strong> -{" "}
+        {/* Goals Section - רקע עדין */}
+        <section className="py-10 px-4 md:px-6 bg-secondary/5">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-2xl font-semibold mb-6 text-center">
+              {t("goals.title")}
+            </h2>
+            <div className="space-y-4">
+              {[
+                "unified_api",
+                "consistent_validation",
+                "generic_components",
+                "code_sharing",
+              ].map((goal, index) => (
+                <Card
+                  key={goal}
+                  className="overflow-hidden bg-card/80 backdrop-blur-sm"
+                >
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2 flex items-center gap-3">
+                      <span className="inline-flex w-8 h-8 bg-primary/90 text-primary-foreground rounded-full items-center justify-center shrink-0">
+                        {index + 1}
+                      </span>
+                      <span>{t(`goals.items.${goal}.title`)}</span>
+                    </h3>
+                    <p className="text-muted-foreground rtl:pr-11 ltr:pl-11">
                       {t(`goals.items.${goal}.description`)}
-                    </li>
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Form examples section - רקע שקוף חלקית */}
+        <section className="py-10 px-4 md:px-6">
+          <div className="max-w-6xl mx-auto bg-background/70 backdrop-blur-sm rounded-lg p-6 border">
+            <h2 className="text-2xl font-semibold mb-6 text-center">
+              {t("examples.title")}
+            </h2>
+
+            <Tabs dir={direction} defaultValue="basic" className="w-full">
+              <TabsList className="grid grid-cols-3 mb-6">
+                <TabsTrigger value="basic">{t("categories.basic")}</TabsTrigger>
+                <TabsTrigger value="advanced">
+                  {t("categories.advanced")}
+                </TabsTrigger>
+                <TabsTrigger value="complex">
+                  {t("categories.complex")}
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="basic">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {/* Basic form examples will go here */}
+                  {["login", "contact", "subscribe"].map((form) => (
+                    <Card key={form} className="overflow-hidden bg-card/80">
+                      <CardHeader className="p-4">
+                        <CardTitle className="text-md">
+                          {t(`examples.basic.${form}.title`)}
+                        </CardTitle>
+                        <CardDescription>
+                          {t(`examples.basic.${form}.description`)}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="p-4 pt-0">
+                        <Button size="sm" className="w-full" asChild>
+                          <Link href={`/examples/${form}`}>
+                            {t("viewExample")}
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
                   ))}
-                </ol>
-              </div>
+                </div>
+              </TabsContent>
 
-              {/* Form examples section */}
-              <div className="mt-10">
-                <h2 className="text-2xl font-semibold mb-6 text-center">
-                  {t("examples.title")}
-                </h2>
+              <TabsContent value="advanced">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {/* Advanced form examples will go here */}
+                  {["multistep", "fileupload", "dynamic"].map((form) => (
+                    <Card key={form} className="overflow-hidden bg-card/80">
+                      <CardHeader className="p-4">
+                        <CardTitle className="text-md">
+                          {t(`examples.advanced.${form}.title`)}
+                        </CardTitle>
+                        <CardDescription>
+                          {t(`examples.advanced.${form}.description`)}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="p-4 pt-0">
+                        <Button size="sm" className="w-full" asChild>
+                          <Link href={`/examples/${form}`}>
+                            {t("viewExample")}
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
 
-                <Tabs dir={direction} defaultValue="basic" className="w-full">
-                  <TabsList className="grid grid-cols-3 mb-6">
-                    <TabsTrigger value="basic">
-                      {t("categories.basic")}
-                    </TabsTrigger>
-                    <TabsTrigger value="advanced">
-                      {t("categories.advanced")}
-                    </TabsTrigger>
-                    <TabsTrigger value="complex">
-                      {t("categories.complex")}
-                    </TabsTrigger>
-                  </TabsList>
+              <TabsContent value="complex">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {/* Complex form examples will go here */}
+                  {["nested", "conditional", "wizard"].map((form) => (
+                    <Card key={form} className="overflow-hidden bg-card/80">
+                      <CardHeader className="p-4">
+                        <CardTitle className="text-md">
+                          {t(`examples.complex.${form}.title`)}
+                        </CardTitle>
+                        <CardDescription>
+                          {t(`examples.complex.${form}.description`)}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="p-4 pt-0">
+                        <Button size="sm" className="w-full" asChild>
+                          <Link href={`/examples/${form}`}>
+                            {t("viewExample")}
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </section>
 
-                  <TabsContent value="basic">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {/* Basic form examples will go here */}
-                      {["login", "contact", "subscribe"].map((form) => (
-                        <Card key={form} className="overflow-hidden">
-                          <CardHeader className="p-4">
-                            <CardTitle className="text-md">
-                              {t(`examples.basic.${form}.title`)}
-                            </CardTitle>
-                            <CardDescription>
-                              {t(`examples.basic.${form}.description`)}
-                            </CardDescription>
-                          </CardHeader>
-                          <CardContent className="p-4 pt-0">
-                            <Button size="sm" className="w-full" asChild>
-                              <Link href={`/examples/${form}`}>
-                                {t("viewExample")}
-                              </Link>
-                            </Button>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="advanced">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {/* Advanced form examples will go here */}
-                      {["multistep", "fileupload", "dynamic"].map((form) => (
-                        <Card key={form} className="overflow-hidden">
-                          <CardHeader className="p-4">
-                            <CardTitle className="text-md">
-                              {t(`examples.advanced.${form}.title`)}
-                            </CardTitle>
-                            <CardDescription>
-                              {t(`examples.advanced.${form}.description`)}
-                            </CardDescription>
-                          </CardHeader>
-                          <CardContent className="p-4 pt-0">
-                            <Button size="sm" className="w-full" asChild>
-                              <Link href={`/examples/${form}`}>
-                                {t("viewExample")}
-                              </Link>
-                            </Button>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="complex">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {/* Complex form examples will go here */}
-                      {["nested", "conditional", "wizard"].map((form) => (
-                        <Card key={form} className="overflow-hidden">
-                          <CardHeader className="p-4">
-                            <CardTitle className="text-md">
-                              {t(`examples.complex.${form}.title`)}
-                            </CardTitle>
-                            <CardDescription>
-                              {t(`examples.complex.${form}.description`)}
-                            </CardDescription>
-                          </CardHeader>
-                          <CardContent className="p-4 pt-0">
-                            <Button size="sm" className="w-full" asChild>
-                              <Link href={`/examples/${form}`}>
-                                {t("viewExample")}
-                              </Link>
-                            </Button>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </TabsContent>
-                </Tabs>
-              </div>
-
-              <div className="mt-10 pb-4 text-center">
-                <h3 className="text-xl font-semibold mb-6">{t("liveDemo")}</h3>
-                <Dialog open={open} onOpenChange={setOpen}>
-                  <DialogTrigger asChild>
-                    <Button size="lg" className="px-8">
-                      {t("viewUserFormExample")}
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-3xl">
-                    <DialogHeader>
-                      <DialogTitle>{t("userFormWithTanStack")}</DialogTitle>
-                    </DialogHeader>
-                    <SimpleUserForm />
-                  </DialogContent>
-                </Dialog>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Live Demo Section */}
+        <section className="py-12 px-4 md:px-6 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-xl font-semibold mb-6">{t("liveDemo")}</h3>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button size="lg" className="px-8">
+                  {t("viewUserFormExample")}
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-3xl">
+                <DialogHeader>
+                  <DialogTitle>{t("userFormWithTanStack")}</DialogTitle>
+                </DialogHeader>
+                <SimpleUserForm />
+              </DialogContent>
+            </Dialog>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t py-6 bg-muted/20">
+      <footer className="w-full border-t py-6 bg-background/60 backdrop-blur-sm">
         <div className="flex flex-col md:flex-row justify-between items-center px-4">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} {t("footer.copyright")}

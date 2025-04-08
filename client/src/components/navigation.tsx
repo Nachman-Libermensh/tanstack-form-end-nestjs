@@ -55,14 +55,14 @@ export default function Navigation() {
 
   return (
     <NavigationMenu dir={direction}>
-      <NavigationMenuList dir="rtl">
+      <NavigationMenuList>
         {mainLinks.map((link) => {
           const isActive =
             pathname === link.href ||
             (link.href !== "/" && pathname.startsWith(link.href));
 
           return (
-            <NavigationMenuItem dir="rtl" key={link.href}>
+            <NavigationMenuItem key={link.href}>
               <Link href={link.href} passHref>
                 <NavigationMenuLink
                   className={cn(
@@ -81,30 +81,31 @@ export default function Navigation() {
           <NavigationMenuTrigger>
             {t("examples.examples")}
           </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="grid gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-3">
+          <NavigationMenuContent className="NavigationMenuContent">
+            <div className="grid p-6 w-[560px] grid-cols-3 gap-5">
               {exampleCategories.map((category) => (
-                <div key={category.title} className="space-y-2">
-                  <h4 className="text-sm font-medium leading-none">
+                <div key={category.title}>
+                  <h4 className="text-sm font-semibold mb-3 pb-1 border-b">
                     {category.title}
                   </h4>
-                  <div className="space-y-1">
+                  <ul className="space-y-2">
                     {category.examples.map((example) => (
-                      <Link key={example.href} href={example.href} passHref>
-                        <NavigationMenuLink
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                            pathname === example.href &&
-                              "bg-accent text-accent-foreground"
-                          )}
-                        >
-                          <div className="text-sm font-medium leading-none">
+                      <li key={example.href}>
+                        <Link href={example.href} passHref>
+                          <NavigationMenuLink
+                            className={cn(
+                              "block text-sm rounded-md px-3 py-2 hover:bg-accent/30 hover:text-accent-foreground transition-colors",
+                              pathname === example.href
+                                ? "bg-accent/60 text-accent-foreground font-medium"
+                                : "text-foreground/70"
+                            )}
+                          >
                             {example.label}
-                          </div>
-                        </NavigationMenuLink>
-                      </Link>
+                          </NavigationMenuLink>
+                        </Link>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               ))}
             </div>
