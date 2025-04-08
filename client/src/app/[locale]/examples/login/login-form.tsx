@@ -3,6 +3,7 @@
 
 import { useAppForm } from "@/components/shadcn-form";
 import { Button } from "@/components/ui/button";
+import { useDirection } from "@/hooks/use-direction";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 
@@ -34,6 +35,7 @@ export default function LoginForm() {
     },
   });
   const t = useTranslations("examples.login.form");
+  const dir = useDirection();
   return (
     <form
       onSubmit={(e) => {
@@ -42,10 +44,10 @@ export default function LoginForm() {
         form.handleSubmit();
       }}
     >
-      <form.FormLayout>
+      <form.FormLayout dir={dir}>
         {/* פרטים אישיים */}
         <form.FormSection title={t("personalDetails")}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="flex flex-col space-y-4 max-w-md mx-auto w-full">
             <form.AppField
               name="email"
               children={(field) => (
@@ -54,6 +56,7 @@ export default function LoginForm() {
                   placeholder={t("emailPlaceholder")}
                   autoComplete="email"
                   type="email"
+                  dir={dir}
                 />
               )}
             />
@@ -61,16 +64,17 @@ export default function LoginForm() {
               name="password"
               children={(field) => (
                 <field.PasswordInput
+                  dir={dir}
                   label={t("passwordLabel")}
                   placeholder={t("passwordPlaceholder")}
-                  // autoComplete="current-password"
+                  autoComplete="current-password"
                 />
               )}
             />
           </div>
         </form.FormSection>
 
-        <div className="flex justify-end gap-3 mt-2">
+        <div className="flex justify-end gap-3 mt-6">
           <Button variant="outline" className="min-w-[100px]">
             {t("cancel")}
           </Button>
