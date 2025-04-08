@@ -1,0 +1,49 @@
+{
+  "login": {
+    "title": "Login Form Example",
+    "description": "A simple yet powerful login form with client-side validation using TanStack Form and Zod.",
+    "preview": "Preview",
+    "code": "Code",
+    "loginFormTitle": "Account Login",
+    "loginFormDescription": "Enter your credentials to access your account",
+    "tipTitle": "Try it out!",
+    "tipDescription": "Use the demo credentials to see a successful login, or try different values to see validation and error handling in action.",
+    "keyFeaturesTitle": "Key Features",
+    "features": {
+      "validation": {
+        "title": "Client-side Validation",
+        "description": "Real-time form validation using Zod schema to ensure data integrity before submission."
+      },
+      "errorHandling": {
+        "title": "Error Handling",
+        "description": "Comprehensive error handling for both client-side validation and server responses."
+      },
+      "typeInference": {
+        "title": "Type Safety",
+        "description": "Full TypeScript support with type inference from the Zod schema for end-to-end type safety."
+      },
+      "reusability": {
+        "title": "Reusable Components",
+        "description": "Form components are designed to be reusable across your application."
+      }
+    },
+    "codeTab": {
+      "form": "Form Component",
+      "schema": "Schema & Types",
+      "page": "Page Component"
+    },
+    "form": {
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "emailDescription": "We'll never share your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "passwordDescription": "Password must be at least 6 characters",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Login",
+      "loginSuccess": "Login successful! Redirecting...",
+      "invalidCredentials": "Invalid email or password",
+      "demoCredentials": "Demo credentials:"
+    }
+  }
+}

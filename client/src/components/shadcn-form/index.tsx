@@ -4,6 +4,8 @@ import CheckboxField from "./form-components/checkbox-field";
 import { SelectField } from "./form-components/select-field";
 import { SubmitButton } from "./form-components/submit-button";
 import { PasswordInput } from "./form-components/password-input";
+import FormLayout from "./form-components/form-layout";
+import { FormSection } from "./form-components/form-section";
 
 // יצירת Context עבור השדות והטופס
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
@@ -20,5 +22,7 @@ export const { useAppForm, withForm } = createFormHook({
   },
   formComponents: {
     SubmitButton,
+    FormLayout,
+    FormSection,
   },
 });

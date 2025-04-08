@@ -1,0 +1,49 @@
+{
+  "login": {
+    "title": "דוגמת טופס התחברות",
+    "description": "טופס התחברות פשוט אך רב-עוצמה עם תיקוף צד לקוח באמצעות TanStack Form ו-Zod.",
+    "preview": "תצוגה מקדימה",
+    "code": "קוד",
+    "loginFormTitle": "התחברות לחשבון",
+    "loginFormDescription": "הזן את פרטי ההתחברות שלך כדי לגשת לחשבונך",
+    "tipTitle": "נסה בעצמך!",
+    "tipDescription": "השתמש בפרטי ההדגמה כדי לראות התחברות מוצלחת, או נסה ערכים שונים כדי לראות את התיקוף וטיפול בשגיאות בפעולה.",
+    "keyFeaturesTitle": "תכונות מרכזיות",
+    "features": {
+      "validation": {
+        "title": "תיקוף צד לקוח",
+        "description": "תיקוף טפסים בזמן אמת באמצעות סכמת Zod להבטחת תקינות הנתונים לפני שליחה."
+      },
+      "errorHandling": {
+        "title": "טיפול בשגיאות",
+        "description": "טיפול מקיף בשגיאות עבור תיקוף צד לקוח ותגובות שרת."
+      },
+      "typeInference": {
+        "title": "בטיחות טיפוסים",
+        "description": "תמיכה מלאה ב-TypeScript עם הסקת טיפוסים מסכמת Zod לבטיחות טיפוסים מקצה לקצה."
+      },
+      "reusability": {
+        "title": "רכיבים לשימוש חוזר",
+        "description": "רכיבי הטופס מתוכננים לשימוש חוזר בכל היישום שלך."
+      }
+    },
+    "codeTab": {
+      "form": "רכיב הטופס",
+      "schema": "סכמה וטיפוסים",
+      "page": "רכיב העמוד"
+    },
+    "form": {
+      "emailLabel": "אימייל",
+      "emailPlaceholder": "הזן את האימייל שלך",
+      "emailDescription": "לעולם לא נשתף את האימייל שלך",
+      "passwordLabel": "סיסמה",
+      "passwordPlaceholder": "הזן את הסיסמה שלך",
+      "passwordDescription": "הסיסמה חייבת להכיל לפחות 6 תווים",
+      "forgotPassword": "שכחת סיסמה?",
+      "loginButton": "התחבר",
+      "loginSuccess": "ההתחברות בוצעה בהצלחה! מעביר...",
+      "invalidCredentials": "אימייל או סיסמה שגויים",
+      "demoCredentials": "פרטי התחברות להדגמה:"
+    }
+  }
+}
