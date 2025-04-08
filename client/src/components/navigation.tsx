@@ -63,7 +63,7 @@ export default function Navigation() {
 
           return (
             <NavigationMenuItem dir="rtl" key={link.href}>
-              <Link href={link.href} legacyBehavior passHref>
+              <Link href={link.href} passHref>
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
@@ -90,12 +90,7 @@ export default function Navigation() {
                   </h4>
                   <div className="space-y-1">
                     {category.examples.map((example) => (
-                      <Link
-                        key={example.href}
-                        href={example.href}
-                        legacyBehavior
-                        passHref
-                      >
+                      <Link key={example.href} href={example.href} passHref>
                         <NavigationMenuLink
                           className={cn(
                             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",

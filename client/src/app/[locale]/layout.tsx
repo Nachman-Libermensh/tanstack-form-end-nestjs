@@ -17,6 +17,7 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Navigation from "@/components/navigation";
 import LanguageSwitcher from "@/components/language-switcher";
+import LibrarySwitcher from "@/components/library-switcher";
 
 export async function generateMetadata({
   params: { locale },
@@ -87,6 +88,7 @@ export default async function RootLayout({
                       <Navigation />
                     </div>
                     <div className="flex items-center gap-3">
+                      <LibrarySwitcher />
                       <LanguageSwitcher />
                       <ToggleTheme />
                       <Link

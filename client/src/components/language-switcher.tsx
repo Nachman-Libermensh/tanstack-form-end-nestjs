@@ -1,39 +1,62 @@
 "use client";
+
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { Button } from "@/components/ui/button";
-import { Languages } from "lucide-react";
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-export default function LocaleSwitcher() {
-  const t = useTranslations("common.localeSwitcher");
+export default function LanguageSwitcher() {
   const locale = useLocale();
   const otherLocale = locale === "en" ? "he" : "en";
   const pathname = usePathname();
 
-  // שפה נוכחית כטקסט מוצג
-  // const currentLanguage = locale === "he" ? "עברית" : "English";
-  // השפה האחרת כטקסט מוצג
-  const otherLanguageName = otherLocale === "he" ? "עברית" : "English";
+  const t = useTranslations("common.languageSwitcher");
 
-  // דגלים לפי שפה
-  const otherFlag = otherLocale === "he" ? "🇮🇱" : "🇺🇸";
+  const languages = [
+    { id: "en", name: "English", flag: "🇺🇸" },
+    { id: "he", name: "עברית", flag: "🇮🇱" },
+  ];
 
   return (
-    <Button
-      variant="outline"
-      size="sm"
-      className="h-9 flex items-center gap-2 px-3 rounded-md border-muted-foreground/20 hover:bg-accent hover:text-accent-foreground transition-colors"
-      asChild
-    >
-      <Link href={pathname} locale={otherLocale}>
-        <Languages className="h-4 w-4 mr-1" />
-        <span className="font-medium">{otherFlag}</span>
-        <span>
-          {t("switchLocale", {
-            locale: otherLanguageName,
-          })}
-        </span>
-      </Link>
-    </Button>
+    <div className="flex items-center border rounded-md overflow-hidden">
+      {languages.map((lang) => (
+        <TooltipProvider key={lang.id}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Toggle
+                asChild
+                variant="outline"
+                size="sm"
+                pressed={locale === lang.id}
+                className={`
+                  cursor-pointer
+                  flex items-center gap-2 px-3 py-1.5 h-9 border-0 rounded-none
+                  transition-colors
+                  ${
+                    locale === lang.id
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-accent hover:text-accent-foreground"
+                  }
+                `}
+                aria-label={`Switch to ${lang.name}`}
+              >
+                <Link href={pathname} locale={otherLocale}>
+                  <span>{lang.flag}</span>
+                  <span className="hidden sm:inline text-sm">{lang.name}</span>
+                </Link>
+              </Toggle>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{t("switchToLanguage", { language: lang.name })}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ))}
+    </div>
   );
 }

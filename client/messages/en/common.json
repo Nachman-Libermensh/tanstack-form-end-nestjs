@@ -1,6 +1,21 @@
 {
   "localeSwitcher": {
-    "switchLocale": "Switch to {locale}",
-    "label": "Change language"
+    "switchLocale": "החלף ל-{locale}",
+    "currentLocale": "שפה נוכחית: {locale}"
+  },
+  "librarySwitcher": {
+    "title": "החלף ספריית UI",
+    "shadcn": "Shadcn UI",
+    "rizzui": "RizzUI",
+    "switchTo": "החלף ל",
+    "uiLibrary": "ספריית UI"
+  },
+  "languageSwitcher": {
+    "switchToLanguage": "החלף ל{language}"
+  },
+  "theme": {
+    "light": "בהיר",
+    "dark": "כהה",
+    "system": "מערכת"
   }
 }
