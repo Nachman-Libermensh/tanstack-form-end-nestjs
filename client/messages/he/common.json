@@ -13,6 +13,17 @@
   "languageSwitcher": {
     "switchToLanguage": "החלף ל{language}"
   },
+  "fileUpload": {
+    "dropFiles": "שחרר קבצים כאן",
+    "dragAndDrop": "או גרור ושחרר",
+    "browseFiles": "בחר קבצים",
+    "selectedFiles": "קבצים שנבחרו",
+    "tooManyFiles": "יותר מדי קבצים. מספר מקסימלי מותר: {max}",
+    "fileTooLarge": "הקובץ {name} גדול מדי. גודל מקסימלי: {size} מגה",
+    "invalidFileType": "לקובץ {name} יש סוג לא חוקי. סוגים מקובלים: {types}",
+    "maxSize": "גודל קובץ מקסימלי:",
+    "acceptedTypes": "סוגי קבצים מקובלים"
+  },
   "theme": {
     "light": "בהיר",
     "dark": "כהה",

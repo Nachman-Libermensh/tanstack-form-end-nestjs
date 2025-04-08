@@ -1,21 +1,32 @@
 {
   "localeSwitcher": {
-    "switchLocale": "החלף ל-{locale}",
-    "currentLocale": "שפה נוכחית: {locale}"
+    "switchLocale": "Switch to {locale}",
+    "currentLocale": "Current language: {locale}"
   },
   "librarySwitcher": {
-    "title": "החלף ספריית UI",
+    "title": "Switch UI Library",
     "shadcn": "Shadcn UI",
     "rizzui": "RizzUI",
-    "switchTo": "החלף ל",
-    "uiLibrary": "ספריית UI"
+    "switchTo": "Switch to",
+    "uiLibrary": "UI Library"
   },
   "languageSwitcher": {
-    "switchToLanguage": "החלף ל{language}"
+    "switchToLanguage": "Switch to {language}"
+  },
+  "fileUpload": {
+    "dropFiles": "Drop files here",
+    "dragAndDrop": "or drag and drop",
+    "browseFiles": "Browse Files",
+    "selectedFiles": "Selected Files",
+    "tooManyFiles": "Too many files. Maximum allowed: {max}",
+    "fileTooLarge": "File {name} is too large. Maximum size: {size}MB",
+    "invalidFileType": "File {name} has invalid type. Accepted types: {types}",
+    "maxSize": "Max file size:",
+    "acceptedTypes": "Accepted types"
   },
   "theme": {
-    "light": "בהיר",
-    "dark": "כהה",
-    "system": "מערכת"
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }

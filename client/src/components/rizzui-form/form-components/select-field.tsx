@@ -1,52 +1,27 @@
-import { Label } from "@/components/ui/label";
 import { useFieldContext } from "..";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import FieldErrors from "./field-errors";
+import SelectLookup from "@/components/global/select/SelectLookup";
 
-type SelectOption = {
-  value: string;
-  label: string;
-};
 
 type SelectFieldProps = {
   label: string;
-  options: SelectOption[];
+  lookupName: string;
   placeholder?: string;
 };
 
-export const SelectField = ({
-  label,
-  options,
-  placeholder,
-}: SelectFieldProps) => {
-  const field = useFieldContext<string>();
+export const SelectLookupField = ({ label, lookupName }: SelectFieldProps) => {
+  const field = useFieldContext<number>();
 
   return (
     <div className="space-y-2">
       <div className="space-y-1">
-        <Label htmlFor={field.name}>{label}</Label>
-        <Select
+        <SelectLookup
           value={field.state.value}
-          onValueChange={(value) => field.handleChange(value)}
-        >
-          <SelectTrigger id={field.name} onBlur={field.handleBlur}>
-            <SelectValue placeholder={placeholder} />
-          </SelectTrigger>
-          <SelectContent>
-            {options.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          onSelect={(value: any) => field.handleChange(value)}
+          lookupName={lookupName}
+          label={label}
+        />
       </div>
       <FieldErrors meta={field.state.meta} />
     </div>

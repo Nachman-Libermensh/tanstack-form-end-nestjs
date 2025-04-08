@@ -1,5 +1,6 @@
 import { useFieldContext } from "..";
 import { Password } from "rizzui";
+import FieldErrors from "./field-errors";
 
 export function PasswordInput({
   label,
@@ -12,41 +13,25 @@ export function PasswordInput({
   dir?: "ltr" | "rtl";
   showStrengthIndicator?: boolean;
 }) {
-  // const [showPassword, setShowPassword] = useState(false);
   const field = useFieldContext<string>();
   return (
-    <div className="space-y-2">
-      {/* <Label htmlFor={field.name}>{label}</Label> */}
-      <div className="relative">
+    <div>
+      <div>
         <Password
           label={label}
           name={field.name}
-          // type={showPassword ? "text" : "password"}
           id={field.name}
           value={field.state.value}
           onChange={(e) => field.handleChange(e.target.value)}
           onBlur={field.handleBlur}
           placeholder={placeholder}
           dir={dir}
-          className="pr-10"
         />
-        {/* <Butto
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="absolute right-0 top-0 h-full px-3 py-2 text-gray-400 hover:text-gray-900"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? (
-            <EyeOffIcon className="h-4 w-4" />
-          ) : (
-            <EyeIcon className="h-4 w-4" />
-          )}
-        </Butto> */}
       </div>
       {showStrengthIndicator && (
         <PasswordStrengthIndicator password={field.state.value} />
       )}
+      <FieldErrors meta={field.state.meta} />
     </div>
   );
 }
@@ -99,8 +84,8 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
             strength < 2
               ? "text-red-500"
               : strength < 4
-              ? "text-amber-500"
-              : "text-green-500"
+                ? "text-amber-500"
+                : "text-green-500"
           }`}
         >
           {getLabel()}

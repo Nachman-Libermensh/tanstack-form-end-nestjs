@@ -1,5 +1,6 @@
 import { useFieldContext } from "..";
 import { Checkbox } from "rizzui";
+import FieldErrors from "./field-errors";
 type CheckboxFieldProps = {
   label: string;
   description?: string;
@@ -19,14 +20,13 @@ const CheckboxField = ({ label, description }: CheckboxFieldProps) => {
           onBlur={field.handleBlur}
         />
         <div className="grid gap-1.5 leading-none">
-          {/* <Label htmlFor={field.name} className="cursor-pointer">
-            {label}
-          </Label> */}
+        
           {description && (
             <p className="text-sm text-muted-foreground">{description}</p>
           )}
         </div>
       </div>
+      <FieldErrors meta={field.state.meta} />
     </div>
   );
 };
