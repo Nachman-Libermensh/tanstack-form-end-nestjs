@@ -52,7 +52,6 @@ const FileUploadField = ({
 
   return (
     <div className="space-y-2">
-      {label && <div className="text-sm font-medium mb-1.5">{label}</div>}
       <FileUpload
         accept={getAcceptString(accept)}
         maxSize={maxSize}
