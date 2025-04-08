@@ -15,7 +15,6 @@ type FileUploadFieldProps = {
 };
 
 const FileUploadField = ({
-  label,
   accept = "all",
   maxSize,
   maxFiles = 1,
