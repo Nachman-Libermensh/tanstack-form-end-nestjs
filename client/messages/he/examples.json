@@ -51,7 +51,10 @@
       "loginButton": "התחבר",
       "loginSuccess": "ההתחברות בוצעה בהצלחה! מעביר...",
       "invalidCredentials": "אימייל או סיסמה שגויים",
-      "demoCredentials": "פרטי התחברות להדגמה:"
+      "demoCredentials": "פרטי התחברות להדגמה:",
+      "submit": "שלח",
+      "cancel": "ביטול",
+      "personalDetails": "פרטים אישיים"
     }
   }
 }
