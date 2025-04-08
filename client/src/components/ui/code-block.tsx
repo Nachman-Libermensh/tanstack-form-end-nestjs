@@ -1,28 +1,28 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import {
+  atomDark,
+  duotoneLight,
+} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { IconCheck, IconCopy } from "@tabler/icons-react";
+import { useTheme } from "next-themes";
+import { Button } from "./button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+
+type Tab = {
+  name: string;
+  code: string;
+  language?: string;
+  highlightLines?: number[];
+};
 
 type CodeBlockProps = {
   language: string;
   filename: string;
   highlightLines?: number[];
-} & (
-  | {
-      code: string;
-      tabs?: never;
-    }
-  | {
-      code?: never;
-      tabs: Array<{
-        name: string;
-        code: string;
-        language?: string;
-        highlightLines?: number[];
-      }>;
-    }
-);
+} & ({ code: string; tabs?: never } | { code?: never; tabs: Tab[] });
 
 export const CodeBlock = ({
   language,
@@ -31,84 +31,99 @@ export const CodeBlock = ({
   highlightLines = [],
   tabs = [],
 }: CodeBlockProps) => {
-  const [copied, setCopied] = React.useState(false);
-  const [activeTab, setActiveTab] = React.useState(0);
+  const [copied, setCopied] = useState(false);
+  const { resolvedTheme } = useTheme();
 
-  const tabsExist = tabs.length > 0;
-
-  const copyToClipboard = async () => {
-    const textToCopy = tabsExist ? tabs[activeTab].code : code;
-    if (textToCopy) {
-      await navigator.clipboard.writeText(textToCopy);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+  const handleCopy = async (text: string) => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const activeCode = tabsExist ? tabs[activeTab].code : code;
-  const activeLanguage = tabsExist
-    ? tabs[activeTab].language || language
-    : language;
-  const activeHighlightLines = tabsExist
-    ? tabs[activeTab].highlightLines || []
-    : highlightLines;
+  // If no tabs, create a single "default" tab with the provided code
+  const tabsData = tabs.length
+    ? tabs
+    : [{ name: "Default", code: code!, language, highlightLines }];
 
   return (
-    <div className="relative w-full rounded-lg bg-slate-900 p-4 font-mono text-sm">
-      <div className="flex flex-col gap-2">
-        {tabsExist && (
-          <div className="flex  overflow-x-auto">
-            {tabs.map((tab, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(index)}
-                className={`px-3 !py-2 text-xs transition-colors font-sans ${
-                  activeTab === index
-                    ? "text-white"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                {tab.name}
-              </button>
-            ))}
-          </div>
-        )}
-        {!tabsExist && filename && (
-          <div className="flex justify-between items-center py-2">
-            <div className="text-xs text-zinc-400">{filename}</div>
-            <button
-              onClick={copyToClipboard}
-              className="flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-200 transition-colors font-sans"
-            >
-              {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
-            </button>
-          </div>
-        )}
+    <div className="relative rounded-2xl border bg-muted/40 p-4 shadow-sm">
+      <div className="flex justify-between items-center mb-2">
+        {/* Filename */}
+        <div className="text-xs text-muted-foreground">{filename}</div>
+
+        {/* Copy Button - now in the header area instead of absolute */}
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => handleCopy(tabs.length ? tabs[0].code : code!)}
+          className={`flex items-center gap-1 text-xs transition-all duration-300 ${
+            copied
+              ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          {copied ? (
+            <>
+              <IconCheck
+                size={16}
+                className="animate-in zoom-in-50 duration-300"
+              />
+              <span className="animate-in slide-in-from-left-2 duration-300">
+                Copied!
+              </span>
+            </>
+          ) : (
+            <>
+              <IconCopy size={16} />
+              <span>Copy</span>
+            </>
+          )}
+        </Button>
       </div>
-      <SyntaxHighlighter
-        language={activeLanguage}
-        style={atomDark}
-        customStyle={{
-          margin: 0,
-          padding: 0,
-          background: "transparent",
-          fontSize: "0.875rem", // text-sm equivalent
-        }}
-        wrapLines={true}
-        showLineNumbers={true}
-        lineProps={(lineNumber) => ({
-          style: {
-            backgroundColor: activeHighlightLines.includes(lineNumber)
-              ? "rgba(255,255,255,0.1)"
-              : "transparent",
-            display: "block",
-            width: "100%",
-          },
-        })}
-        PreTag="div"
-      >
-        {String(activeCode)}
-      </SyntaxHighlighter>
+
+      {/* Using shadcn Tabs component */}
+      <Tabs defaultValue={tabsData[0].name} className="w-full">
+        {tabsData.length > 1 && (
+          <TabsList className="mb-2">
+            {tabsData.map((tab) => (
+              <TabsTrigger key={tab.name} value={tab.name}>
+                {tab.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        )}
+
+        {tabsData.map((tab) => (
+          <TabsContent key={tab.name} value={tab.name}>
+            <SyntaxHighlighter
+              language={tab.language || language}
+              style={resolvedTheme === "dark" ? atomDark : duotoneLight}
+              customStyle={{
+                padding: "1rem",
+                borderRadius: "1rem",
+                fontSize: "0.875rem",
+                background: "transparent",
+              }}
+              wrapLines
+              lineProps={(lineNumber) => {
+                const shouldHighlight = (tab.highlightLines || []).includes(
+                  lineNumber
+                );
+                return {
+                  style: shouldHighlight
+                    ? {
+                        backgroundColor: "rgba(255,255,0,0.1)",
+                        display: "block",
+                      }
+                    : { display: "block" },
+                };
+              }}
+            >
+              {tab.code}
+            </SyntaxHighlighter>
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   );
 };

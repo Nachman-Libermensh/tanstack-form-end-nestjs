@@ -138,7 +138,7 @@ app.useGlobalPipes(
       <div className="px-6">
         <CodeBlock
           language="tsx"
-          filename="login-form.tsx"
+          filename="login-form"
           tabs={[
             {
               name: "client/login-form.tsx",
