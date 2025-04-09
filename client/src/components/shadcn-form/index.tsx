@@ -7,7 +7,6 @@ import { PasswordInput } from "./form-components/password-input";
 import FormLayout from "./form-components/form-layout";
 import { FormSection } from "./form-components/form-section";
 
-// יצירת Context עבור השדות והטופס
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts();
 
