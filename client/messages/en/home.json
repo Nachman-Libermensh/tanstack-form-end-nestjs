@@ -2,6 +2,7 @@
   "title": "TanStack Form with NestJS Integration Research",
   "description": "Developing a comprehensive strategy for advanced form management",
   "intro": "This project focuses on researching and developing advanced methods for form management, combining:",
+  "technologiesTitle": "Technologies Used",
   "technologies": {
     "tanstack": {
       "name": "TanStack Form",

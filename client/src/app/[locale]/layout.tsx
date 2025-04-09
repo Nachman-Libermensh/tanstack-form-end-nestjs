@@ -51,10 +51,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={getDirection(locale)} suppressHydrationWarning>
-      <body className="min-h-screen bg-background text-foreground antialiased relative">
+      <body className="min-h-screen bg-background text-foreground antialiased relative selection:bg-primary/30">
         {/* Modern dynamic background */}
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          {/* We remove the base gradient to let the more vibrant background shine through */}
           <Background />
         </div>
 
@@ -67,11 +66,12 @@ export default async function RootLayout({
           >
             <UILibraryProvider>
               <div className="flex flex-col min-h-screen">
-                <header className="w-full bg-background/80 backdrop-blur-sm border-b sticky top-0 z-50">
-                  <div className="w-full px-4 md:px-6 lg:px-8 flex h-16 items-center justify-between">
+                {/* Header */}
+                <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/70 border-b border-border/40 shadow-sm transition-colors">
+                  <div className="w-full max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 flex h-16 items-center justify-between">
                     <div className="flex items-center gap-6">
-                      <Link href="/" className="flex items-center gap-2">
-                        <div className="rounded-lg bg-primary p-1 text-primary-foreground">
+                      <Link href="/" className="flex items-center gap-2 group">
+                        <div className="rounded-lg bg-primary p-1 text-primary-foreground shadow-md transition-transform group-hover:scale-105">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -86,7 +86,7 @@ export default async function RootLayout({
                             <path d="M13 2v7h7" />
                           </svg>
                         </div>
-                        <h1 className="text-xl font-bold">
+                        <h1 className="text-xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                           TanStack Form + NestJS
                         </h1>
                       </Link>
@@ -108,7 +108,11 @@ export default async function RootLayout({
                     </div>
                   </div>
                 </header>
-                {children}
+
+                {/* Main content */}
+                <main className="flex-1 w-full max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 py-6">
+                  {children}
+                </main>
               </div>
               <Toaster />
             </UILibraryProvider>
