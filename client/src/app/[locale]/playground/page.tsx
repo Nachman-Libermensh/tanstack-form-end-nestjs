@@ -3,9 +3,11 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { Plus } from "lucide-react";
+// import { Plus } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 // import type { FormFieldConfig } from "@/types/form-builder";
 
@@ -18,6 +20,11 @@ type FormFieldConfig = {
   required: boolean;
   placeholder: string;
 };
+// app/form-builder/page.tsx
+
+// תשתיות לקומפוננטות הבאות — יש לממש אותן בנפרד
+// app/form-builder/page.tsx
+
 // תשתיות לקומפוננטות הבאות — יש לממש אותן בנפרד
 function FormBuilderCanvas({
   fields,
@@ -30,7 +37,9 @@ function FormBuilderCanvas({
 }) {
   return (
     <div className="border rounded p-4 min-h-[300px]">
-      <p className="text-muted-foreground">כאן תוצג גרירת השדות בפועל</p>
+      {fields.length === 0 && (
+        <p className="text-muted-foreground">כאן תוצג גרירת השדות בפועל</p>
+      )}
       {fields.map((field) => (
         <div
           key={field.id}
@@ -46,63 +55,37 @@ function FormBuilderCanvas({
   );
 }
 
-function FormFieldEditor({
+function FieldEditor({
   field,
   onChange,
 }: {
-  field: FormFieldConfig | null;
+  field: FormFieldConfig;
   onChange: (updated: FormFieldConfig) => void;
 }) {
-  if (!field)
-    return <div className="text-muted-foreground">בחר שדה לעריכה</div>;
   return (
-    <div className="space-y-2">
-      <input
-        className="w-full border rounded p-2"
-        value={field.label}
-        onChange={(e) => onChange({ ...field, label: e.target.value })}
-        placeholder="Label"
-      />
-      <input
-        className="w-full border rounded p-2"
-        value={field.name}
-        onChange={(e) => onChange({ ...field, name: e.target.value })}
-        placeholder="Name"
-      />
-      <input
-        className="w-full border rounded p-2"
-        value={field.placeholder}
-        onChange={(e) => onChange({ ...field, placeholder: e.target.value })}
-        placeholder="Placeholder"
-      />
+    <div className="space-y-4">
+      <div>
+        <Label>שם</Label>
+        <Input
+          value={field.name}
+          onChange={(e) => onChange({ ...field, name: e.target.value })}
+        />
+      </div>
+      <div>
+        <Label>תווית</Label>
+        <Input
+          value={field.label}
+          onChange={(e) => onChange({ ...field, label: e.target.value })}
+        />
+      </div>
+      <div>
+        <Label>פלייסהולדר</Label>
+        <Input
+          value={field.placeholder || ""}
+          onChange={(e) => onChange({ ...field, placeholder: e.target.value })}
+        />
+      </div>
     </div>
-  );
-}
-
-function FormPreview({ fields }: { fields: FormFieldConfig[] }) {
-  return (
-    <form className="space-y-3">
-      {fields.map((field) => (
-        <div key={field.id}>
-          <label className="block text-sm font-medium mb-1">
-            {field.label}
-          </label>
-          <input
-            className="w-full border rounded p-2"
-            placeholder={field.placeholder}
-            required={field.required}
-          />
-        </div>
-      ))}
-    </form>
-  );
-}
-
-function GeneratedCodePanel({ fields }: { fields: FormFieldConfig[] }) {
-  return (
-    <pre className="whitespace-pre-wrap text-sm bg-muted p-4 rounded">
-      {JSON.stringify(fields, null, 2)}
-    </pre>
   );
 }
 
@@ -110,12 +93,12 @@ export default function FormBuilderPage() {
   const [fields, setFields] = useState<FormFieldConfig[]>([]);
   const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
 
-  const handleAddField = () => {
+  const addField = (type: FormFieldConfig["type"]) => {
     const newField: FormFieldConfig = {
-      id: crypto.randomUUID(),
-      type: "text",
-      label: "שדה טקסט",
+      id: nanoid(),
+      type,
       name: `field_${fields.length + 1}`,
+      label: "",
       required: false,
       placeholder: "",
     };
@@ -123,64 +106,41 @@ export default function FormBuilderPage() {
     setSelectedFieldId(newField.id);
   };
 
-  const selectedField = fields.find((f) => f.id === selectedFieldId) || null;
-
   const updateField = (updated: FormFieldConfig) => {
     setFields((prev) => prev.map((f) => (f.id === updated.id ? updated : f)));
   };
 
+  const selectedField = fields.find((f) => f.id === selectedFieldId) || null;
+
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold">🎛️ בונה טפסים</h1>
-        <Button onClick={handleAddField}>
-          <Plus className="w-4 h-4 mr-2" />
-          הוסף שדה
-        </Button>
-      </div>
-      <Tabs defaultValue="editor">
-        <TabsList>
-          <TabsTrigger value="editor">עריכה</TabsTrigger>
-          <TabsTrigger value="preview">תצוגה</TabsTrigger>
-          <TabsTrigger value="code">קוד</TabsTrigger>
-        </TabsList>
+    <div className="grid grid-cols-3 gap-4 p-4">
+      <Card className="col-span-2">
+        <CardContent className="p-4 space-y-4">
+          <div className="flex gap-2">
+            <Button onClick={() => addField("text")}>+ שדה טקסט</Button>
+            <Button onClick={() => addField("password")}>+ סיסמה</Button>
+            <Button onClick={() => addField("checkbox")}>+ תיבת סימון</Button>
+          </div>
+          <FormBuilderCanvas
+            fields={fields}
+            onSelectField={setSelectedFieldId}
+            selectedFieldId={selectedFieldId}
+          />
+        </CardContent>
+      </Card>
 
-        <TabsContent
-          value="editor"
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
-        >
-          <Card>
-            <CardContent className="p-4">
-              <FormBuilderCanvas
-                fields={fields}
-                selectedFieldId={selectedFieldId}
-                onSelectField={setSelectedFieldId}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4">
-              <FormFieldEditor field={selectedField} onChange={updateField} />
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="preview">
-          <Card>
-            <CardContent className="p-4">
-              <FormPreview fields={fields} />
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="code">
-          <Card>
-            <CardContent className="p-4">
-              <GeneratedCodePanel fields={fields} />
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+      <Card>
+        <CardContent className="p-4">
+          {selectedField ? (
+            <FieldEditor field={selectedField} onChange={updateField} />
+          ) : (
+            <p className="text-muted-foreground">בחר שדה לעריכה</p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
+}
+function nanoid(): string {
+  return Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
