@@ -62,94 +62,92 @@
     }
   }
 }
-
 :root {
   --radius: 0.625rem;
-  /* צבעי בסיס - חיים יותר אך עדיין מאוזנים */
-  --background: oklch(0.98 0.01 240);
-  --foreground: oklch(0.2 0.02 240);
-  --card: oklch(1 0.005 240);
-  --card-foreground: oklch(0.145 0.02 240);
-  --popover: oklch(1 0.005 240);
-  --popover-foreground: oklch(0.145 0.02 240);
+  /* צבעי בסיס */
+  --background: oklch(0.98 0.015 270);
+  --foreground: oklch(0.2 0.03 270);
+  --card: oklch(1 0.01 260);
+  --card-foreground: oklch(0.15 0.025 260);
+  --popover: oklch(1 0.01 260);
+  --popover-foreground: oklch(0.15 0.025 260);
 
-  /* צבעי אינטראקציה - יותר חיים וססגוניים */
-  --primary: oklch(0.48 0.25 250); /* כחול סגלגל עשיר */
-  --primary-foreground: oklch(0.98 0.005 250);
-  --secondary: oklch(0.9 0.075 280); /* לבנדר בהיר */
-  --secondary-foreground: oklch(0.2 0.1 280);
-  --muted: oklch(0.95 0.03 260);
-  --muted-foreground: oklch(0.5 0.05 260);
-  --accent: oklch(0.85 0.12 220); /* כחול בהיר */
-  --accent-foreground: oklch(0.2 0.05 220);
+  /* צבעי אינטראקציה */
+  --primary: oklch(0.58 0.28 280);
+  --primary-foreground: oklch(0.98 0.01 280);
+  --secondary: oklch(0.85 0.12 300);
+  --secondary-foreground: oklch(0.2 0.08 300);
+  --muted: oklch(0.96 0.03 280);
+  --muted-foreground: oklch(0.5 0.07 280);
+  --accent: oklch(0.78 0.18 220);
+  --accent-foreground: oklch(0.2 0.06 220);
 
   /* צבעי שירות */
-  --destructive: oklch(0.65 0.28 25); /* אדום עשיר */
-  --border: oklch(0.85 0.03 240);
-  --input: oklch(0.9 0.025 240);
-  --ring: oklch(0.65 0.15 250);
+  --destructive: oklch(0.68 0.32 20);
+  --border: oklch(0.85 0.04 270);
+  --input: oklch(0.9 0.03 270);
+  --ring: oklch(0.62 0.2 280);
 
-  /* צבעי תרשימים - צבעים ססגוניים ומבודלים */
-  --chart-1: oklch(0.65 0.28 40); /* כתום-אדום */
-  --chart-2: oklch(0.6 0.25 180); /* טורקיז */
-  --chart-3: oklch(0.55 0.2 250); /* סגול */
-  --chart-4: oklch(0.7 0.28 90); /* ירוק-צהוב */
-  --chart-5: oklch(0.6 0.3 140); /* ירוק */
+  /* צבעי תרשימים */
+  --chart-1: oklch(0.62 0.28 280);
+  --chart-2: oklch(0.64 0.26 220);
+  --chart-3: oklch(0.66 0.27 320);
+  --chart-4: oklch(0.68 0.28 190);
+  --chart-5: oklch(0.7 0.27 30);
 
   /* צבעי סייד-בר */
-  --sidebar: oklch(0.97 0.02 240);
-  --sidebar-foreground: oklch(0.2 0.02 240);
-  --sidebar-primary: oklch(0.48 0.25 250);
-  --sidebar-primary-foreground: oklch(0.98 0.005 250);
-  --sidebar-accent: oklch(0.9 0.075 280);
-  --sidebar-accent-foreground: oklch(0.2 0.1 280);
-  --sidebar-border: oklch(0.85 0.03 240);
-  --sidebar-ring: oklch(0.65 0.15 250);
+  --sidebar: oklch(0.97 0.02 270);
+  --sidebar-foreground: oklch(0.2 0.03 270);
+  --sidebar-primary: oklch(0.58 0.28 280);
+  --sidebar-primary-foreground: oklch(0.98 0.01 280);
+  --sidebar-accent: oklch(0.85 0.12 300);
+  --sidebar-accent-foreground: oklch(0.2 0.08 300);
+  --sidebar-border: oklch(0.85 0.04 270);
+  --sidebar-ring: oklch(0.62 0.2 280);
 }
 
 .dark {
   /* צבעי בסיס בגרסה כהה */
-  --background: oklch(0.15 0.03 250);
-  --foreground: oklch(0.95 0.025 240);
-  --card: oklch(0.2 0.05 250);
-  --card-foreground: oklch(0.95 0.02 240);
-  --popover: oklch(0.2 0.05 250);
-  --popover-foreground: oklch(0.95 0.02 240);
+  --background: oklch(0.14 0.05 270);
+  --foreground: oklch(0.95 0.03 260);
+  --card: oklch(0.17 0.06 270);
+  --card-foreground: oklch(0.95 0.03 260);
+  --popover: oklch(0.17 0.06 270);
+  --popover-foreground: oklch(0.95 0.03 260);
 
-  /* צבעי אינטראקציה - חיים ובהירים יותר במצב כהה */
-  --primary: oklch(0.7 0.3 250); /* סגול בהיר */
-  --primary-foreground: oklch(0.15 0.05 250);
-  --secondary: oklch(0.3 0.1 270); /* סגול כהה */
-  --secondary-foreground: oklch(0.95 0.02 270);
-  --muted: oklch(0.25 0.05 260);
-  --muted-foreground: oklch(0.7 0.07 260);
-  --accent: oklch(0.3 0.15 230); /* כחול כהה */
-  --accent-foreground: oklch(0.95 0.02 230);
+  /* צבעי אינטראקציה */
+  --primary: oklch(0.7 0.32 280);
+  --primary-foreground: oklch(0.15 0.06 280);
+  --secondary: oklch(0.3 0.15 300);
+  --secondary-foreground: oklch(0.95 0.03 300);
+  --muted: oklch(0.24 0.08 280);
+  --muted-foreground: oklch(0.7 0.1 280);
+  --accent: oklch(0.32 0.18 225);
+  --accent-foreground: oklch(0.95 0.03 225);
 
   /* צבעי שירות */
-  --destructive: oklch(0.7 0.32 20); /* אדום בהיר */
-  --border: oklch(0.3 0.1 250);
-  --input: oklch(0.3 0.08 250);
-  --ring: oklch(0.6 0.2 250);
+  --destructive: oklch(0.73 0.34 20);
+  --border: oklch(0.3 0.1 270);
+  --input: oklch(0.28 0.09 270);
+  --ring: oklch(0.65 0.25 280);
 
-  /* צבעי תרשימים - חיים וניתנים להבחנה */
-  --chart-1: oklch(0.65 0.3 265); /* סגול */
-  --chart-2: oklch(0.7 0.28 160); /* טורקיז */
-  --chart-3: oklch(0.75 0.3 60); /* כתום */
-  --chart-4: oklch(0.6 0.3 320); /* ורוד */
-  --chart-5: oklch(0.6 0.32 15); /* אדום */
+  /* צבעי תרשימים */
+  --chart-1: oklch(0.68 0.32 280);
+  --chart-2: oklch(0.72 0.3 220);
+  --chart-3: oklch(0.74 0.31 320);
+  --chart-4: oklch(0.7 0.33 190);
+  --chart-5: oklch(0.65 0.35 30);
 
   /* צבעי סייד-בר */
-  --sidebar: oklch(0.18 0.04 250);
-  --sidebar-foreground: oklch(0.95 0.02 240);
-  --sidebar-primary: oklch(0.65 0.28 250);
-  --sidebar-primary-foreground: oklch(0.15 0.05 250);
-  --sidebar-accent: oklch(0.25 0.1 270);
-  --sidebar-accent-foreground: oklch(0.95 0.02 270);
-  --sidebar-border: oklch(0.3 0.08 250);
-  --sidebar-ring: oklch(0.6 0.2 250);
+  --sidebar: oklch(0.17 0.06 270);
+  --sidebar-foreground: oklch(0.95 0.03 260);
+  --sidebar-primary: oklch(0.7 0.32 280);
+  --sidebar-primary-foreground: oklch(0.15 0.06 280);
+  --sidebar-accent: oklch(0.3 0.15 300);
+  --sidebar-accent-foreground: oklch(0.95 0.03 300);
+  --sidebar-border: oklch(0.3 0.1 270);
+  --sidebar-ring: oklch(0.65 0.25 280);
 }
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -7,8 +7,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 
-import type { FormFieldConfig } from "@/types/form-builder";
+// import type { FormFieldConfig } from "@/types/form-builder";
 
+type FormFieldConfig = {
+  id: string;
+  type: string;
+
+  label: string;
+  name: string;
+  required: boolean;
+  placeholder: string;
+};
 // תשתיות לקומפוננטות הבאות — יש לממש אותן בנפרד
 function FormBuilderCanvas({
   fields,
