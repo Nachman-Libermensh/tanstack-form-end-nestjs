@@ -1,97 +1,14 @@
 "use client";
 import { useFormBuilder } from "../../context/form-builder-context";
 import { CodeBlock } from "@/components/ui/code-block";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { generateZodSchema } from "./zod-schema-generator";
+import { generateNestJSSchema } from "./nestjs-dto-viewer";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { useState } from "react";
 
 export default function TanstackCodeViewer() {
   const { fields } = useFormBuilder();
-  const [activeTab, setActiveTab] = useState("zod");
-
-  // יוצר את קוד הטייפסקריפט לזוד סכמה
-  const generateZodSchema = () => {
-    if (fields.length === 0) return "// אין שדות בטופס";
-
-    const imports = `import { z } from 'zod';\n\n`;
-
-    let schema = `export const formSchema = z.object({\n`;
-
-    fields.forEach((field) => {
-      let fieldSchema = "";
-
-      switch (field.type) {
-        case "text":
-          fieldSchema = `z.string()`;
-          break;
-        case "email":
-          fieldSchema = `z.string().email()`;
-          break;
-        case "password":
-          fieldSchema = `z.string()`;
-          break;
-        case "number":
-          fieldSchema = `z.number()`;
-          break;
-        case "checkbox":
-          fieldSchema = `z.boolean()`;
-          break;
-        case "select":
-          fieldSchema = `z.string()`;
-          break;
-        case "textarea":
-          fieldSchema = `z.string()`;
-          break;
-        default:
-          fieldSchema = `z.string()`;
-      }
-
-      // הוספת אימותים
-      if (field.validations) {
-        if (
-          field.type === "text" ||
-          field.type === "password" ||
-          field.type === "email" ||
-          field.type === "textarea"
-        ) {
-          if (field.validations.minLength) {
-            fieldSchema += `.min(${field.validations.minLength})`;
-          }
-          if (field.validations.maxLength) {
-            fieldSchema += `.max(${field.validations.maxLength})`;
-          }
-          if (field.validations.pattern) {
-            fieldSchema += `.regex(new RegExp("${field.validations.pattern}"))`;
-          }
-        }
-
-        if (field.type === "number") {
-          if (field.validations.min !== undefined) {
-            fieldSchema += `.min(${field.validations.min})`;
-          }
-          if (field.validations.max !== undefined) {
-            fieldSchema += `.max(${field.validations.max})`;
-          }
-        }
-
-        // הוספת הודעת שגיאה מותאמת
-        if (field.validations.message) {
-          fieldSchema += `.message("${field.validations.message}")`;
-        }
-      }
-
-      // אם השדה הוא לא חובה, נוסיף אופציונלי
-      if (!field.required) {
-        fieldSchema += `.optional()`;
-      }
-
-      schema += `  ${field.name}: ${fieldSchema},\n`;
-    });
-
-    schema += `});\n\n`;
-    schema += `export type FormValues = z.infer<typeof formSchema>;`;
-
-    return imports + schema;
-  };
+  //   const [activeTab, setActiveTab] = useState("zod");
 
   // יוצר את קוד ריאקט לטנסטק פורם
   const generateTanstackForm = () => {
@@ -263,217 +180,38 @@ export default function TanstackCodeViewer() {
     return imports + zodImport + zodResolver + formCode;
   };
 
-  const generateNestJSSchema = () => {
-    if (fields.length === 0) return "// אין שדות בטופס";
-
-    const imports = `import { ApiProperty } from '@nestjs/swagger';\n`;
-    const zodImport = `import { z } from 'zod';\n`;
-    const classValidatorImport = `import { IsString, IsEmail, IsOptional, IsBoolean, IsNumber, Min, Max, MinLength, MaxLength, Matches } from 'class-validator';\n\n`;
-
-    let dtoCode = `export class FormDto {\n`;
-
-    fields.forEach((field) => {
-      dtoCode += `  @ApiProperty({ description: '${
-        field.label || field.name
-      }' })\n`;
-
-      // הוספת אימותים מ-class-validator
-      switch (field.type) {
-        case "email":
-          dtoCode += `  @IsEmail()\n`;
-          break;
-        case "text":
-        case "password":
-        case "textarea":
-          dtoCode += `  @IsString()\n`;
-          if (field.validations?.minLength) {
-            dtoCode += `  @MinLength(${field.validations.minLength})\n`;
-          }
-          if (field.validations?.maxLength) {
-            dtoCode += `  @MaxLength(${field.validations.maxLength})\n`;
-          }
-          if (field.validations?.pattern) {
-            dtoCode += `  @Matches(/${field.validations.pattern}/)\n`;
-          }
-          break;
-
-        case "number":
-          dtoCode += `  @IsNumber()\n`;
-          if (field.validations?.min !== undefined) {
-            dtoCode += `  @Min(${field.validations.min})\n`;
-          }
-          if (field.validations?.max !== undefined) {
-            dtoCode += `  @Max(${field.validations.max})\n`;
-          }
-          break;
-        case "checkbox":
-          dtoCode += `  @IsBoolean()\n`;
-          break;
-        case "select":
-          dtoCode += `  @IsString()\n`;
-          break;
-      }
-
-      if (!field.required) {
-        dtoCode += `  @IsOptional()\n`;
-      }
-
-      // הגדר את הטיפוס הנכון
-      let fieldType;
-      switch (field.type) {
-        case "number":
-          fieldType = "number";
-          break;
-        case "checkbox":
-          fieldType = "boolean";
-          break;
-        default:
-          fieldType = "string";
-      }
-
-      dtoCode += `  ${field.name}: ${fieldType};\n\n`;
-    });
-
-    dtoCode += `}\n\n`;
-
-    // הוסף גם סכימת Zod ל-NestJS מבוססת Zod
-    dtoCode += `export const formZodSchema = z.object({\n`;
-    fields.forEach((field) => {
-      let fieldSchema = "";
-
-      switch (field.type) {
-        case "text":
-          fieldSchema = `z.string()`;
-          break;
-        case "email":
-          fieldSchema = `z.string().email()`;
-          break;
-        case "password":
-          fieldSchema = `z.string()`;
-          break;
-        case "number":
-          fieldSchema = `z.number()`;
-          break;
-        case "checkbox":
-          fieldSchema = `z.boolean()`;
-          break;
-        case "select":
-          fieldSchema = `z.string()`;
-          break;
-        case "textarea":
-          fieldSchema = `z.string()`;
-          break;
-        default:
-          fieldSchema = `z.string()`;
-      }
-
-      if (field.validations) {
-        if (
-          field.type === "text" ||
-          field.type === "password" ||
-          field.type === "email" ||
-          field.type === "textarea"
-        ) {
-          if (field.validations.minLength) {
-            fieldSchema += `.min(${field.validations.minLength})`;
-          }
-          if (field.validations.maxLength) {
-            fieldSchema += `.max(${field.validations.maxLength})`;
-          }
-          if (field.validations.pattern) {
-            fieldSchema += `.regex(new RegExp("${field.validations.pattern}"))`;
-          }
-        }
-
-        if (field.type === "number") {
-          if (field.validations.min !== undefined) {
-            fieldSchema += `.min(${field.validations.min})`;
-          }
-          if (field.validations.max !== undefined) {
-            fieldSchema += `.max(${field.validations.max})`;
-          }
-        }
-
-        if (field.validations.message) {
-          fieldSchema += `.message("${field.validations.message}")`;
-        }
-      }
-
-      if (!field.required) {
-        fieldSchema += `.optional()`;
-      }
-
-      dtoCode += `  ${field.name}: ${fieldSchema},\n`;
-    });
-    dtoCode += `});\n`;
-
-    return imports + zodImport + classValidatorImport + dtoCode;
-  };
-
-  // פונקציה לקבלת שם הקובץ המתאים לכל לשונית
-  const getFilename = (tab: string) => {
-    switch (tab) {
-      case "zod":
-        return "schema.ts";
-      case "tanstack":
-        return "MyForm.tsx";
-      case "nestjs":
-        return "form.dto.ts";
-      default:
-        return "code.ts";
-    }
-  };
+  //   // פונקציה לקבלת שם הקובץ המתאים לכל לשונית
+  //   const getFilename = (tab: string) => {
+  //     switch (tab) {
+  //       case "zod":
+  //         return "schema.ts";
+  //       case "tanstack":
+  //         return "MyForm.tsx";
+  //       case "nestjs":
+  //         return "form.dto.ts";
+  //       default:
+  //         return "code.ts";
+  //     }
+  //   };
 
   // מערך טאבים עבור CodeBlock
   const tabs = [
     {
-      name: "Zod Schema",
-      code: generateZodSchema(),
+      name: "schema.ts",
+      code: generateZodSchema(fields),
       language: "typescript",
     },
     {
-      name: "TanStack Form",
+      name: "MyForm.tsx",
       code: generateTanstackForm(),
       language: "tsx",
     },
     {
-      name: "NestJS DTO",
-      code: generateNestJSSchema(),
+      name: "form.dto.ts",
+      code: generateNestJSSchema(fields),
       language: "typescript",
     },
   ];
 
-  return (
-    <Tabs defaultValue="zod" className="w-full" onValueChange={setActiveTab}>
-      <TabsList className="grid grid-cols-3 mb-2">
-        <TabsTrigger value="zod">Zod סכמה</TabsTrigger>
-        <TabsTrigger value="tanstack">TanStack טופס</TabsTrigger>
-        <TabsTrigger value="nestjs">NestJS DTO</TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="zod">
-        <CodeBlock
-          language="typescript"
-          code={generateZodSchema()}
-          filename={getFilename("zod")}
-        />
-      </TabsContent>
-
-      <TabsContent value="tanstack">
-        <CodeBlock
-          language="tsx"
-          code={generateTanstackForm()}
-          filename={getFilename("tanstack")}
-        />
-      </TabsContent>
-
-      <TabsContent value="nestjs">
-        <CodeBlock
-          language="typescript"
-          code={generateNestJSSchema()}
-          filename={getFilename("nestjs")}
-        />
-      </TabsContent>
-    </Tabs>
-  );
+  return <CodeBlock filename="" language="ts" tabs={tabs} />;
 }

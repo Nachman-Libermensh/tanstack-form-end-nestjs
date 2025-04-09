@@ -10,6 +10,7 @@ import { IconCheck, IconCopy } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { Button } from "./button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+import { ScrollArea } from "./scroll-area";
 
 type Tab = {
   name: string;
@@ -92,37 +93,45 @@ export const CodeBlock = ({
             ))}
           </TabsList>
         )}
+        <ScrollArea className="h-[300px] rounded-md border bg-muted/20">
+          {tabsData.map((tab) => (
+            <TabsContent key={tab.name} value={tab.name}>
+              <SyntaxHighlighter
+                language={tab.language || language}
+                style={resolvedTheme === "dark" ? atomDark : duotoneLight}
+                customStyle={{
+                  padding: "1rem",
+                  borderRadius: "1rem",
+                  fontSize: "0.875rem",
+                  background: "transparent",
+                  // maxWidth: "100ch",
+                  // maxWidth: maxWidth, // הוספנו מגבלת רוחב
+                  maxWidth: "120ch",
+                  overflowWrap: "break-word", // לשבירת מילים ארוכות
+                  whiteSpace: "pre-wrap", // שומר על שבירות שורה ומוסיף שבירה אוטומטית
+                }}
+                wrapLongLines={true}
+                wrapLines
+                lineProps={(lineNumber) => {
+                  const shouldHighlight = (tab.highlightLines || []).includes(
+                    lineNumber
+                  );
 
-        {tabsData.map((tab) => (
-          <TabsContent key={tab.name} value={tab.name}>
-            <SyntaxHighlighter
-              language={tab.language || language}
-              style={resolvedTheme === "dark" ? atomDark : duotoneLight}
-              customStyle={{
-                padding: "1rem",
-                borderRadius: "1rem",
-                fontSize: "0.875rem",
-                background: "transparent",
-              }}
-              wrapLines
-              lineProps={(lineNumber) => {
-                const shouldHighlight = (tab.highlightLines || []).includes(
-                  lineNumber
-                );
-                return {
-                  style: shouldHighlight
-                    ? {
-                        backgroundColor: "rgba(255,255,0,0.1)",
-                        display: "block",
-                      }
-                    : { display: "block" },
-                };
-              }}
-            >
-              {tab.code}
-            </SyntaxHighlighter>
-          </TabsContent>
-        ))}
+                  return {
+                    style: shouldHighlight
+                      ? {
+                          backgroundColor: "rgba(255,255,0,0.1)",
+                          display: "block",
+                        }
+                      : { display: "block" },
+                  };
+                }}
+              >
+                {tab.code}
+              </SyntaxHighlighter>
+            </TabsContent>
+          ))}
+        </ScrollArea>
       </Tabs>
     </div>
   );

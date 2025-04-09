@@ -17,11 +17,11 @@ export default function ActionButtons() {
 
   const exportForm = () => {
     if (fields.length === 0) return;
-    
+
     const formData = JSON.stringify(fields, null, 2);
     const blob = new Blob([formData], { type: "application/json" });
     const url = URL.createObjectURL(blob);
-    
+
     const a = document.createElement("a");
     a.href = url;
     a.download = "form-config.json";
@@ -44,7 +44,7 @@ export default function ActionButtons() {
           <FileDown size={16} />
           <span>ייצא טופס</span>
         </Button>
-        
+
         <Button
           variant="outline"
           size="sm"
@@ -56,9 +56,9 @@ export default function ActionButtons() {
           <span>הצג קוד</span>
         </Button>
       </div>
-      
+
       <Dialog open={showCode} onOpenChange={setShowCode}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className=" w-max min-w-5xl max-w-full">
           <DialogHeader>
             <DialogTitle>קוד מחולל</DialogTitle>
           </DialogHeader>
