@@ -15,14 +15,11 @@ import {
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-// import Navigation from "@/components/navigation";
-// import LanguageSwitcher from "@/components/language-switcher";
-// import LibrarySwitcher from "@/components/library-switcher";
-// import { Link } from "@/i18n/navigation";
+
 import Background from "./bacground";
 // import Image from "next/image";
 import Header from "./header";
-import { getDirection } from "@/lib/direction";
+import { getDirection } from "@/i18n/direction";
 
 export async function generateMetadata({
   params: { locale },

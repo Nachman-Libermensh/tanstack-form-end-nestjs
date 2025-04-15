@@ -17,7 +17,7 @@ import { Link } from "@/i18n/navigation";
 import { Home, Settings, PlayCircle, MenuSquare, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useDirection } from "@/lib/direction";
+import { useDirection } from "@/i18n/direction";
 
 // Component for a single main navigation link
 const MainNavLink = ({

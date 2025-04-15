@@ -17,7 +17,7 @@ import { ArrowLeft, Code, Info, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
-import { useDirection } from "@/lib/direction";
+import { useDirection } from "@/i18n/direction";
 
 export default function LoginFormExamplePage() {
   const t = useTranslations("examples.login");

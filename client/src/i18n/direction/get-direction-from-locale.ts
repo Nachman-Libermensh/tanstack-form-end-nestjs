@@ -1,4 +1,3 @@
-// רשימת שפות עם כיווניות RTL
 const rtlLanguages = ["he", "ar", "fa", "ur"];
 
 export function getDirectionFromLocale(locale: string): "rtl" | "ltr" {

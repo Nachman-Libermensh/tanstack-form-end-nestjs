@@ -22,7 +22,7 @@ import { Link } from "@/i18n/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SimpleUserForm from "@/components/pages/examples/user-form";
 import { motion } from "framer-motion";
-import { useDirection } from "@/lib/direction";
+import { useDirection } from "@/i18n/direction";
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: (i = 1) => ({
