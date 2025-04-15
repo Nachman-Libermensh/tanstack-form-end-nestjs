@@ -3,7 +3,7 @@
 
 import { useAppForm } from "@/components/shadcn-form";
 import { Button } from "@/components/ui/button";
-import { useDirection } from "@/hooks/use-direction";
+import { useDirection } from "@/lib/direction";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 

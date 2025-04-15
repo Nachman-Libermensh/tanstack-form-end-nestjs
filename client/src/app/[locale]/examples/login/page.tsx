@@ -12,12 +12,12 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import { useDirection } from "@/hooks/use-direction";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Code, Info, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
+import { useDirection } from "@/lib/direction";
 
 export default function LoginFormExamplePage() {
   const t = useTranslations("examples.login");

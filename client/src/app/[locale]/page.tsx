@@ -20,9 +20,9 @@ import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useDirection } from "@/hooks/use-direction";
 import SimpleUserForm from "@/components/pages/examples/user-form";
 import { motion } from "framer-motion";
+import { useDirection } from "@/lib/direction";
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: (i = 1) => ({

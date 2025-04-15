@@ -146,20 +146,39 @@
 // };
 
 // export default Background;
+// const Background = () => {
+//   return (
+//     <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+//       {/* Grid pattern – רשת עדינה */}
+//       <div className="absolute inset-0 [background-image:linear-gradient(to_right,rgba(0,0,0,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.025)_1px,transparent_1px)] [background-size:40px_40px] dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
+
+//       {/* Main glowing beam – הדגשה לפסים בצבעים ברורים */}
+//       <div className="absolute -top-1/4 -left-1/4 w-[250%] h-[250%] rotate-[-25deg] bg-gradient-to-r from-sky-400/30 via-purple-400/20 to-pink-300/30 blur-[120px] opacity-60 dark:from-sky-700/30 dark:via-purple-700/20 dark:to-pink-600/30" />
+
+//       {/* Extra light diagonal streak – שכבת בהירות נוספת ליצירת עומק והפרדה */}
+//       <div className="absolute left-[-20%] top-[10%] w-[180%] h-[100%] rotate-[-15deg] bg-gradient-to-r from-white/20 via-transparent to-transparent blur-[100px] opacity-20 dark:from-white/5" />
+
+//       {/* Subtle bottom-side glow */}
+//       <div className="absolute bottom-[-20%] right-[-30%] w-[1000px] h-[600px] rounded-full bg-gradient-to-tr from-indigo-300/20 via-purple-200/10 to-transparent blur-[160px] opacity-40 dark:from-indigo-800/20 dark:via-purple-700/10 dark:to-transparent" />
+//     </div>
+//   );
+// };
+
+// export default Background;
 const Background = () => {
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-      {/* Grid pattern – רשת עדינה */}
-      <div className="absolute inset-0 [background-image:linear-gradient(to_right,rgba(0,0,0,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.025)_1px,transparent_1px)] [background-size:40px_40px] dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
+      {/* Grid pattern – רשת רכה בגוון חול-תכלת */}
+      <div className="absolute inset-0 [background-image:linear-gradient(to_right,rgba(210,235,250,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(210,235,250,0.04)_1px,transparent_1px)] [background-size:40px_40px] dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)]" />
 
-      {/* Main glowing beam – הדגשה לפסים בצבעים ברורים */}
-      <div className="absolute -top-1/4 -left-1/4 w-[250%] h-[250%] rotate-[-25deg] bg-gradient-to-r from-sky-400/30 via-purple-400/20 to-pink-300/30 blur-[120px] opacity-60 dark:from-sky-700/30 dark:via-purple-700/20 dark:to-pink-600/30" />
+      {/* Main tropical glow beam */}
+      <div className="absolute -top-1/4 -left-1/4 w-[250%] h-[250%] rotate-[-25deg] bg-gradient-to-r from-sky-300/30 via-teal-200/20 to-orange-100/30 blur-[120px] opacity-70 dark:from-sky-600/30 dark:via-teal-500/20 dark:to-orange-300/30" />
 
-      {/* Extra light diagonal streak – שכבת בהירות נוספת ליצירת עומק והפרדה */}
-      <div className="absolute left-[-20%] top-[10%] w-[180%] h-[100%] rotate-[-15deg] bg-gradient-to-r from-white/20 via-transparent to-transparent blur-[100px] opacity-20 dark:from-white/5" />
+      {/* Diagonal highlight – כמו קרן שמש רכה */}
+      <div className="absolute left-[-20%] top-[15%] w-[180%] h-[100%] rotate-[-15deg] bg-gradient-to-r from-yellow-100/30 via-transparent to-transparent blur-[100px] opacity-30 dark:from-yellow-400/10" />
 
-      {/* Subtle bottom-side glow */}
-      <div className="absolute bottom-[-20%] right-[-30%] w-[1000px] h-[600px] rounded-full bg-gradient-to-tr from-indigo-300/20 via-purple-200/10 to-transparent blur-[160px] opacity-40 dark:from-indigo-800/20 dark:via-purple-700/10 dark:to-transparent" />
+      {/* Bottom tropical sunset glow */}
+      <div className="absolute bottom-[-20%] right-[-30%] w-[1000px] h-[600px] rounded-full bg-gradient-to-tr from-pink-200/20 via-orange-100/10 to-transparent blur-[160px] opacity-50 dark:from-pink-600/20 dark:via-orange-400/10 dark:to-transparent" />
     </div>
   );
 };

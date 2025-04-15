@@ -1,4 +1,4 @@
-import { FormFieldConfig } from ".";
+import { FormFieldConfig } from "./types";
 
 export default function FormBuilderCanvas({
   fields,
