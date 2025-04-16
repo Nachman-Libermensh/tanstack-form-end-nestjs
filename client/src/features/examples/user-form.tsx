@@ -2,7 +2,7 @@
 import { useAppForm } from "@/components/shadcn-form";
 import { createUserSchema } from "shared";
 
-const SimpleUserForm = () => {
+const UserForm = () => {
   const form = useAppForm({
     defaultValues: {
       name: "",
@@ -53,4 +53,4 @@ const SimpleUserForm = () => {
     </form>
   );
 };
-export default SimpleUserForm;
+export default UserForm;

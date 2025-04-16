@@ -2,8 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import LoginForm from "./login-form";
-import { LoginFormCode } from "./login-form-code";
+import LoginForm from "@/features/examples/login-form";
+import { LoginFormCode } from "@/features/examples/login-form-code";
 import {
   Card,
   CardContent,
