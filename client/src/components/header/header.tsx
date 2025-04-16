@@ -2,11 +2,11 @@
 
 import LanguageSwitcher from "@/components/language-switcher";
 // import LibrarySwitcher from "@/components/library-switcher";
-import Navigation from "@/components/navigation";
 import ToggleTheme from "@/components/toggle-theme";
 import { Link } from "@/i18n/navigation";
 import { GithubIcon } from "lucide-react";
 import Image from "next/image";
+import Navigation from "./navigation";
 
 const Header = () => {
   return (
@@ -21,7 +21,8 @@ const Header = () => {
               TanStackPlayground
             </h1>
           </Link>
-          <nav className="hidden md:flex items-center">
+          {/* השינוי כאן - הסרנו את ה-hidden ממסך מובייל */}
+          <nav className="flex items-center">
             <Navigation />
           </nav>
         </div>

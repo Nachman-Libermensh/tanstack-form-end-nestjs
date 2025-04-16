@@ -12,13 +12,13 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import React, { useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { Home, Settings, PlayCircle, MenuSquare, Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Home, Settings, PlayCircle, MenuSquare } from "lucide-react";
 import { useDirection } from "@/i18n/direction";
 
+import { Example } from "@/types";
+import { MobileNavigation } from "./mobile-navigation";
+// Component for a single main navigation link
 // Component for a single main navigation link
 const MainNavLink = ({
   href,
@@ -30,22 +30,29 @@ const MainNavLink = ({
   label: string;
   icon: React.ReactNode;
   isActive: boolean;
-}) => (
-  <NavigationMenuItem>
-    <Link href={href} passHref>
+}) => {
+  const direction = useDirection();
+
+  return (
+    <NavigationMenuItem>
       <NavigationMenuLink
+        asChild
         className={cn(
           navigationMenuTriggerStyle(),
-          "flex items-center gap-2 rounded-lg text-sm font-medium hover:bg-accent/40 transition-colors",
+          "flex items-center !flex-row !gap-2 rounded-lg text-sm font-medium hover:bg-accent/40 transition-colors whitespace-nowrap",
           isActive && "bg-accent/60 text-accent-foreground shadow-sm"
         )}
       >
-        {icon}
-        <span>{label}</span>
+        <Link href={href} passHref>
+          <span className="inline-flex items-center justify-center">
+            {icon}
+          </span>
+          <span className={direction === "rtl" ? "me-2" : "ms-2"}>{label}</span>
+        </Link>
       </NavigationMenuLink>
-    </Link>
-  </NavigationMenuItem>
-);
+    </NavigationMenuItem>
+  );
+};
 
 // Component for a single example link in the dropdown
 const ExampleLink = ({
@@ -74,10 +81,6 @@ const ExampleLink = ({
 );
 
 // Interface for example items
-interface Example {
-  href: string;
-  label: string;
-}
 
 // Component for a category of examples
 const ExampleCategory = ({
@@ -107,100 +110,6 @@ const ExampleCategory = ({
 );
 
 // Interface for example categories
-interface ExampleCategory {
-  title: string;
-  examples: Example[];
-}
-
-// Mobile navigation component
-const MobileNavigation = ({
-  mainLinks,
-  exampleCategories,
-  pathname,
-}: {
-  mainLinks: { href: string; label: string; icon: React.ReactNode }[];
-  exampleCategories: ExampleCategory[];
-  pathname: string;
-}) => {
-  const [open, setOpen] = useState(false);
-  const t = useTranslations("navigation");
-
-  return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden flex">
-          <Menu className="h-5 w-5" />
-          <span className="sr-only">תפריט</span>
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="w-[300px] p-0">
-        <div className="p-6 space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold">תפריט</h2>
-            <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-
-          <nav className="space-y-1">
-            {mainLinks.map((link) => {
-              const isActive =
-                pathname === link.href ||
-                (link.href !== "/" && pathname.startsWith(link.href));
-
-              return (
-                <Link
-                  href={link.href}
-                  key={link.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-accent/70 text-accent-foreground"
-                      : "hover:bg-accent/30"
-                  )}
-                >
-                  {link.icon}
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-muted-foreground">
-              {t("examples.examples")}
-            </h3>
-            {exampleCategories.map((category) => (
-              <div key={category.title} className="space-y-2">
-                <h4 className="text-sm font-medium border-b pb-1 border-border">
-                  {category.title}
-                </h4>
-                <div className="pl-2 space-y-1">
-                  {category.examples.map((example) => (
-                    <Link
-                      key={example.href}
-                      href={example.href}
-                      onClick={() => setOpen(false)}
-                      className={cn(
-                        "block px-3 py-1.5 text-sm rounded transition-colors",
-                        pathname === example.href
-                          ? "bg-accent/60 text-accent-foreground font-medium"
-                          : "text-foreground/70 hover:bg-accent/30"
-                      )}
-                    >
-                      {example.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </SheetContent>
-    </Sheet>
-  );
-};
 
 export default function Navigation() {
   const t = useTranslations("navigation");
@@ -208,16 +117,20 @@ export default function Navigation() {
   const direction = useDirection();
 
   const mainLinks = [
-    { href: "/", label: t("home"), icon: <Home className="w-4 h-4 mr-2" /> },
+    {
+      href: "/",
+      label: t("home"),
+      icon: <Home className="w-4 h-4" />,
+    },
     {
       href: "/how-it-works",
       label: t("howItWorks"),
-      icon: <Settings className="w-4 h-4 mr-2" />,
+      icon: <Settings className="w-4 h-4" />,
     },
     {
       href: "/playground",
       label: t("playground"),
-      icon: <PlayCircle className="w-4 h-4 mr-2" />,
+      icon: <PlayCircle className="w-4 h-4" />,
     },
   ];
 
@@ -249,7 +162,7 @@ export default function Navigation() {
   ];
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full">
       {/* Mobile Navigation */}
       <MobileNavigation
         mainLinks={mainLinks}
@@ -277,9 +190,11 @@ export default function Navigation() {
           })}
 
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="px-4 py-2 rounded-lg text-sm font-medium hover:bg-accent/40 transition-colors flex items-center gap-2">
-              <MenuSquare className="w-4 h-4" />
-              {t("examples.examples")}
+            <NavigationMenuTrigger className="px-4 py-2 rounded-lg text-sm font-medium hover:bg-accent/40 transition-colors flex items-center gap-2 whitespace-nowrap">
+              <span className="inline-flex items-center justify-center">
+                <MenuSquare className="w-4 h-4" />
+              </span>
+              <span>{t("examples.examples")}</span>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="grid p-6 w-[560px] grid-cols-3 gap-5">

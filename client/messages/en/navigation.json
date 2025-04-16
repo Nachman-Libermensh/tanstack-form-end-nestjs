@@ -2,6 +2,14 @@
   "home": "Home",
   "howItWorks": "How It Works",
   "playground": "Playground",
+
+  "menuAriaLabel": "Open menu",
+  "menuTitle": "Menu",
+  "search": "Search",
+  "searchExamples": "Search examples...",
+  "noExamplesFound": "No examples found",
+  "current": "Current",
+
   "language": "Language",
   "categories": {
     "basic": "Basic Forms",
@@ -10,7 +18,6 @@
   },
   "examples": {
     "examples": "Examples",
-
     "login": "Login Form",
     "contact": "Contact Form",
     "subscribe": "Newsletter Subscription",

@@ -3,6 +3,13 @@
   "howItWorks": "איך זה עובד",
   "playground": "פלייגראונד",
 
+  "menuAriaLabel": "פתח תפריט",
+  "menuTitle": "תפריט",
+  "search": "חיפוש",
+  "searchExamples": "חפש דוגמאות...",
+  "noExamplesFound": "לא נמצאו דוגמאות",
+  "current": "נוכחי",
+
   "language": "שפה",
   "categories": {
     "basic": "טפסים בסיסיים",

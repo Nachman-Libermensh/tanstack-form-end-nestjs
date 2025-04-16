@@ -16,9 +16,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 
-import Background from "./bacground";
+import Background from "@/components/header/bacground";
 // import Image from "next/image";
-import Header from "./header";
+import Header from "@/components/header/header";
 import { getDirection } from "@/i18n/direction";
 
 export async function generateMetadata({
