@@ -1,11 +1,16 @@
 /* eslint-disable react/no-children-prop */
 "use client";
 
-import { useAppForm } from "@/components/shadcn-form";
+import FormLayout from "@/components/shadcn-form/form-components/form-layout";
+import { FormSection } from "@/components/shadcn-form/form-components/form-section";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useDirection } from "@/i18n/direction";
+import { useForm } from "@tanstack/react-form";
 import { useTranslations } from "next-intl";
+import { Label } from "@/components/ui/label";
 import { z } from "zod";
+import { PasswordInput } from "@/components/ui/password-input";
 
 const loginSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email format"),
@@ -25,7 +30,7 @@ export default function LoginForm() {
     // Handle login logic here
     console.log("Login data:", data);
   };
-  const form = useAppForm({
+  const form = useForm({
     defaultValues,
     validators: {
       onChange: loginSchema,
@@ -44,35 +49,50 @@ export default function LoginForm() {
         form.handleSubmit();
       }}
     >
-      <form.FormLayout dir={dir}>
+      <FormLayout dir={dir}>
         {/* פרטים אישיים */}
-        <form.FormSection title={t("personalDetails")}>
+        <FormSection title={t("personalDetails")}>
           <div className="flex flex-col space-y-4 max-w-md mx-auto w-full">
-            <form.AppField
+            <form.Field
               name="email"
               children={(field) => (
-                <field.TextField
-                  label={t("emailLabel")}
-                  placeholder={t("emailPlaceholder")}
-                  autoComplete="email"
-                  type="email"
-                  dir={dir}
-                />
+                <>
+                  <Label htmlFor={field.name}>
+                    {t("emailLabel")}
+                    <span className="text-destructive ml-1">*</span>
+                  </Label>
+                  <Input
+                    placeholder={t("emailPlaceholder")}
+                    autoComplete="email"
+                    value={field.state.value}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    type="email"
+                    dir={dir}
+                  />
+                </>
               )}
             />
-            <form.AppField
+            <form.Field
               name="password"
               children={(field) => (
-                <field.PasswordInput
-                  dir={dir}
-                  label={t("passwordLabel")}
-                  placeholder={t("passwordPlaceholder")}
-                  autoComplete="current-password"
-                />
+                <>
+                  <Label htmlFor={field.name}>
+                    {t("passwordLabel")}
+                    <span className="text-destructive ml-1">*</span>
+                  </Label>
+                  <PasswordInput
+                    dir={dir}
+                    placeholder={t("passwordPlaceholder")}
+                    value={field.state.value}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    autoComplete="current-password"
+                    showStrengthIndicator={true}
+                  />
+                </>
               )}
             />
           </div>
-        </form.FormSection>
+        </FormSection>
 
         <div className="flex justify-end gap-3 mt-6">
           <Button variant="outline" className="min-w-[100px]">
@@ -82,7 +102,7 @@ export default function LoginForm() {
             {t("submit")}
           </Button>
         </div>
-      </form.FormLayout>
+      </FormLayout>
     </form>
   );
 }
