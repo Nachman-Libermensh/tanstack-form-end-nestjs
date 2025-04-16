@@ -73,7 +73,6 @@ export const PasswordInput = React.forwardRef<
 
 PasswordInput.displayName = "PasswordInput";
 
-// ...existing code...
 function PasswordStrengthIndicator({ password }: { password: string }) {
   const getStrength = (pass: string) => {
     let strength = 0;
