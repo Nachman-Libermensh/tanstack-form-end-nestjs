@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
-import { useFormSchemaStore } from "../stores/formSchemaStore";
-import { useFormDataStore } from "../stores/formDataStore";
+import { useFormSchemaStore } from "../stores/form-schema.store";
+import { useFormDataStore } from "../stores/form-data.store";
 import type { FormSchema, FormData } from "../types";
 
 export function useFormManager(
