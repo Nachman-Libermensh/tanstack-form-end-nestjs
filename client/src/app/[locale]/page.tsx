@@ -20,7 +20,7 @@ import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SimpleUserForm from "@/components/pages/examples/user-form";
+import UserForm from "@/features/examples/user-form";
 import { motion } from "framer-motion";
 import { useDirection } from "@/i18n/direction";
 const fadeIn = {
@@ -229,7 +229,7 @@ export default function Home() {
               <DialogHeader>
                 <DialogTitle>{t("userFormWithTanStack")}</DialogTitle>
               </DialogHeader>
-              <SimpleUserForm />
+              <UserForm />
             </DialogContent>
           </Dialog>
         </motion.div>
