@@ -15,8 +15,8 @@ import { useDirection } from "@/i18n/direction";
 const languages = [
   { id: "en", name: "English", flag: "🇺🇸" },
   { id: "he", name: "עברית", flag: "🇮🇱" },
-  { id: "fr", name: "Français", flag: "🇫🇷" },
-  { id: "ru", name: "Русский", flag: "🇷🇺" },
+  // { id: "fr", name: "Français", flag: "🇫🇷" },
+  // { id: "ru", name: "Русский", flag: "🇷🇺" },
 ];
 
 export default function LanguageSwitcher() {
