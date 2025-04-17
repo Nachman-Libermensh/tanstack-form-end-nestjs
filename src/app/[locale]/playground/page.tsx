@@ -1,5 +1,7 @@
-import FormBuilderLayout from "@/features/playground";
+// import FormBuilderLayout from "@/features/playground";
+import FormBuilderAndPreview from "@/features/playground/FormBuilderAndPreview";
 
 export default function PlaygroundPage() {
-  return <FormBuilderLayout />;
+  return <FormBuilderAndPreview />;
+  // return <FormBuilderLayout />;
 }

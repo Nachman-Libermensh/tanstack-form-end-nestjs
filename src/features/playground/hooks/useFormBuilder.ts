@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useFormManager } from "./useFormManager";
 import { FieldConfig, FormSchema } from "../types";
 import { nanoid } from "nanoid";
+import { toast } from "sonner";
 
 // ID קבוע לטופס הראשי
 const MAIN_FORM_ID = "main-form";
@@ -54,8 +55,7 @@ export function useFormBuilder() {
       // בחר את השדה החדש אוטומטית
       selectField(newField.id);
 
-      toast({
-        title: "שדה נוסף",
+      toast.success("שדה נוסף", {
         description: `נוסף שדה מסוג ${newField.type}`,
       });
     },
@@ -88,8 +88,7 @@ export function useFormBuilder() {
         selectField(updatedFields.length > 0 ? updatedFields[0].id : null);
       }
 
-      toast({
-        title: "שדה נמחק",
+      toast.success("שדה נמחק", {
         description: "השדה הוסר מהטופס",
       });
     },
@@ -99,8 +98,7 @@ export function useFormBuilder() {
   const resetForm = useCallback(() => {
     clear();
     selectField(null);
-    toast({
-      title: "הטופס אופס",
+    toast.success("הטופס אופס", {
       description: "כל הנתונים נמחקו",
     });
   }, [clear, selectField]);
@@ -118,8 +116,7 @@ export function useFormBuilder() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    toast({
-      title: "הטופס יוצא",
+    toast.success("הטופס יוצא", {
       description: "הקובץ הורד למחשב שלך",
     });
   }, [schema]);
