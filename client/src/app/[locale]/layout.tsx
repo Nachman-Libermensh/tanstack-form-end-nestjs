@@ -16,7 +16,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 
-import Background from "@/components/header/bacground";
+import Background from "@/components/header/background";
 // import Image from "next/image";
 import Header from "@/components/header/header";
 import { getDirection } from "@/i18n/direction";

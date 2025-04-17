@@ -1,7 +1,6 @@
 "use client";
 
 import LanguageSwitcher from "@/components/language-switcher";
-// import LibrarySwitcher from "@/components/library-switcher";
 import ToggleTheme from "@/components/toggle-theme";
 import { Link } from "@/i18n/navigation";
 import { GithubIcon } from "lucide-react";
@@ -21,13 +20,11 @@ const Header = () => {
               TanStackPlayground
             </h1>
           </Link>
-          {/* השינוי כאן - הסרנו את ה-hidden ממסך מובייל */}
           <nav className="flex items-center">
             <Navigation />
           </nav>
         </div>
         <div className="flex items-center gap-3">
-          {/* <LibrarySwitcher /> */}
           <LanguageSwitcher />
           <ToggleTheme />
           <Link
