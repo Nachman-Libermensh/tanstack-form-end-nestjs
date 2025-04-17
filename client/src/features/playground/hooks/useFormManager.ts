@@ -18,21 +18,18 @@ export function useFormManager(
   const setData = useFormDataStore((s) => s.setData);
   const removeData = useFormDataStore((s) => s.removeData);
 
-  // אתחול ערכים אם לא קיימים
+  // אתחול ערכים רק אם לא קיימים בסטור
   useEffect(() => {
-    setSchema(formId, schema);
-    setData(formId, data);
-  }, [formId]);
-  //   useEffect(() => {
-  //       // בדיקה אם הסכמה אינה קיימת כבר בסטור
-  //       if (!useFormSchemaStore.getState().schemas[formId]) {
-  //         setSchema(formId, defaultSchema);
-  //       }
-  //       // בדיקה אם הנתונים אינם קיימים כבר בסטור
-  //       if (!useFormDataStore.getState().data[formId]) {
-  //         setData(formId, defaultData);
-  //       }
-  //     }, [formId, defaultSchema, defaultData]);
+    // בדיקה אם הסכמה אינה קיימת כבר בסטור
+    if (!useFormSchemaStore.getState().schemas[formId]) {
+      setSchema(formId, defaultSchema);
+    }
+    // בדיקה אם הנתונים אינם קיימים כבר בסטור
+    if (!useFormDataStore.getState().data[formId]) {
+      setData(formId, defaultData);
+    }
+  }, [formId, defaultSchema, defaultData]);
+
   const saveSchema = (newSchema: FormSchema) => setSchema(formId, newSchema);
   const saveData = (newData: FormData) => setData(formId, newData);
   const clear = () => {

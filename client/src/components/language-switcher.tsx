@@ -1,62 +1,51 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
-import { Toggle } from "@/components/ui/toggle";
+import { useLocale } from "next-intl";
+import { usePathname } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useDirection } from "@/i18n/direction";
+
+const languages = [
+  { id: "en", name: "English", flag: "🇺🇸" },
+  { id: "he", name: "עברית", flag: "🇮🇱" },
+  { id: "fr", name: "Français", flag: "🇫🇷" },
+  { id: "ru", name: "Русский", flag: "🇷🇺" },
+];
 
 export default function LanguageSwitcher() {
   const locale = useLocale();
-  const otherLocale = locale === "en" ? "he" : "en";
   const pathname = usePathname();
-
-  const t = useTranslations("common.languageSwitcher");
-
-  const languages = [
-    { id: "en", name: "English", flag: "🇺🇸" },
-    { id: "he", name: "עברית", flag: "🇮🇱" },
-  ];
+  const router = useRouter();
+  const dir = useDirection();
+  const handleChange = (langId: string) => {
+    router.push(`/${langId}${pathname}`);
+  };
 
   return (
-    <div className="flex items-center border rounded-md overflow-hidden">
-      {languages.map((lang) => (
-        <TooltipProvider key={lang.id}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Toggle
-                asChild
-                variant="outline"
-                size="sm"
-                pressed={locale === lang.id}
-                className={`
-                  cursor-pointer
-                  flex items-center gap-2 px-3 py-1.5 h-9 border-0 rounded-none
-                  transition-colors
-                  ${
-                    locale === lang.id
-                      ? "bg-primary text-primary-foreground"
-                      : "hover:bg-accent hover:text-accent-foreground"
-                  }
-                `}
-                aria-label={`Switch to ${lang.name}`}
-              >
-                <Link href={pathname} locale={otherLocale}>
-                  <span>{lang.flag}</span>
-                  <span className="hidden sm:inline text-sm">{lang.name}</span>
-                </Link>
-              </Toggle>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{t("switchToLanguage", { language: lang.name })}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      ))}
-    </div>
+    <Select dir={dir} defaultValue={locale} onValueChange={handleChange}>
+      <SelectTrigger>
+        <SelectValue
+          placeholder="Select Language"
+          className="flex items-center gap-2"
+        />
+      </SelectTrigger>
+      <SelectContent className="w-36 rounded-md border bg-popover shadow-xl">
+        {languages.map((lang) => (
+          <SelectItem key={lang.id} value={lang.id}>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-base">{lang.flag}</span>
+              <span>{lang.name}</span>
+            </div>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }
