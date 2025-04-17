@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import { useAppForm } from "@/components/shadcn-form";
-import { createUserSchema } from "shared";
+import { createUserSchema } from "./user.schema";
 
 const UserForm = () => {
   const form = useAppForm({
