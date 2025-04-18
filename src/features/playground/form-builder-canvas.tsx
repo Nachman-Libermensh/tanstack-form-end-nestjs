@@ -1,30 +1,61 @@
-import { FormFieldConfig } from "./types";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { FormField } from "./types";
+
+interface FormBuilderCanvasProps {
+  fields: FormField[];
+  selectedFieldId: string | null;
+  addField: (field: Partial<FormField> & { type: string }) => void;
+  removeField: (id: string) => void;
+  selectField: (id: string) => void;
+}
 
 export default function FormBuilderCanvas({
   fields,
-  onSelectField,
   selectedFieldId,
-}: {
-  fields: FormFieldConfig[];
-  onSelectField: (id: string) => void;
-  selectedFieldId: string | null;
-}) {
+  addField,
+  removeField,
+  selectField,
+}: FormBuilderCanvasProps) {
   return (
-    <div className="border rounded p-4 min-h-[300px]">
-      {fields.length === 0 && (
-        <p className="text-muted-foreground">כאן תוצג גרירת השדות בפועל</p>
-      )}
-      {fields.map((field) => (
-        <div
-          key={field.id}
-          className={`p-2 my-1 rounded cursor-pointer border ${
-            selectedFieldId === field.id ? "bg-muted" : ""
-          }`}
-          onClick={() => onSelectField(field.id)}
+    <Card>
+      <CardHeader>
+        <CardTitle>Form Builder</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Button
+          onClick={() => addField({ type: "text", label: "New Field" })}
+          className="w-full"
         >
-          {field.label || field.name}
-        </div>
-      ))}
-    </div>
+          + Add Text Field
+        </Button>
+        <ul className="space-y-2">
+          {fields.map((field) => (
+            <li
+              key={field.id}
+              className={`flex items-center justify-between p-2 rounded cursor-pointer ${
+                selectedFieldId === field.id
+                  ? "bg-blue-100"
+                  : "bg-gray-50 hover:bg-gray-100"
+              }`}
+              onClick={() => selectField(field.id)}
+            >
+              <span className="text-sm">{field.label}</span>
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeField(field.id);
+                }}
+              >
+                Remove
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
   );
 }
