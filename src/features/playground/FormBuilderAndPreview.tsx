@@ -10,15 +10,10 @@ import FieldEditor from "./field-editor";
 import FormPreview from "./form-preview";
 import CodePreview from "./code-preview";
 
-export default function FormBuilderAndPreview() {
-  const {
-    fields,
-    addField,
-    removeField,
-    selectedFieldId,
-    selectField,
-    updateField,
-  } = useFormBuilder();
+export default function FormBuilderAndLa() {
+  const { fields, addField, removeField, selectedFieldId, selectField } =
+    useFormBuilder();
+  useFormBuilder();
 
   const codeString = generateFormCode(
     fields.map((f) => ({ name: f.name, label: f.label }))
@@ -36,7 +31,7 @@ export default function FormBuilderAndPreview() {
         selectField={selectField}
       />
 
-      <FieldEditor selectedField={selectedField} updateField={updateField} />
+      <FieldEditor selectedField={selectedField} />
 
       <FormPreview fields={fields} />
 

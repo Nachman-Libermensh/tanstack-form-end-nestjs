@@ -4,17 +4,14 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormField } from "./types";
-
+import { useFormBuilder } from "./hooks/useFormBuilder";
 
 interface FieldEditorProps {
   selectedField: FormField | undefined;
-  updateField: (id: string, updates: Partial<FormField>) => void;
 }
 
-export default function FieldEditor({
-  selectedField,
-  updateField,
-}: FieldEditorProps) {
+export default function FieldEditor({ selectedField }: FieldEditorProps) {
+  const { updateField } = useFormBuilder();
   if (!selectedField) {
     return (
       <Card>
@@ -29,7 +26,6 @@ export default function FieldEditor({
       </Card>
     );
   }
-
   return (
     <Card>
       <CardHeader>
