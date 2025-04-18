@@ -1,8 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react"; // Removed useState
 import { useFormManager } from "./useFormManager";
 import { FieldConfig, FormSchema } from "../types";
 import { nanoid } from "nanoid";
 import { toast } from "sonner";
+import { useFormSchemaStore } from "../stores/form-schema.store"; // Added this import
 
 // ID קבוע לטופס הראשי
 const MAIN_FORM_ID = "main-form";
@@ -28,23 +29,20 @@ export function useFormBuilder() {
     {}
   );
 
-  const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
+  // Get selectedFieldId and selectField from the store instead of using local state
+  const selectedFieldId = useFormSchemaStore((state) => state.selectedFieldId);
+  const selectField = useFormSchemaStore((state) => state.selectField);
 
   const fields = schema.fields;
-
-  const selectField = useCallback((fieldId: string | null) => {
-    setSelectedFieldId(fieldId);
-  }, []);
 
   const addField = useCallback(
     (field: Partial<FieldConfig> & { type: string }) => {
       // וודא שלשדה יש מזהה
       const newField: FieldConfig = {
+        ...field,
         id: field.id || nanoid(6),
-        type: field.type,
         name: field.name || `field_${field.type}_${nanoid(4)}`,
         label: field.label || `שדה חדש`,
-        ...field,
       } as FieldConfig;
 
       saveSchema({
@@ -66,7 +64,7 @@ export function useFormBuilder() {
     (fieldId: string, updates: Partial<FieldConfig>) => {
       const updatedFields = fields.map((field) =>
         field.id === fieldId ? { ...field, ...updates } : field
-      );
+      ) as FieldConfig[];
       saveSchema({
         ...schema,
         fields: updatedFields,
