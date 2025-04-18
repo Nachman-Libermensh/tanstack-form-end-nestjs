@@ -62,13 +62,31 @@ export function useFormBuilder() {
 
   const updateField = useCallback(
     (fieldId: string, updates: Partial<FieldConfig>) => {
-      const updatedFields = fields.map((field) =>
-        field.id === fieldId ? { ...field, ...updates } : field
-      ) as FieldConfig[];
+      const updatedFields = fields.map((field) => {
+        if (field.id !== fieldId) return field;
+
+        // Create updated field preserving the original type
+        const updatedField = { ...field, ...updates } as FieldConfig;
+
+        // Special handling for nested validation properties
+        if (updates.validations) {
+          updatedField.validations = {
+            ...(field.validations || {}),
+            ...updates.validations,
+          };
+        }
+
+        return updatedField;
+      });
+
       saveSchema({
         ...schema,
         fields: updatedFields,
       });
+
+      // Log for debugging
+      console.log("Field updated:", fieldId, updates);
+      console.log("fields", updatedFields);
     },
     [schema, fields, saveSchema]
   );

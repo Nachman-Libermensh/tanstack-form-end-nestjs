@@ -54,11 +54,12 @@ export default function FieldEditor() {
           <div className="flex items-center space-x-2">
             <Checkbox
               checked={!!selectedField.required}
-              onCheckedChange={(checked) =>
+              onCheckedChange={(checked) => {
+                console.log("Setting required to:", checked);
                 updateField(selectedField.id, {
                   required: checked === true,
-                })
-              }
+                });
+              }}
             />
             <Label>Required</Label>
           </div>
@@ -73,38 +74,38 @@ export default function FieldEditor() {
               }
             />
           </div>
+
           <div className="space-y-1">
             <Label>Min Length</Label>
             <Input
               type="number"
               value={selectedField.validations?.minLength ?? ""}
-              onChange={(e) =>
+              onChange={(e) => {
+                const value = e.target.value;
                 updateField(selectedField.id, {
                   validations: {
                     ...selectedField.validations,
-                    minLength: e.target.value
-                      ? Number(e.target.value)
-                      : undefined,
+                    minLength: value === "" ? undefined : Number(value),
                   },
-                })
-              }
+                });
+              }}
             />
           </div>
+
           <div className="space-y-1">
             <Label>Max Length</Label>
             <Input
               type="number"
               value={selectedField.validations?.maxLength ?? ""}
-              onChange={(e) =>
+              onChange={(e) => {
+                const value = e.target.value;
                 updateField(selectedField.id, {
                   validations: {
                     ...selectedField.validations,
-                    maxLength: e.target.value
-                      ? Number(e.target.value)
-                      : undefined,
+                    maxLength: value === "" ? undefined : Number(value),
                   },
-                })
-              }
+                });
+              }}
             />
           </div>
         </div>
