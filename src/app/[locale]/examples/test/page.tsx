@@ -4,11 +4,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
+
+export const formSchema = z.object({
+  firstName: z
+    .string()
+    .min(1, { message: "שדה חובה" })
+    .min(2, { message: "אורך מינימלי: 2 תווים" }),
+});
+
+export type FormValues = z.infer<typeof formSchema>;
 
 const Page = () => {
   const form = useForm({
-    defaultValues: { field_text_gLNU: "", field_text_Ke0H: "" },
+    defaultValues: { firstName: "" },
     onSubmit: async ({ value }) => console.log(value),
+    validators: {
+      // Connect Zod validation
+      onChange: formSchema,
+    },
   });
 
   return (
@@ -19,46 +33,22 @@ const Page = () => {
       }}
       className="space-y-6"
     >
-      <form.Field
-        name="field_text_gLNU"
-        children={(field) => (
-          <div className="space-y-1">
-            <Label htmlFor="field_text_gLNU">New Field</Label>
+      <div className="space-y-2">
+        <Label htmlFor="firstName">שם פרטי</Label>
+        <form.Field
+          name="firstName"
+          children={(field) => (
             <Input
-              id="field_text_gLNU"
+              id="firstName"
+              placeholder="השם שלך..."
+              required
               value={field.state.value}
-              onChange={(e) => field.handleChange(e.target.value)}
               onBlur={field.handleBlur}
-            />
-            {field.state.meta.isTouched &&
-              field.state.meta.errors.map((message, index) => (
-                <p key={index} className="text-sm font-medium text-destructive">
-                  {message}
-                </p>
-              ))}
-          </div>
-        )}
-      />
-      <form.Field
-        name="field_text_Ke0H"
-        children={(field) => (
-          <div className="space-y-1">
-            <Label htmlFor="field_text_Ke0H">New Field</Label>
-            <Input
-              id="field_text_Ke0H"
-              value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
-              onBlur={field.handleBlur}
             />
-            {field.state.meta.isTouched &&
-              field.state.meta.errors.map((message, index) => (
-                <p key={index} className="text-sm font-medium text-destructive">
-                  {message}
-                </p>
-              ))}
-          </div>
-        )}
-      />
+          )}
+        />
+      </div>
       <Button type="submit">Submit</Button>
     </form>
   );

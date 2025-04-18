@@ -1,20 +1,26 @@
-export function generateFieldCode(name: string, label: string) {
-  return `  <form.Field
-    name="${name}"
-    children={(field) => (
-      <div className=\"space-y-1\">  
-        <Label htmlFor=\"${name}\">${label}</Label>
-        <Input
-          id=\"${name}\"
-          value={field.state.value}
-          onChange={(e) => field.handleChange(e.target.value)}
-          onBlur={field.handleBlur}
+export function generateFieldCode(
+  name: string,
+  label: string,
+  placeholder?: string,
+  required?: boolean
+) {
+  const placeholderAttr = placeholder ? `placeholder="${placeholder}"` : "";
+  const requiredAttr = required ? "required" : "";
+
+  return `      <div className="space-y-2">
+        <Label htmlFor="${name}">${label}</Label>
+        <form.Field
+          name="${name}"
+          children={( field ) => (
+            <Input
+              id="${name}"
+              ${placeholderAttr}
+              ${requiredAttr}
+              value={field.state.value}
+              onBlur={field.handleBlur}
+              onChange={(e) => field.handleChange(e.target.value)}
+            />
+          )}
         />
-        {field.state.meta.isTouched &&
-          field.state.meta.errors.map((message, index) => (
-            <p key={index} className=\"text-sm font-medium text-destructive\">{message}</p>
-          ))}
-      </div>
-    )}
-  />`;
+      </div>`;
 }
