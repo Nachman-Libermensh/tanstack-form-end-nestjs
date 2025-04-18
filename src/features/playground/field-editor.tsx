@@ -3,15 +3,15 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FormField } from "./types";
 import { useFormBuilder } from "./hooks/useFormBuilder";
 
-interface FieldEditorProps {
-  selectedField: FormField | undefined;
-}
+// interface FieldEditorProps {
 
-export default function FieldEditor({ selectedField }: FieldEditorProps) {
-  const { updateField } = useFormBuilder();
+// }
+
+export default function FieldEditor() {
+  const { updateField, selectedFieldId, fields } = useFormBuilder();
+  const selectedField = fields.find((f) => f.id === selectedFieldId);
   if (!selectedField) {
     return (
       <Card>

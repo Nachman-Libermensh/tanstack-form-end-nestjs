@@ -1,14 +1,12 @@
-import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FormField } from "./types";
 import { CodeBlock } from "@/components/ui/code-block";
 import { toast } from "sonner";
 import { useAppForm } from "@/components/shadcn-form";
+import { useFormBuilder } from "./hooks/useFormBuilder";
 
-interface FormPreviewProps {
-  fields: FormField[];
-}
+// interface FormPreviewProps {
+// }
 interface FormValues {
   [key: string]: string;
 }
@@ -19,7 +17,8 @@ interface FormState {
   canSubmit: boolean;
   submissionAttempts: number;
 }
-export default function FormPreview({ fields }: FormPreviewProps) {
+export default function FormPreview() {
+  const { fields } = useFormBuilder();
   const handleFormSubmit = (value: FormValues, formState: FormState) => {
     console.log("Submitted:", value);
 

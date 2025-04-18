@@ -1,23 +1,13 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { FormField } from "./types";
+import { useFormBuilder } from "./hooks/useFormBuilder";
 
-interface FormBuilderCanvasProps {
-  fields: FormField[];
-  selectedFieldId: string | null;
-  addField: (field: Partial<FormField> & { type: string }) => void;
-  removeField: (id: string) => void;
-  selectField: (id: string) => void;
-}
+// interface FormBuilderCanvasProps {}
 
-export default function FormBuilderCanvas({
-  fields,
-  selectedFieldId,
-  addField,
-  removeField,
-  selectField,
-}: FormBuilderCanvasProps) {
+export default function FormBuilderCanvas() {
+  const { fields, selectedFieldId, addField, removeField, selectField } =
+    useFormBuilder();
   return (
     <Card>
       <CardHeader>
