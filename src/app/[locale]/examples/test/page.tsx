@@ -32,6 +32,7 @@ export default function DemoPage() {
           id: "6",
           isSelectable: true,
           name: "ui",
+
           children: [{ id: "7", isSelectable: true, name: "carousel.tsx" }],
         },
       ],
