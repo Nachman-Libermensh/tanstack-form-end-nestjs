@@ -1,57 +1,84 @@
-/* eslint-disable react/no-children-prop */
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useForm } from "@tanstack/react-form";
-import { z } from "zod";
 
-export const formSchema = z.object({
-  firstName: z
-    .string()
-    .min(1, { message: "שדה חובה" })
-    .min(2, { message: "אורך מינימלי: 2 תווים" }),
-});
+import { TreeViewElement } from "@/components/ui/extension/tree-view-api";
+import { CodeFileExplorer } from "@/components/uu";
+import React from "react";
 
-export type FormValues = z.infer<typeof formSchema>;
-
-const Page = () => {
-  const form = useForm({
-    defaultValues: { firstName: "" },
-    onSubmit: async ({ value }) => console.log(value),
-    validators: {
-      // Connect Zod validation
-      onChange: formSchema,
+export default function DemoPage() {
+  // הגדרת העץ
+  const elements: TreeViewElement[] = [
+    {
+      id: "1",
+      isSelectable: true,
+      name: "src",
+      children: [
+        { id: "2", isSelectable: true, name: "app.tsx" },
+        {
+          id: "3",
+          isSelectable: true,
+          name: "components",
+          children: [
+            {
+              id: "20",
+              isSelectable: true,
+              name: "pages",
+              children: [
+                { id: "21", isSelectable: true, name: "interface.ts" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "6",
+          isSelectable: true,
+          name: "ui",
+          children: [{ id: "7", isSelectable: true, name: "carousel.tsx" }],
+        },
+      ],
     },
-  });
+  ];
+
+  // מפת תוכן הקבצים
+  const files = {
+    "2": {
+      filename: "app.tsx",
+      language: "tsx",
+      code: `import React from "react";
+
+export default function App() {
+  return <div className="p-4">Hello World</div>;
+}`,
+      highlightLines: [3],
+    },
+    "21": {
+      filename: "interface.ts",
+      language: "ts",
+      code: `export interface User {
+  id: string;
+  name: string;
+}`,
+      highlightLines: [2],
+    },
+    "7": {
+      filename: "carousel.tsx",
+      language: "tsx",
+      code: `import React from "react";
+
+export const Carousel = () => (
+  <div>Carousel Component</div>
+);`,
+      highlightLines: [2],
+    },
+  };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        form.handleSubmit();
-      }}
-      className="space-y-6"
-    >
-      <div className="space-y-2">
-        <Label htmlFor="firstName">שם פרטי</Label>
-        <form.Field
-          name="firstName"
-          children={(field) => (
-            <Input
-              id="firstName"
-              placeholder="השם שלך..."
-              required
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-            />
-          )}
-        />
-      </div>
-      <Button type="submit">Submit</Button>
-    </form>
+    <div className="p-8">
+      <CodeFileExplorer
+        elements={elements}
+        files={files}
+        initialFileId="2"
+        height={500}
+      />
+    </div>
   );
-};
-
-export default Page;
+}

@@ -136,7 +136,7 @@ export const BreadCrumb = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [activeIndex, value, prevValue],
+    [activeIndex, value, prevValue]
   );
 
   return (
@@ -164,7 +164,7 @@ export const BreadCrumb = ({
             "flex-row": orientation === "horizontal",
             "flex-col": orientation === "vertical",
           },
-          className,
+          className
         )}
         dir={dir}
         {...props}
@@ -233,7 +233,7 @@ export const BreadCrumbItem = forwardRef<
       className={cn(
         buttonVariants(Variants),
         className,
-        isSelected ? "bg-muted focus-visible:ring-0 ring-0" : "",
+        isSelected ? "bg-muted focus-visible:ring-0 ring-0" : ""
       )}
       onClick={() => setActiveIndex(index)}
       {...props}
@@ -257,7 +257,7 @@ export const BreadCrumbSeparator = forwardRef<
       dir={dir}
       data-orientation={orientation}
       className={cn(
-        "flex items-center justify-center size-4 data-[orientation='horizontal']:rotate-0 rtl:data-[orientation='horizontal']:rotate-180 data-[orientation='vertical']:rotate-90 ",
+        "flex items-center justify-center size-4 data-[orientation='horizontal']:rotate-0 rtl:data-[orientation='horizontal']:rotate-180 data-[orientation='vertical']:rotate-90 "
       )}
     >
       {children ? (
@@ -318,7 +318,16 @@ export const BreadCrumbPopover = forwardRef<
 
 BreadCrumbPopover.displayName = "BreadCrumbPopover";
 
-export const BreadCrumbTrigger = PopoverTrigger;
+export const BreadCrumbTrigger = forwardRef<
+  React.ElementRef<typeof PopoverPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>
+>(({ children, ...props }, ref) => {
+  return (
+    <PopoverTrigger ref={ref} {...props}>
+      {children}
+    </PopoverTrigger>
+  );
+});
 
 BreadCrumbTrigger.displayName = "BreadCrumbTrigger";
 

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -54,14 +56,14 @@ export const TreeView = ({
   });
 
   const { height = getTotalSize(), width } = useResizeObserver({
-    ref: containerRef,
+    ref: containerRef as React.RefObject<Element>,
   });
   return (
     <div
       ref={containerRef}
       className={cn(
         "w-full rounded-md overflow-hidden py-1 relative",
-        className,
+        className
       )}
     >
       <Tree

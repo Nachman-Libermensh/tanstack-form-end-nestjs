@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React from "react";
@@ -8,7 +9,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ActiveModifiers } from "react-day-picker";
-import { Calendar, CalendarProps } from "@/components/ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
+import type { ComponentProps } from "react";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -54,7 +56,7 @@ export const getDateTimeLocal = (timestamp?: Date): string => {
 /**
  * Returns the earliest date (starting with today) that is not disabled by the matcher.
  * If no dates are `disabled`, we default to new Date().
- * 
+ *
  * @param disabled - A boolean disabling the entire input, or a matcher function for valid dates.
  * @returns A `Date` object representing the earliest valid date.
  */
@@ -124,7 +126,7 @@ const useSmartDateInput = () => {
   const context = React.useContext(SmartDatetimeInputContext);
   if (!context) {
     throw new Error(
-      "useSmartDateInput must be used within SmartDateInputProvider",
+      "useSmartDateInput must be used within SmartDateInputProvider"
     );
   }
   return context;
@@ -136,7 +138,7 @@ export const SmartDatetimeInput = React.forwardRef<
     React.InputHTMLAttributes<HTMLInputElement>,
     "disabled" | "type" | "ref" | "value" | "defaultValue" | "onBlur"
   > &
-  SmartDatetimeInputProps
+    SmartDatetimeInputProps
 >(({ className, value, onValueChange, placeholder, disabled }, ref) => {
   // ? refactor to be only used with controlled input
   /*  const [dateTime, setDateTime] = React.useState<Date | undefined>(
@@ -159,7 +161,7 @@ export const SmartDatetimeInput = React.forwardRef<
             "flex gap-1 w-full p-1 items-center justify-between rounded-md border transition-all",
             "focus-within:outline-0 focus:outline-0 focus:ring-0",
             "placeholder:text-muted-foreground focus-visible:outline-0 ",
-            className,
+            className
           )}
         >
           <DateTimeLocalInput disabled={disabled} />
@@ -179,7 +181,8 @@ SmartDatetimeInput.displayName = "DatetimeInput";
 // Make it a standalone component
 
 const TimePicker = () => {
-  const { value, onValueChange, Time, onTimeChange, disabled } = useSmartDateInput();
+  const { value, onValueChange, Time, onTimeChange, disabled } =
+    useSmartDateInput();
   const [activeIndex, setActiveIndex] = React.useState(-1);
   const timestamp = 15;
 
@@ -194,14 +197,14 @@ const TimePicker = () => {
 
       newVal.setHours(
         hour,
-        partStamp === 0 ? parseInt("00") : timestamp * partStamp,
+        partStamp === 0 ? parseInt("00") : timestamp * partStamp
       );
 
       // ? refactor needed check if we want to use the new date
 
       onValueChange(newVal);
     },
-    [value],
+    [value]
   );
 
   const handleKeydown = React.useCallback(
@@ -251,11 +254,11 @@ const TimePicker = () => {
               ? 0
               : PM_AM_hour
             : PM_AM_hour === 12
-              ? 12
-              : PM_AM_hour + 12;
+            ? 12
+            : PM_AM_hour + 12;
 
         const part = Math.floor(
-          parseInt(timeValue.split(" ")[0].split(":")[1]) / 15,
+          parseInt(timeValue.split(" ")[0].split(":")[1]) / 15
         );
 
         formateSelectedTime(timeValue, hour, part);
@@ -285,7 +288,7 @@ const TimePicker = () => {
           break;
       }
     },
-    [activeIndex, formateSelectedTime],
+    [activeIndex, formateSelectedTime]
   );
 
   const handleClick = React.useCallback(
@@ -293,11 +296,11 @@ const TimePicker = () => {
       formateSelectedTime(
         `${hour}:${part === 0 ? "00" : timestamp * part} ${PM_AM}`,
         hour,
-        part,
+        part
       );
       setActiveIndex(currentIndex);
     },
-    [formateSelectedTime],
+    [formateSelectedTime]
   );
 
   const currentTime = React.useMemo(() => {
@@ -364,7 +367,7 @@ const TimePicker = () => {
       >
         <ul
           className={cn(
-            "flex items-center flex-col gap-1 h-full max-h-56 w-28 px-1 py-0.5",
+            "flex items-center flex-col gap-1 h-full max-h-56 w-28 px-1 py-0.5"
           )}
         >
           {Array.from({ length: 24 }).map((_, i) => {
@@ -372,7 +375,10 @@ const TimePicker = () => {
             const formatIndex = i > 12 ? i % 12 : i === 0 || i === 12 ? 12 : i;
             return Array.from({ length: 4 }).map((_, part) => {
               // Create a candidate date using the current value's date if available or today's date.
-              const baseDate = value && !disabled ? new Date(value) : getValidBaseDate(disabled);
+              const baseDate =
+                value && !disabled
+                  ? new Date(value)
+                  : getValidBaseDate(disabled);
               const candidateDate = new Date(
                 baseDate.getFullYear(),
                 baseDate.getMonth(),
@@ -380,10 +386,13 @@ const TimePicker = () => {
                 i,
                 part === 0 ? 0 : timestamp * part,
                 0,
-                0,
+                0
               );
               // Use the matcher if provided to decide if this candidate should be disabled.
-              let candidateDisabled = typeof disabled === "function" ? disabled(candidateDate) : false;
+              let candidateDisabled =
+                typeof disabled === "function"
+                  ? disabled(candidateDate)
+                  : false;
 
               // Additional check: if the candidate is for today and its time is past, disable it.
               const now = new Date();
@@ -429,10 +438,10 @@ const TimePicker = () => {
                       variant: isSuggested
                         ? "secondary"
                         : isSelected
-                          ? "default"
-                          : "outline",
+                        ? "default"
+                        : "outline",
                     }),
-                    "h-8 px-3 w-full text-sm focus-visible:outline-0 outline-0 focus-visible:border-0 cursor-default ring-0",
+                    "h-8 px-3 w-full text-sm focus-visible:outline-0 outline-0 focus-visible:border-0 cursor-default ring-0"
                   )}
                   onClick={() => handleClick(i, part, PM_AM, trueIndex)}
                   onFocus={() => isSuggested && setActiveIndex(trueIndex)}
@@ -455,7 +464,8 @@ const NaturalLanguageInput = React.forwardRef<
     disabled?: boolean;
   }
 >(({ placeholder, ...props }, ref) => {
-  const { value, onValueChange, Time, onTimeChange, disabled } = useSmartDateInput();
+  const { value, onValueChange, Time, onTimeChange, disabled } =
+    useSmartDateInput();
 
   const _placeholder = placeholder ?? 'e.g. "tomorrow at 5pm" or "in 2 hours"';
 
@@ -476,7 +486,11 @@ const NaturalLanguageInput = React.forwardRef<
       const parsedDateTime = parseDateTime(e.currentTarget.value);
       if (parsedDateTime) {
         // If a matcher function was passed, prevent selecting a disabled (past) date
-        if (disabled && typeof disabled != "boolean" && disabled(parsedDateTime)) {
+        if (
+          disabled &&
+          typeof disabled != "boolean" &&
+          disabled(parsedDateTime)
+        ) {
           // Invalid input--time already passed
           return;
         }
@@ -489,15 +503,15 @@ const NaturalLanguageInput = React.forwardRef<
           PM_AM_hour > 12
             ? PM_AM_hour % 12
             : PM_AM_hour === 0 || PM_AM_hour === 12
-              ? 12
-              : PM_AM_hour;
+            ? 12
+            : PM_AM_hour;
 
         onValueChange(parsedDateTime);
         setInputValue(formatDateTime(parsedDateTime));
         onTimeChange(`${hour}:${parsedDateTime.getMinutes()} ${PM_AM}`);
       }
     },
-    [value],
+    [value]
   );
 
   const handleKeydown = React.useCallback(
@@ -506,7 +520,11 @@ const NaturalLanguageInput = React.forwardRef<
         case "Enter":
           const parsedDateTime = parseDateTime(e.currentTarget.value);
           if (parsedDateTime) {
-            if (disabled && typeof disabled != "boolean" && disabled(parsedDateTime)) {
+            if (
+              disabled &&
+              typeof disabled != "boolean" &&
+              disabled(parsedDateTime)
+            ) {
               return;
             }
             const PM_AM = parsedDateTime.getHours() >= 12 ? "PM" : "AM";
@@ -518,8 +536,8 @@ const NaturalLanguageInput = React.forwardRef<
               PM_AM_hour > 12
                 ? PM_AM_hour % 12
                 : PM_AM_hour === 0 || PM_AM_hour === 12
-                  ? 12
-                  : PM_AM_hour;
+                ? 12
+                : PM_AM_hour;
 
             onValueChange(parsedDateTime);
             setInputValue(formatDateTime(parsedDateTime));
@@ -528,7 +546,7 @@ const NaturalLanguageInput = React.forwardRef<
           break;
       }
     },
-    [value],
+    [value]
   );
 
   return (
@@ -547,8 +565,9 @@ const NaturalLanguageInput = React.forwardRef<
 });
 
 NaturalLanguageInput.displayName = "NaturalLanguageInput";
-
-type DateTimeLocalInputProps = { disabled?: boolean | ((date: Date) => boolean) } & CalendarProps;
+type DateTimeLocalInputProps = {
+  disabled?: boolean | ((date: Date) => boolean);
+} & ComponentProps<typeof Calendar>;
 
 const DateTimeLocalInput = ({
   className,
@@ -562,7 +581,7 @@ const DateTimeLocalInput = ({
       date: Date | undefined,
       selectedDate: Date,
       m: ActiveModifiers,
-      e: React.MouseEvent,
+      e: React.MouseEvent
     ) => {
       // if fully disabled, do nothing
       if (typeof disabled === "boolean" && disabled) return;
@@ -574,12 +593,12 @@ const DateTimeLocalInput = ({
       if (parsedDateTime) {
         parsedDateTime.setHours(
           parseInt(Time.split(":")[0]),
-          parseInt(Time.split(":")[1]),
+          parseInt(Time.split(":")[1])
         );
         onValueChange(parsedDateTime);
       }
     },
-    [value, Time],
+    [value, Time]
   );
 
   return (
@@ -591,7 +610,7 @@ const DateTimeLocalInput = ({
           size={"icon"}
           className={cn(
             "size-9 flex items-center justify-center font-normal",
-            !value && "text-muted-foreground",
+            !value && "text-muted-foreground"
           )}
         >
           <CalendarIcon className="size-4" />
