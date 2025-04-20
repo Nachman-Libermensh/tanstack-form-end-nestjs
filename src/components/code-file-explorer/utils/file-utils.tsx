@@ -53,10 +53,17 @@ export function getLanguageFromFile(file: FileMeta): string {
  * מחזיר פונקציה להדגשת שורות קוד
  */
 export function getLineProps(highlightLines?: number[]) {
+  const styles: React.CSSProperties = {
+    display: "block",
+    wordBreak: "break-word",
+    whiteSpace: "pre-wrap",
+    overflowWrap: "break-word",
+  };
   return function (lineNumber: number) {
     if (highlightLines?.includes(lineNumber)) {
       return {
         style: {
+          ...styles,
           display: "block",
           backgroundColor: "rgba(255, 255, 0, 0.15)",
           // משתמש ב-box shadow במקום margin כדי לא להזיז את מספור השורות
@@ -64,7 +71,7 @@ export function getLineProps(highlightLines?: number[]) {
         },
       };
     }
-    return { display: "block" };
+    return { styles };
   };
 }
 

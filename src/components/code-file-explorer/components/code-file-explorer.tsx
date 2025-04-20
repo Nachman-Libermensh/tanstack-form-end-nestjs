@@ -19,7 +19,7 @@ export const CodeFileExplorer: React.FC<CodeFileExplorerProps> = ({
   elements,
   files,
   initialFileId,
-  height = 500,
+  // height = 500,
   direction = "ltr",
 }) => {
   const isMobile = useIsMobile();
@@ -42,7 +42,7 @@ export const CodeFileExplorer: React.FC<CodeFileExplorerProps> = ({
   // קובץ נוכחי
   const currentFile = files[selectedId] || {
     filename: "",
-    code: "",
+    code: "no code selected",
     language: "text",
   };
 
@@ -54,14 +54,14 @@ export const CodeFileExplorer: React.FC<CodeFileExplorerProps> = ({
   };
 
   // גובה המכל
-  const containerHeight = typeof height === "number" ? `${height}px` : height;
+  // const containerHeight = typeof height === "number" ? `${height}px` : height;
 
   return (
     <SidebarProvider defaultOpen={!isMobile}>
       <div
-        className="flex flex-col overflow-hidden rounded-xl border bg-gradient-to-br from-card to-card/95 shadow-md relative"
+        className="flex flex-col min-w-full  overflow-hidden rounded-xl border bg-gradient-to-br from-card to-card/95 shadow-md relative"
         dir={isRtl ? "rtl" : "ltr"}
-        style={{ height: containerHeight }}
+        // style={{ height: containerHeight }}
       >
         {/* כותרת (נראית רק במובייל) */}
         <div className="md:hidden flex items-center justify-between p-3 pb-2 border-b bg-muted/30">
@@ -79,7 +79,7 @@ export const CodeFileExplorer: React.FC<CodeFileExplorerProps> = ({
             {/* סיידבר עץ הקבצים */}
             <Sidebar
               className="!relative 
-               !block !w-[280px] shadow-none border-r"
+               !block !w-[280px] min-h-full rounded-l-full shadow-none border-r"
               collapsible="offcanvas"
               variant="inset"
             >

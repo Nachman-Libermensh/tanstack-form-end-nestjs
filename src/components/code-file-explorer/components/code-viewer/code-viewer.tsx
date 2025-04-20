@@ -14,7 +14,7 @@ export function CodeViewer({
   const language = getLanguageFromFile(file);
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden">
+    <div className="flex-1 flex flex-col">
       <CodeHeader
         filename={file.filename}
         language={language}
@@ -24,12 +24,12 @@ export function CodeViewer({
       />
 
       {/* אזור הקוד */}
-      <div className="flex-1 p-4 overflow-hidden flex flex-col">
+      <div className="flex-1 p-4">
         <ScrollArea
-          className="rounded-md border border-border/50 bg-muted/10 shadow-sm flex-1"
+          className="rounded-md border border-border/50 bg-muted/10 shadow-sm"
           type="always"
         >
-          <div className="min-h-[200px] h-full" dir="ltr">
+          <div dir="ltr">
             <SyntaxHighlighterWrapper
               code={file.code}
               language={file.language || language}

@@ -40,8 +40,8 @@ export function SyntaxHighlighterWrapper({
         padding: "1.5rem 1rem",
         boxSizing: "border-box",
         width: "100%",
-        minHeight: "100%",
-        direction: "ltr", // קוד תמיד LTR
+        direction: "ltr",
+        overflow: "visible",
       }}
       codeTagProps={{
         style: {
