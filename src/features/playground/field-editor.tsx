@@ -12,11 +12,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useFormBuilder } from "./hooks/useFormBuilder";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Settings, Filter, Palette } from "lucide-react";
+import { useDirection } from "@/i18n/direction";
 
 export default function FieldEditor() {
   const { updateField, selectedFieldId, fields } = useFormBuilder();
   const selectedField = fields.find((f) => f.id === selectedFieldId);
-
+  const dir = useDirection();
   if (!selectedField) {
     return (
       <Card>
@@ -34,14 +35,14 @@ export default function FieldEditor() {
   }
 
   return (
-    <Card className="border-2 border-primary/10">
+    <Card dir={dir} className="border-2 border-primary/10">
       <CardHeader>
         <CardTitle>הגדרות שדה {selectedField.label}</CardTitle>
         <CardDescription>שנה את מאפייני השדה הנבחר</CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="basic">
-          <TabsList className="grid grid-cols-3 mb-4">
+        <Tabs dir={dir} defaultValue="basic">
+          <TabsList className="grid grid-cols-3 mb-4 border-amber-100">
             <TabsTrigger value="basic" className="flex items-center gap-2">
               <Settings size={14} /> בסיסי
             </TabsTrigger>

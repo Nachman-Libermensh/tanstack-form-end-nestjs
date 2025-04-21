@@ -137,6 +137,28 @@ export function useFormBuilder() {
     });
   }, [schema]);
 
+  const reorderFields = useCallback(
+    (activeId: string, overId: string) => {
+      const oldIndex = fields.findIndex((field) => field.id === activeId);
+      const newIndex = fields.findIndex((field) => field.id === overId);
+
+      if (oldIndex === -1 || newIndex === -1) return;
+
+      const newFields = [...fields];
+      const [movedField] = newFields.splice(oldIndex, 1);
+      newFields.splice(newIndex, 0, movedField);
+
+      saveSchema({
+        ...schema,
+        fields: newFields,
+      });
+
+      toast.success("סדר השדות שונה", {
+        description: "סדר השדות בטופס עודכן",
+      });
+    },
+    [schema, fields, saveSchema]
+  );
   return {
     schema,
     fields,
@@ -149,5 +171,6 @@ export function useFormBuilder() {
     exportFormAsJson,
     formData: data,
     updateFormData: saveData,
+    reorderFields,
   };
 }
