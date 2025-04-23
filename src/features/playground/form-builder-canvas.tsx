@@ -300,48 +300,126 @@ export default function FormBuilderCanvas() {
                 <Plus size={16} /> הוסף שדה חדש
               </Button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="center" className="w-72 p-1">
-              <DropdownMenuItem
-                onClick={() =>
-                  handleAddField({ type: "text", label: "שדה טקסט" })
-                }
-                className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-              >
-                <Text size={18} className="text-primary/80" /> שדה טקסט
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() =>
-                  handleAddField({ type: "email", label: "אימייל" })
-                }
-                className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-              >
-                <Mail size={18} className="text-primary/80" /> אימייל
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() =>
-                  handleAddField({ type: "number", label: "מספר" })
-                }
-                className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-              >
-                <Hash size={18} className="text-primary/80" /> מספר
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() =>
-                  handleAddField({ type: "select", label: "בחירה" })
-                }
-                className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-              >
-                <ChevronDown size={18} className="text-primary/80" /> רשימת
-                בחירה
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() =>
-                  handleAddField({ type: "checkbox", label: "אישור" })
-                }
-                className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-              >
-                <CheckSquare size={18} className="text-primary/80" /> תיבת סימון
-              </DropdownMenuItem>
+              <div className="grid grid-cols-1 gap-0.5 p-1">
+                {/* שדות בסיסיים */}
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({ type: "text", label: "שדה טקסט" })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <Text size={18} className="text-primary/80" /> שדה טקסט
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({ type: "email", label: "אימייל" })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <Mail size={18} className="text-primary/80" /> אימייל
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({ type: "password", label: "סיסמה" })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <i className="text-primary/80">🔒</i> סיסמה
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({ type: "number", label: "מספר" })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <Hash size={18} className="text-primary/80" /> מספר
+                </DropdownMenuItem>
+
+                {/* שדות מתקדמים */}
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({
+                      type: "textarea",
+                      label: "טקסט מרובה שורות",
+                    })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <i className="text-primary/80">📝</i> טקסט מרובה שורות
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({
+                      type: "select",
+                      label: "רשימת בחירה",
+                      options: [
+                        { label: "אפשרות 1", value: "option1" },
+                        { label: "אפשרות 2", value: "option2" },
+                      ],
+                    })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <ChevronDown size={18} className="text-primary/80" /> רשימת
+                  בחירה
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({ type: "checkbox", label: "תיבת סימון" })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <CheckSquare size={18} className="text-primary/80" /> תיבת
+                  סימון
+                </DropdownMenuItem>
+
+                {/* שדות תאריך וזמן */}
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({ type: "date", label: "תאריך" })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <i className="text-primary/80">📅</i> תאריך
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() => handleAddField({ type: "time", label: "שעה" })}
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <i className="text-primary/80">🕒</i> שעה
+                </DropdownMenuItem>
+
+                {/* שדות נוספים */}
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({ type: "file", label: "העלאת קובץ" })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <i className="text-primary/80">📎</i> העלאת קובץ
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleAddField({
+                      type: "range",
+                      label: "מחוון טווח",
+                      validations: { min: 0, max: 100 },
+                    })
+                  }
+                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  <i className="text-primary/80">⚖️</i> מחוון טווח
+                </DropdownMenuItem>
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

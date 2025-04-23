@@ -21,7 +21,7 @@ export default function CodePreview() {
   const [format, setFormat] = useState<CodeFormat>("react");
   const [copied, setCopied] = useState(false);
 
-  const codeString = generateFormCode(fields /*format*/);
+  const codeString = generateFormCode(fields /*, format*/);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(codeString);

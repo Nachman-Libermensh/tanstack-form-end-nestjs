@@ -15,9 +15,11 @@ import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import { FieldConfig } from "./types";
 import { Smartphone, Monitor, Tablet } from "lucide-react";
+import { useDirection } from "@/i18n/direction";
+import { SmartDatetimeInput } from "@/components/ui/extension/smart-datetime-input";
 
 interface FormValues {
-  [key: string]: string;
+  [key: string]: string | boolean | number;
 }
 
 interface FormState {
@@ -33,47 +35,121 @@ export default function FormPreview() {
   const { fields } = useFormBuilder();
   const [deviceView, setDeviceView] = useState<DeviceView>("desktop");
 
-  // Zod schema creation - unchanged
+  // יצירה של Zod schema - עם תמיכה משופרת בסוגי שדות שונים
   const zodSchema = useMemo(() => {
-    // Start with an empty schema object
     const schemaFields: Record<string, z.ZodTypeAny> = {};
 
     fields.forEach((field: FieldConfig) => {
-      // Start with a string schema
-      let fieldSchema = z.string();
+      switch (field.type) {
+        case "number":
+          let numberSchema = z.coerce.number({
+            invalid_type_error: "חובה להזין מספר",
+          });
 
-      // Add min/max length validations if defined
-      if (field.validations?.minLength) {
-        fieldSchema = fieldSchema.min(field.validations.minLength, {
-          message: `אורך מינימלי: ${field.validations.minLength} תווים`,
-        });
-      }
+          // הוספת ולידציות ספציפיות למספרים
+          if (field.validations?.min !== undefined) {
+            numberSchema = numberSchema.min(field.validations.min, {
+              message: `ערך מינימלי: ${field.validations.min}`,
+            });
+          }
+          if (field.validations?.max !== undefined) {
+            numberSchema = numberSchema.max(field.validations.max, {
+              message: `ערך מקסימלי: ${field.validations.max}`,
+            });
+          }
 
-      if (field.validations?.maxLength) {
-        fieldSchema = fieldSchema.max(field.validations.maxLength, {
-          message: `אורך מקסימלי: ${field.validations.maxLength} תווים`,
-        });
-      }
+          // שמירת הסכמה המעודכנת
+          schemaFields[field.name] = field.required
+            ? numberSchema.min(1, { message: "שדה חובה" })
+            : numberSchema.optional();
+          break;
 
-      // Add more validations as needed
-      // For example, email validation
-      if (field.type === "email") {
-        fieldSchema = fieldSchema.email({ message: "אימייל לא תקין" });
-      }
+        case "checkbox":
+          schemaFields[field.name] = z.boolean();
+          break;
 
-      // Apply required/optional check LAST - after all other validations
-      if (!field.required) {
-        // Directly add the optional schema to schemaFields instead of reassigning
-        schemaFields[field.name] = fieldSchema.optional();
-      } else {
-        schemaFields[field.name] = fieldSchema.min(1, { message: "שדה חובה" });
+        case "email":
+          const emailSchema = z.string().email({ message: "אימייל לא תקין" });
+          schemaFields[field.name] = field.required
+            ? emailSchema.min(1, { message: "שדה חובה" })
+            : emailSchema.optional();
+          break;
+
+        case "password":
+          let passwordSchema = z.string();
+
+          // אפשרויות ולידציה לסיסמה
+          if (field.validations?.minLength) {
+            passwordSchema = passwordSchema.min(field.validations.minLength, {
+              message: `אורך מינימלי: ${field.validations.minLength} תווים`,
+            });
+          }
+          if (field.validations?.maxLength) {
+            passwordSchema = passwordSchema.max(field.validations.maxLength, {
+              message: `אורך מקסימלי: ${field.validations.maxLength} תווים`,
+            });
+          }
+
+          schemaFields[field.name] = field.required
+            ? passwordSchema.min(1, { message: "שדה חובה" })
+            : passwordSchema.optional();
+          break;
+
+        case "select":
+          const selectSchema = z.string();
+          schemaFields[field.name] = field.required
+            ? selectSchema.min(1, { message: "שדה חובה" })
+            : selectSchema.optional();
+          break;
+
+        default: // text וכל השאר
+          let textSchema = z.string();
+
+          // הוספת ולידציות אורך טקסט
+          if (field.validations?.minLength) {
+            textSchema = textSchema.min(field.validations.minLength, {
+              message: `אורך מינימלי: ${field.validations.minLength} תווים`,
+            });
+          }
+          if (field.validations?.maxLength) {
+            textSchema = textSchema.max(field.validations.maxLength, {
+              message: `אורך מקסימלי: ${field.validations.maxLength} תווים`,
+            });
+          }
+
+          schemaFields[field.name] = field.required
+            ? textSchema.min(1, { message: "שדה חובה" })
+            : textSchema.optional();
+          break;
       }
     });
 
     return z.object(schemaFields);
   }, [fields]);
 
-  // Form handling - unchanged
+  // יצירת ערכים ברירת מחדל לפי סוגי שדות
+  const defaultValues = useMemo(() => {
+    return fields.reduce((acc, f) => {
+      // קביעת ערך ברירת מחדל מתאים לסוג השדה
+      let defaultValue: string | boolean | number = "";
+
+      switch (f.type) {
+        case "checkbox":
+          defaultValue = Boolean(f.defaultValue) || false;
+          break;
+        case "number":
+          defaultValue = f.defaultValue ? Number(f.defaultValue) : 0;
+          break;
+        default:
+          defaultValue = f.defaultValue || "";
+          break;
+      }
+
+      return { ...acc, [f.name]: defaultValue };
+    }, {});
+  }, [fields]);
+
+  // Form handling
   const handleFormSubmit = (value: FormValues, formState: FormState) => {
     console.log("Submitted:", value);
 
@@ -102,11 +178,10 @@ export default function FormPreview() {
   };
 
   const form = useAppForm({
-    defaultValues: fields.reduce((acc, f) => ({ ...acc, [f.name]: "" }), {}),
+    defaultValues,
     onSubmit: ({ value }) => {
       handleFormSubmit(value, form.store.state);
     },
-    // Add the Zod validation schema
     validators: {
       onChange: zodSchema,
       onSubmit: zodSchema,
@@ -124,6 +199,124 @@ export default function FormPreview() {
     desktop: "w-full",
   };
 
+  // רנדור שדה לפי סוג
+  const renderField = (field: FieldConfig) => {
+    switch (field.type) {
+      case "checkbox":
+        return (
+          <form.AppField key={field.id} name={field.name as never}>
+            {(fieldContext) => (
+              <fieldContext.CheckboxField
+                label={field.label}
+                required={field.required}
+                disabled={field.disabled}
+                helperText={field.helperText}
+              />
+            )}
+          </form.AppField>
+        );
+
+      case "select":
+        return (
+          <form.AppField key={field.id} name={field.name as never}>
+            {(fieldContext) => (
+              <fieldContext.SelectField
+                label={field.label}
+                placeholder={field.placeholder || "בחר..."}
+                required={field.required}
+                disabled={field.disabled}
+                helperText={field.helperText}
+                options={
+                  field.options?.map((opt) => ({
+                    label: opt.label,
+                    value: opt.value,
+                  })) || []
+                }
+              />
+            )}
+          </form.AppField>
+        );
+
+      case "password":
+        return (
+          <form.AppField key={field.id} name={field.name as never}>
+            {(fieldContext) => (
+              <fieldContext.PasswordInput
+                label={field.label}
+                placeholder={field.placeholder}
+                required={field.required}
+                disabled={field.disabled}
+                helperText={field.helperText}
+              />
+            )}
+          </form.AppField>
+        );
+      // מיקום: השלמת המקרה החסר לטיפול בשדה מסוג זמן
+      case "time":
+        return (
+          <form.AppField key={field.id} name={field.name as never}>
+            {(fieldContext) => (
+              <div className="relative">
+                <SmartDatetimeInput
+                  value={
+                    fieldContext.state.value
+                      ? new Date(fieldContext.state.value)
+                      : undefined
+                  }
+                  onValueChange={(date) => {
+                    // שמירת התאריך כמחרוזת ISO בטופס
+                    fieldContext.handleChange(date.toISOString());
+                  }}
+                  // disabled={field.disabled}
+                  // placeholder={field.placeholder || `הזן זמן עבור ${field.label}`}
+                  className="mt-0"
+                />
+
+                {/* הצגת תווית השדה בחלק העליון */}
+                <label
+                  className={`absolute -top-2 right-2 text-xs bg-white dark:bg-gray-950 px-1
+                      ${
+                        field.required
+                          ? "after:content-['*'] after:mr-0.5 after:text-destructive"
+                          : ""
+                      }`}
+                >
+                  {field.label}
+                </label>
+
+                {/* הודעת עזרה או הודעת שגיאה */}
+                {fieldContext.state.meta.touchedErrors?.[0] ? (
+                  <p className="text-xs text-destructive mt-1">
+                    {fieldContext.state.meta.touchedErrors[0]}
+                  </p>
+                ) : field.helperText ? (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {field.helperText}
+                  </p>
+                ) : null}
+              </div>
+            )}
+          </form.AppField>
+        );
+
+      default: // text, email, number, etc.
+        return (
+          <form.AppField key={field.id} name={field.name as never}>
+            {(fieldContext) => (
+              <fieldContext.TextField
+                label={field.label}
+                placeholder={field.placeholder}
+                required={field.required}
+                disabled={field.disabled}
+                helperText={field.helperText}
+                type={field.type === "number" ? "number" : field.type}
+              />
+            )}
+          </form.AppField>
+        );
+    }
+  };
+  const dir = useDirection();
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
@@ -155,6 +348,7 @@ export default function FormPreview() {
 
       <div className={`mx-auto transition-all ${deviceWidth[deviceView]}`}>
         <Card
+          dir={dir}
           className={`${deviceView === "mobile" ? "shadow-lg" : ""} border-2`}
         >
           <CardHeader>
@@ -175,19 +369,7 @@ export default function FormPreview() {
                   אין שדות בטופס. הוסף שדות כדי לראות את הטופס בפעולה.
                 </div>
               ) : (
-                fields.map((f) => (
-                  <form.AppField key={f.id} name={f.name as never}>
-                    {(field) => (
-                      <field.TextField
-                        label={f.label}
-                        placeholder={f.placeholder}
-                        required={f.required}
-                        disabled={f.disabled}
-                        helperText={f.helperText}
-                      />
-                    )}
-                  </form.AppField>
-                ))
+                fields.map(renderField)
               )}
             </form>
           </CardContent>
