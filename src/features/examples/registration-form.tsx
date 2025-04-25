@@ -9,14 +9,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle2 } from "lucide-react";
 import { useDirection } from "@/i18n/direction";
 
-// טווח גילאים תקין
-const MIN_AGE = 16;
-const MAX_AGE = 120;
-
-// תאריכי לידה מינימלי ומקסימלי
-const MIN_BIRTH_YEAR = new Date().getFullYear() - MAX_AGE;
-const MAX_BIRTH_YEAR = new Date().getFullYear() - MIN_AGE;
-
 export default function RegistrationForm() {
   const t = useTranslations("examples.registration.form");
   const dir = useDirection();
@@ -27,7 +19,7 @@ export default function RegistrationForm() {
     .object({
       fullName: z.string().min(2, t("errors.fullNameRequired")),
       email: z.string().email(t("errors.emailInvalid")),
-      birthDate: z.string(),
+      birthDate: z.date().nullable(), // שינוי לאפשר null
       password: z.string().min(8, t("errors.passwordLength")),
       confirmPassword: z.string(),
       terms: z.boolean().refine((val) => val, t("errors.termsRequired")),
@@ -38,11 +30,12 @@ export default function RegistrationForm() {
     });
 
   // הגדרת הטופס
+  // הגדרת הטופס
   const form = useAppForm({
     defaultValues: {
       fullName: "",
       email: "",
-      birthDate: "",
+      birthDate: null as Date | null, // הוספת טיפוס מפורש
       password: "",
       confirmPassword: "",
       terms: false,
@@ -114,14 +107,11 @@ export default function RegistrationForm() {
         {/* תאריך לידה במקום גיל - שימוש בדייטפיקר החדש */}
         <form.AppField name="birthDate">
           {(field) => (
-            <field.DatePickerField
+            <field.DateField
               label={t("fields.birthDate") || "תאריך לידה"}
               helperText={
                 t("helpers.birthDate") || "יש לבחור את תאריך הלידה שלך"
               }
-              fromYear={MIN_BIRTH_YEAR}
-              toYear={MAX_BIRTH_YEAR}
-              formatString="dd/MM/yyyy"
               dir={dir}
               errorPlacement="bottom"
             />

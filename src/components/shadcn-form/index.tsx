@@ -6,7 +6,7 @@ import { SubmitButton } from "./form-components/submit-button";
 import { PasswordInput } from "./form-components/password-input.field";
 import FormLayout from "./form-components/form-layout";
 import { FormSection } from "./form-components/form-section";
-import { DatePickerField } from "./form-components/date-picker.field";
+import DateField from "./form-components/date-picker.field";
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts();
@@ -19,7 +19,7 @@ export const { useAppForm, withForm } = createFormHook({
     CheckboxField,
     SelectField,
     PasswordInput,
-    DatePickerField,
+    DateField,
   },
   formComponents: {
     SubmitButton,

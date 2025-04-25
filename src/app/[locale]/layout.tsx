@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { UILibraryProvider } from "@/providers/ui-library-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 // import { GithubIcon } from "lucide-react";
@@ -62,25 +61,23 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <UILibraryProvider>
-              <div className="flex flex-col min-h-screen">
-                {/* Header */}
-                <Header />
-                {/* Main content */}
-                <main className="flex-1 w-full px-4 md:px-6 lg:px-8 py-10">
-                  {children}
-                </main>
+            <div className="flex flex-col min-h-screen">
+              {/* Header */}
+              <Header />
+              {/* Main content */}
+              <main className="flex-1 w-full px-4 md:px-6 lg:px-8 py-10">
+                {children}
+              </main>
 
-                {/* Optional Footer */}
-                <footer className="w-full py-6 text-center text-sm text-muted-foreground">
-                  <p>
-                    © {new Date().getFullYear()} TanStack Playground. All rights
-                    reserved.
-                  </p>
-                </footer>
-              </div>
-              <Toaster />
-            </UILibraryProvider>
+              {/* Optional Footer */}
+              <footer className="w-full py-6 text-center text-sm text-muted-foreground">
+                <p>
+                  © {new Date().getFullYear()} TanStack Playground. All rights
+                  reserved.
+                </p>
+              </footer>
+            </div>
+            <Toaster />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
