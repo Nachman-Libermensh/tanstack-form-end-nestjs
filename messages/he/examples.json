@@ -56,5 +56,77 @@
       "cancel": "ביטול",
       "personalDetails": "פרטים אישיים"
     }
+  },
+  "registration": {
+    "title": "דוגמת טופס הרשמה",
+    "description": "טופס הרשמה מתקדם עם תכונות כמו מחוון חוזק סיסמה, בדיקות תלויות שדה ותיקוף מורכב.",
+    "preview": "תצוגה מקדימה",
+    "code": "קוד",
+    "registrationFormTitle": "הרשמה למערכת",
+    "registrationFormDescription": "צור חשבון חדש כדי להתחיל להשתמש בשירות",
+    "backToExamples": "חזרה לדוגמאות",
+    "securityNotice": "מידע מאובטח - אינו נשלח לשרת בדוגמה זו",
+    "tipTitle": "נסה בעצמך!",
+    "tipDescription": "נסה להזין ערכים שונים כדי לראות את מערכת התיקוף בפעולה, כולל מחוון חוזק הסיסמה.",
+    "keyFeaturesTitle": "תכונות מרכזיות",
+    "features": {
+      "validation": {
+        "title": "תיקוף מורכב",
+        "description": "שילוב בין תיקוף רגיל ומותאם אישית עם התלויות בין שדות."
+      },
+      "passwordStrength": {
+        "title": "מחוון חוזק סיסמה",
+        "description": "הצגה ויזואלית של חוזק הסיסמה בזמן אמת להנחיית המשתמש."
+      },
+      "fieldDependencies": {
+        "title": "תלויות בין שדות",
+        "description": "בדיקת התאמה בין שדות שונים כמו סיסמה ואימות סיסמה."
+      },
+      "customErrors": {
+        "title": "הודעות שגיאה מותאמות",
+        "description": "הצגת הודעות שגיאה ברורות ומותאמות לכל סוג של קלט לא תקין."
+      }
+    },
+    "form": {
+      "fields": {
+        "fullName": "שם מלא",
+        "email": "כתובת דוא\"ל",
+        "age": "גיל",
+        "password": "סיסמה",
+        "confirmPassword": "אימות סיסמה",
+        "terms": "תנאי שימוש"
+      },
+      "placeholders": {
+        "fullName": "הזן את שמך המלא",
+        "email": "הזן את כתובת הדוא\"ל שלך",
+        "age": "הזן את גילך",
+        "password": "בחר סיסמה חזקה",
+        "confirmPassword": "הקלד שוב את הסיסמה"
+      },
+      "errors": {
+        "fullNameRequired": "שם מלא הוא שדה חובה",
+        "emailInvalid": "כתובת דוא\"ל לא תקינה",
+        "ageMin": "גיל מינימלי הוא {min}",
+        "ageMax": "גיל מקסימלי הוא {max}",
+        "passwordLength": "הסיסמה חייבת להכיל לפחות 8 תווים",
+        "passwordStrength": "הסיסמה חייבת לכלול אותיות גדולות וקטנות ומספרים",
+        "passwordMatch": "הסיסמאות אינן תואמות",
+        "termsRequired": "יש לאשר את תנאי השימוש"
+      },
+      "helpers": {
+        "ageLimit": "גיל חייב להיות בין {min} ל-{max}",
+        "termsDetail": "אני מסכים לתנאי השימוש ומדיניות הפרטיות"
+      },
+      "passwordStrength": "חוזק סיסמה",
+      "strength": {
+        "weak": "חלשה",
+        "medium": "בינונית",
+        "strong": "חזקה"
+      },
+      "submit": "הירשם",
+      "submitSuccess": "הרשמה בוצעה בהצלחה!",
+      "checkEmail": "נשלח מייל אימות לכתובת שהזנת",
+      "registrationComplete": "ההרשמה הושלמה בהצלחה! בדוק את תיבת המייל שלך להמשך התהליך."
+    }
   }
 }

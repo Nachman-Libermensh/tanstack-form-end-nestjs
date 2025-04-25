@@ -56,5 +56,77 @@
       "invalidCredentials": "Invalid email or password",
       "demoCredentials": "Demo credentials:"
     }
+  },
+  "registration": {
+    "title": "Registration Form Example",
+    "description": "Advanced registration form with features like password strength meter, field dependencies, and complex validation.",
+    "preview": "Preview",
+    "code": "Code",
+    "registrationFormTitle": "Create an Account",
+    "registrationFormDescription": "Sign up for a new account to get started",
+    "backToExamples": "Back to examples",
+    "securityNotice": "Secure information - not sent to any server in this example",
+    "tipTitle": "Try it out!",
+    "tipDescription": "Try entering different values to see the validation system in action, including the password strength indicator.",
+    "keyFeaturesTitle": "Key Features",
+    "features": {
+      "validation": {
+        "title": "Complex Validation",
+        "description": "Combination of standard and custom validation with field dependencies."
+      },
+      "passwordStrength": {
+        "title": "Password Strength Indicator",
+        "description": "Real-time visual indication of password strength to guide the user."
+      },
+      "fieldDependencies": {
+        "title": "Field Dependencies",
+        "description": "Checking for matching fields like password and password confirmation."
+      },
+      "customErrors": {
+        "title": "Custom Error Messages",
+        "description": "Clear and custom error messages for each type of invalid input."
+      }
+    },
+    "form": {
+      "fields": {
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "age": "Age",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "terms": "Terms of Service"
+      },
+      "placeholders": {
+        "fullName": "Enter your full name",
+        "email": "Enter your email address",
+        "age": "Enter your age",
+        "password": "Choose a strong password",
+        "confirmPassword": "Type your password again"
+      },
+      "errors": {
+        "fullNameRequired": "Full name is required",
+        "emailInvalid": "Please enter a valid email address",
+        "ageMin": "Minimum age is {min}",
+        "ageMax": "Maximum age is {max}",
+        "passwordLength": "Password must be at least 8 characters",
+        "passwordStrength": "Password must include uppercase, lowercase letters and numbers",
+        "passwordMatch": "Passwords do not match",
+        "termsRequired": "You must accept the terms of service"
+      },
+      "helpers": {
+        "ageLimit": "Age must be between {min} and {max}",
+        "termsDetail": "I agree to the terms of service and privacy policy"
+      },
+      "passwordStrength": "Password strength",
+      "strength": {
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
+      },
+      "submit": "Register",
+      "submitSuccess": "Registration successful!",
+      "checkEmail": "A verification email has been sent to your address",
+      "registrationComplete": "Registration complete! Check your email to continue the process."
+    }
   }
 }

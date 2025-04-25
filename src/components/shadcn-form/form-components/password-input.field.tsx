@@ -5,18 +5,18 @@ import { Label } from "@/components/ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { useFieldContext } from "..";
-import { InputHTMLAttributes } from "react";
-import FieldErrors from "./field-errors";
+import FieldErrors, { ErrorPlacement } from "./field-errors";
 import { cn } from "@/lib/utils";
 
-// הרחבת הפרופס עם תכונות HTML סטנדרטיות
 type PasswordInputProps = {
   label: string;
   placeholder?: string;
   dir?: "ltr" | "rtl";
   showStrengthIndicator?: boolean;
+  errorPlacement?: ErrorPlacement;
+  helperText?: string;
 } & Omit<
-  InputHTMLAttributes<HTMLInputElement>,
+  React.InputHTMLAttributes<HTMLInputElement>,
   "type" | "value" | "onChange" | "onBlur" | "name" | "id"
 >;
 
@@ -27,21 +27,28 @@ export function PasswordInput({
   showStrengthIndicator = false,
   className,
   required,
-  ...restProps // אוסף שאר הפרופס
+  errorPlacement = "bottom",
+  helperText,
+  disabled,
+  ...restProps
 }: PasswordInputProps) {
   const [showPassword, setShowPassword] = useState(false);
   const field = useFieldContext<string>();
 
-  // קובע את המיקום והסגנון של הכפתור לפי כיוון הטקסט
   const buttonPosition = dir === "rtl" ? "left-0" : "right-0";
   const inputPadding = dir === "rtl" ? "pl-10" : "pr-10";
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2" dir={dir}>
+      {errorPlacement === "top" && (
+        <FieldErrors meta={field.state.meta} placement={errorPlacement} />
+      )}
+
       <Label htmlFor={field.name}>
         {label}
         {required && <span className="text-destructive ml-1">*</span>}
       </Label>
+
       <div className="relative">
         <Input
           name={field.name}
@@ -51,10 +58,10 @@ export function PasswordInput({
           onChange={(e) => field.handleChange(e.target.value)}
           onBlur={field.handleBlur}
           placeholder={placeholder}
-          dir={dir}
-          className={cn(`${inputPadding} ${className || ""}`)}
+          className={cn(inputPadding, className)}
           required={required}
-          {...restProps} // העברת כל הפרופס הנוספים
+          disabled={disabled}
+          {...restProps}
         />
         <Button
           type="button"
@@ -62,6 +69,7 @@ export function PasswordInput({
           size="icon"
           className={`absolute ${buttonPosition} top-0 h-full px-3 py-2 text-gray-400 hover:text-gray-900 dark:hover:text-gray-300`}
           onClick={() => setShowPassword(!showPassword)}
+          disabled={disabled}
         >
           {showPassword ? (
             <EyeOffIcon className="h-4 w-4" />
@@ -70,10 +78,18 @@ export function PasswordInput({
           )}
         </Button>
       </div>
+
+      {helperText && (
+        <p className="text-sm text-muted-foreground">{helperText}</p>
+      )}
+
       {showStrengthIndicator && (
         <PasswordStrengthIndicator password={field.state.value} />
       )}
-      <FieldErrors meta={field.state.meta} />
+
+      {errorPlacement === "bottom" && (
+        <FieldErrors meta={field.state.meta} placement={errorPlacement} />
+      )}
     </div>
   );
 }

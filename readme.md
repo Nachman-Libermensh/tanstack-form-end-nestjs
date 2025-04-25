@@ -10,6 +10,8 @@ This project was developed as part of a research initiative to formulate a strat
 
 A modern full-stack application that combines TanStack Form for frontend form management with NestJS as a robust backend framework. This project demonstrates a complete form handling solution with validation, submission, and data processing.
 
+<!-- 583222702 -->
+
 Key benefits of this approach:
 
 - Rapid form development with less boilerplate
