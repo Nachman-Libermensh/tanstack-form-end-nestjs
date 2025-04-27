@@ -88,45 +88,50 @@
       }
     },
     "form": {
-      "fields": {
-        "fullName": "Full Name",
-        "email": "Email Address",
-        "age": "Age",
-        "password": "Password",
-        "confirmPassword": "Confirm Password",
-        "terms": "Terms of Service"
-      },
-      "placeholders": {
-        "fullName": "Enter your full name",
-        "email": "Enter your email address",
-        "age": "Enter your age",
-        "password": "Choose a strong password",
-        "confirmPassword": "Type your password again"
-      },
-      "errors": {
-        "fullNameRequired": "Full name is required",
-        "emailInvalid": "Please enter a valid email address",
-        "ageMin": "Minimum age is {min}",
-        "ageMax": "Maximum age is {max}",
-        "passwordLength": "Password must be at least 8 characters",
-        "passwordStrength": "Password must include uppercase, lowercase letters and numbers",
-        "passwordMatch": "Passwords do not match",
-        "termsRequired": "You must accept the terms of service"
-      },
-      "helpers": {
-        "ageLimit": "Age must be between {min} and {max}",
-        "termsDetail": "I agree to the terms of service and privacy policy"
-      },
-      "passwordStrength": "Password strength",
-      "strength": {
-        "weak": "Weak",
-        "medium": "Medium",
-        "strong": "Strong"
-      },
-      "submit": "Register",
-      "submitSuccess": "Registration successful!",
-      "checkEmail": "A verification email has been sent to your address",
-      "registrationComplete": "Registration complete! Check your email to continue the process."
+      "form": {
+        "fields": {
+          "fullName": "Full Name",
+          "email": "Email Address",
+          "age": "Age",
+          "birthDate": "Date of Birth",
+          "password": "Password",
+          "confirmPassword": "Confirm Password",
+          "terms": "Terms of Service"
+        },
+        "placeholders": {
+          "fullName": "Enter your full name",
+          "email": "Enter your email address",
+          "age": "Enter your age",
+          "password": "Choose a strong password",
+          "confirmPassword": "Type your password again"
+        },
+        "errors": {
+          "fullNameRequired": "Full name is required",
+          "emailInvalid": "Please enter a valid email address",
+          "ageMin": "Minimum age is {min}",
+          "ageMax": "Maximum age is {max}",
+          "passwordLength": "Password must be at least 8 characters",
+          "passwordStrength": "Password must include uppercase, lowercase letters and numbers",
+          "passwordMatch": "Passwords do not match",
+          "termsRequired": "You must accept the terms of service"
+        },
+        "helpers": {
+          "ageLimit": "Age must be between {min} and {max}",
+          "termsDetail": "I agree to the terms of service and privacy policy",
+          "birthDate": "Please select your date of birth",
+          "passwordRequirements": "At least 8 characters, including uppercase, lowercase and numbers"
+        },
+        "passwordStrength": "Password strength",
+        "strength": {
+          "weak": "Weak",
+          "medium": "Medium",
+          "strong": "Strong"
+        },
+        "submit": "Register",
+        "submitSuccess": "Registration successful!",
+        "checkEmail": "A verification email has been sent to your address",
+        "registrationComplete": "Registration complete! Check your email to continue the process."
+      }
     }
   }
 }

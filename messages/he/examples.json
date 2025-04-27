@@ -92,6 +92,7 @@
         "fullName": "שם מלא",
         "email": "כתובת דוא\"ל",
         "age": "גיל",
+        "birthDate": "תאריך לידה",
         "password": "סיסמה",
         "confirmPassword": "אימות סיסמה",
         "terms": "תנאי שימוש"
@@ -115,7 +116,9 @@
       },
       "helpers": {
         "ageLimit": "גיל חייב להיות בין {min} ל-{max}",
-        "termsDetail": "אני מסכים לתנאי השימוש ומדיניות הפרטיות"
+        "termsDetail": "אני מסכים לתנאי השימוש ומדיניות הפרטיות",
+        "birthDate": "יש לבחור את תאריך הלידה שלך",
+        "passwordRequirements": "לפחות 8 תווים, אות גדולה, קטנה ומספר"
       },
       "passwordStrength": "חוזק סיסמה",
       "strength": {

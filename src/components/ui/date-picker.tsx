@@ -33,6 +33,7 @@ interface DatePickerProps {
   locale?: Locale;
   footer?: React.ReactNode;
   shouldDisableDate?: (date: Date) => boolean;
+  dir?: "rtl" | "ltr";
 }
 
 export function DatePicker({
@@ -45,24 +46,21 @@ export function DatePicker({
   className,
   minDate,
   maxDate,
-  locale,
+  locale = he,
   footer,
   shouldDisableDate,
+  dir = "rtl",
 }: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-  // State for current view (month/year shown in calendar)
   const today = new Date();
   const [viewDate, setViewDate] = useState<Date>(value || today);
 
-  // Update viewDate when value changes
   useEffect(() => {
     if (value) {
       setViewDate(value);
     }
   }, [value]);
 
-  // Handle both onChange and onSelect callbacks
   const handleSelect = (date: Date | undefined) => {
     onChange?.(date);
     if (date) {
@@ -72,36 +70,28 @@ export function DatePicker({
     }
   };
 
-  // Handle year change
   const handleYearChange = (yearStr: string) => {
     const year = parseInt(yearStr);
-    const newDate = setYear(viewDate, year);
-    setViewDate(newDate);
+    setViewDate(setYear(viewDate, year));
   };
 
-  // Handle month change
   const handleMonthChange = (monthStr: string) => {
     const month = parseInt(monthStr);
-    const newDate = setMonth(viewDate, month);
-    setViewDate(newDate);
+    setViewDate(setMonth(viewDate, month));
   };
 
-  // Jump to today
   const handleTodayClick = () => {
     const today = new Date();
     handleSelect(today);
   };
 
-  // Handle blur event
   const handleBlur = (e: FocusEvent<HTMLButtonElement | HTMLDivElement>) => {
     onBlur?.(e);
   };
 
-  // Generate years for dropdown (10 years before and after current year)
   const currentYear = getYear(today);
   const years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
 
-  // Months in Hebrew
   const months = [
     { value: "0", label: "ינואר" },
     { value: "1", label: "פברואר" },
@@ -120,49 +110,47 @@ export function DatePicker({
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
-        <div className="relative w-full">
-          <Button
+        <div className="relative w-full cursor-pointer">
+          <button
             type="button"
-            variant="outline"
+            onClick={() => setIsOpen(!isOpen)}
+            onBlur={handleBlur}
             disabled={disabled}
             className={cn(
-              "w-full justify-between text-right font-normal",
-              "transition-colors duration-200",
-              "hover:bg-accent hover:text-accent-foreground",
+              "w-full h-10 px-3 py-2 text-sm rounded-md border bg-background text-right",
+              "border-input shadow-sm transition-colors",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+              "disabled:cursor-not-allowed disabled:opacity-50",
+              "flex items-center justify-between",
               !value && "text-muted-foreground",
               className
             )}
             aria-label="בחר תאריך"
-            onClick={() => setIsOpen(true)}
-            onBlur={handleBlur}
           >
             {value ? format(value, "dd/MM/yyyy") : <span>{placeholder}</span>}
-            <CalendarIcon className="mr-auto h-4 w-4 opacity-50" />
-          </Button>
+            <CalendarIcon className="w-4 h-4 opacity-50 ml-2" />
+          </button>
         </div>
       </PopoverTrigger>
 
       <PopoverContent
-        className="w-auto p-0 z-[100]"
+        className="z-50 p-0 w-auto rounded-xl border bg-background shadow-xl"
         align="start"
         side="bottom"
         sideOffset={5}
-        avoidCollisions={true}
+        dir={dir}
       >
-        <div className="p-3 border-b bg-muted/50">
-          <div className="flex items-center gap-2 justify-between" dir="rtl">
+        {/* אזור ניווט */}
+        <div className="p-3 bg-muted/50 border-b rounded-t-xl">
+          <div className="flex items-center justify-between gap-2" dir={dir}>
             <Select
               value={getMonth(viewDate).toString()}
               onValueChange={handleMonthChange}
             >
-              <SelectTrigger className="w-[110px] h-9">
+              <SelectTrigger className="h-9 w-[110px] text-sm rounded-lg border bg-background shadow-sm">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent
-                position="popper"
-                sideOffset={5}
-                className="z-[110]"
-              >
+              <SelectContent className="z-[120] rounded-lg shadow-md">
                 {months.map((month) => (
                   <SelectItem key={month.value} value={month.value}>
                     {month.label}
@@ -175,14 +163,10 @@ export function DatePicker({
               value={getYear(viewDate).toString()}
               onValueChange={handleYearChange}
             >
-              <SelectTrigger className="w-[80px] h-9">
+              <SelectTrigger className="h-9 w-[80px] text-sm rounded-lg border bg-background shadow-sm">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent
-                position="popper"
-                sideOffset={5}
-                className="z-[110]"
-              >
+              <SelectContent className="z-[120] rounded-lg shadow-md">
                 {years.map((year) => (
                   <SelectItem key={year} value={year.toString()}>
                     {year}
@@ -193,32 +177,43 @@ export function DatePicker({
 
             <Button
               variant="outline"
-              className="ml-auto h-9"
+              className="h-9 px-3 text-sm rounded-lg bg-white hover:bg-muted"
               onClick={handleTodayClick}
-              size="sm"
             >
               היום
             </Button>
           </div>
         </div>
 
-        <Calendar
-          mode="single"
-          selected={value}
-          onSelect={handleSelect}
-          disabled={shouldDisableDate}
-          fromDate={minDate}
-          toDate={maxDate}
-          locale={locale ?? he}
-          showOutsideDays={true}
-          dir="rtl"
-          month={viewDate}
-          onMonthChange={setViewDate}
-          initialFocus
-          className="border-0"
-        />
+        {/* לוח שנה */}
+        <div className="p-3 bg-background">
+          <Calendar
+            mode="single"
+            selected={value}
+            onSelect={handleSelect}
+            disabled={shouldDisableDate}
+            fromDate={minDate}
+            toDate={maxDate}
+            locale={locale}
+            showOutsideDays
+            classNames={{
+              nav_button_previous:
+                dir === "rtl" ? "absolute right-1" : "absolute left-1",
+              nav_button_next:
+                dir === "rtl" ? "absolute left-1" : "absolute right-1",
+            }}
+            dir={dir}
+            month={viewDate}
+            onMonthChange={setViewDate}
+            initialFocus
+            className="border-0" // מבטל גבול של calendar
+          />
+        </div>
 
-        {footer && <div className="p-3 border-t">{footer}</div>}
+        {/* רגל תחתון אם קיים */}
+        {footer && (
+          <div className="p-3 border-t bg-muted/30 rounded-b-xl">{footer}</div>
+        )}
       </PopoverContent>
     </Popover>
   );
