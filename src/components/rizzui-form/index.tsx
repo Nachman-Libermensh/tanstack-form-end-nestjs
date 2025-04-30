@@ -32,15 +32,6 @@ const FileUploadField = lazy(
  * שדות בחירה
  */
 const SelectField = lazy(() => import("./form-components/select.field"));
-const SelectLookupField = lazy(
-  () => import("./form-components/select-lookup.field")
-);
-const SelectMultiLookupField = lazy(
-  () => import("./form-components/select-multi-lookup.field")
-);
-const SelectUserField = lazy(
-  () => import("./form-components/select-user.field")
-);
 
 /**
  * יצירת והגדרת ה-hook של הטופס
@@ -68,8 +59,5 @@ export const { useAppForm, withForm } = createFormHook({
 
     // שדות בחירה
     SelectField,
-    SelectLookupField,
-    SelectMultiLookupField,
-    SelectUserField,
   },
 });
