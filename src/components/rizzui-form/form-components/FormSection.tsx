@@ -7,11 +7,11 @@ export type FormSectionProps = {
   className?: string;
 };
 
-export const FormSection: React.FC<FormSectionProps> = ({
+export default function FormSection({
   title,
   children,
   className,
-}) => {
+}: FormSectionProps) {
   return (
     <div
       className={`rounded-lg p-4 shadow-sm border border-gray-200 ${className ?? ""}`}
@@ -22,4 +22,4 @@ export const FormSection: React.FC<FormSectionProps> = ({
       {children}
     </div>
   );
-};
+}

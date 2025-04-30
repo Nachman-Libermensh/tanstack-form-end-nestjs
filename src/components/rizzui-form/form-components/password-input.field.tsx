@@ -1,40 +1,52 @@
 import { useFieldContext } from "..";
 import { Password } from "rizzui";
-import FieldErrors from "./field-errors";
+import { ComponentProps } from "react";
 
-export function PasswordInput({
+type PasswordInputProps = {
+  label: string;
+  description?: string;
+  showStrengthIndicator?: boolean;
+  dir?: "ltr" | "rtl";
+} & Omit<
+  ComponentProps<typeof Password>,
+  "label" | "value" | "onChange" | "id" | "onBlur" | "error"
+>;
+
+const PasswordInput = ({
   label,
-  placeholder,
+  description,
   dir = "rtl",
   showStrengthIndicator = false,
-}: {
-  label: string;
-  placeholder?: string;
-  dir?: "ltr" | "rtl";
-  showStrengthIndicator?: boolean;
-}) {
+  ...props
+}: PasswordInputProps) => {
   const field = useFieldContext<string>();
+
   return (
-    <div>
-      <div>
-        <Password
-          label={label}
-          name={field.name}
-          id={field.name}
-          value={field.state.value}
-          onChange={(e) => field.handleChange(e.target.value)}
-          onBlur={field.handleBlur}
-          placeholder={placeholder}
-          dir={dir}
-        />
-      </div>
+    <div className="space-y-2">
+      <Password
+        label={label}
+        id={field.name}
+        value={field.state.value}
+        onChange={(e) => field.handleChange(e.target.value)}
+        onBlur={field.handleBlur}
+        dir={dir}
+        error={
+          field.state.meta.isTouched && field.state.meta.errors.length > 0
+            ? field.state.meta.errors.join(", ")
+            : undefined
+        }
+        {...props}
+      />
       {showStrengthIndicator && (
         <PasswordStrengthIndicator password={field.state.value} />
       )}
-      <FieldErrors meta={field.state.meta} />
+      {description && (
+        <p className="text-sm text-muted-foreground">{description}</p>
+      )}
     </div>
   );
-}
+};
+
 function PasswordStrengthIndicator({ password }: { password: string }) {
   const getStrength = (pass: string) => {
     if (!pass) return 0;
@@ -100,3 +112,5 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
     </div>
   );
 }
+
+export default PasswordInput;

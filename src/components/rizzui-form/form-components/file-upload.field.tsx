@@ -1,67 +1,48 @@
 import { useFieldContext } from "..";
-import FieldErrors from "./field-errors";
-import { FileUpload } from "../../file-upload";
+import FileUpload from "@/app/shared/file-upload";
+import { ComponentProps } from "react";
 
 type FileUploadFieldProps = {
   label?: string;
   fieldLabel?: string;
   btnLabel?: string;
   accept?: "img" | "pdf" | "csv" | "imgAndPdf" | "all";
-  maxSize?: number;
-  maxFiles?: number;
-  multiple?: boolean;
-  showPreview?: boolean;
-  className?: string;
-};
+  description?: string;
+} & Omit<
+  ComponentProps<typeof FileUpload>,
+  "label" | "fieldLabel" | "btnLabel" | "accept" | "onChange"
+>;
 
 const FileUploadField = ({
+  label,
+  fieldLabel,
+  btnLabel,
   accept = "all",
-  maxSize,
-  maxFiles = 1,
-  multiple = false,
-  showPreview = true,
-  className,
+  description,
+  ...props
 }: FileUploadFieldProps) => {
-  const field = useFieldContext<File | File[] | null>();
-
-  // המרת ערכי accept למחרוזות MIME מתאימות
-  const getAcceptString = (acceptType: string): string => {
-    switch (acceptType) {
-      case "img":
-        return "image/*";
-      case "pdf":
-        return "application/pdf";
-      case "csv":
-        return ".csv,text/csv";
-      case "imgAndPdf":
-        return "image/*,application/pdf";
-      case "all":
-      default:
-        return "*";
-    }
-  };
-
-  const handleFilesChange = (files: File[]) => {
-    if (multiple) {
-      field.handleChange(files);
-    } else {
-      field.handleChange(files.length > 0 ? files[0] : null);
-    }
-  };
+  const field = useFieldContext<File | null>();
 
   return (
     <div className="space-y-2">
       <FileUpload
-        accept={getAcceptString(accept)}
-        maxSize={maxSize}
-        maxFiles={maxFiles}
-        multiple={multiple}
-        onFilesChange={handleFilesChange}
-        showPreview={showPreview}
-        disabled={field.form.state.isSubmitting}
-        className={className}
+        label={label}
+        fieldLabel={fieldLabel}
+        btnLabel={btnLabel}
+        accept={accept}
+        onChange={(file: File) => {
+          field.handleChange(file);
+        }}
+        error={
+          field.state.meta.isTouched && field.state.meta.errors.length > 0
+            ? field.state.meta.errors.join(", ")
+            : undefined
+        }
+        {...props}
       />
-      <FieldErrors meta={field.state.meta} />
+      {description && (
+        <p className="text-sm text-muted-foreground">{description}</p>
+      )}
     </div>
   );
 };

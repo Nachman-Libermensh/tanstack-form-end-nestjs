@@ -1,33 +1,75 @@
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
-import TextField from "./form-components/text-field.field";
-import CheckboxField from "./form-components/checkbox-field";
-import { SubmitButton } from "./form-components/submit-button";
-import { PasswordInput } from "./form-components/password-input.field";
-import TextAreaField from "./form-components/text-area-field";
-import FormLayout from "./form-components/form-layout";
-import { FormSection } from "./form-components/FormSection";
-import DatePickerField from "./form-components/date-picker.field";
-import FileUploadField from "./form-components/file-upload.field";
+import { lazy } from "react";
 
 // יצירת Context עבור השדות והטופס
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts();
 
+/**
+ * קומפוננטות מבנה טופס
+ */
+const FormLayout = lazy(() => import("./form-components/form-layout"));
+const FormSection = lazy(() => import("./form-components/FormSection"));
+const SubmitButton = lazy(() => import("./form-components/submit-button"));
+
+/**
+ * שדות קלט בסיסיים
+ */
+const TextField = lazy(() => import("./form-components/text.field"));
+const TextAreaField = lazy(() => import("./form-components/text-area.field"));
+const CheckboxField = lazy(() => import("./form-components/checkbox.field"));
+const PasswordInputField = lazy(
+  () => import("./form-components/password-input.field")
+);
+const DatePickerField = lazy(
+  () => import("./form-components/date-picker.field")
+);
+const FileUploadField = lazy(
+  () => import("./form-components/file-upload.field")
+);
+
+/**
+ * שדות בחירה
+ */
+const SelectField = lazy(() => import("./form-components/select.field"));
+const SelectLookupField = lazy(
+  () => import("./form-components/select-lookup.field")
+);
+const SelectMultiLookupField = lazy(
+  () => import("./form-components/select-multi-lookup.field")
+);
+const SelectUserField = lazy(
+  () => import("./form-components/select-user.field")
+);
+
+/**
+ * יצירת והגדרת ה-hook של הטופס
+ */
 export const { useAppForm, withForm } = createFormHook({
   fieldContext,
   formContext,
-  fieldComponents: {
-    TextField,
-    CheckboxField,
 
-    PasswordInput,
-    TextAreaField,
-    DatePickerField,
-    FileUploadField,
-  },
+  // קומפוננטות מבנה
   formComponents: {
     FormLayout,
     FormSection,
     SubmitButton,
+  },
+
+  // קומפוננטות שדות
+  fieldComponents: {
+    // שדות קלט בסיסיים
+    TextField,
+    TextAreaField,
+    CheckboxField,
+    PasswordInputField,
+    DatePickerField,
+    FileUploadField,
+
+    // שדות בחירה
+    SelectField,
+    SelectLookupField,
+    SelectMultiLookupField,
+    SelectUserField,
   },
 });

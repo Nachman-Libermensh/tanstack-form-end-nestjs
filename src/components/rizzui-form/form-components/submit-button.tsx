@@ -1,12 +1,14 @@
 import { useStore } from "@tanstack/react-form";
 import { useFormContext } from "..";
 import { Button } from "rizzui";
+import cn from "@/ui/utils/class-names";
 
 type SubmitButtonProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
-export const SubmitButton = ({ children }: SubmitButtonProps) => {
+const SubmitButton = ({ children, className = "" }: SubmitButtonProps) => {
   const form = useFormContext();
 
   const [isSubmitting, canSubmit] = useStore(form.store, (state) => [
@@ -15,8 +17,13 @@ export const SubmitButton = ({ children }: SubmitButtonProps) => {
   ]);
 
   return (
-    <Button type="submit" disabled={isSubmitting || !canSubmit}>
+    <Button
+      type="submit"
+      className={cn(className)}
+      disabled={isSubmitting || !canSubmit}
+    >
       {children}
     </Button>
   );
 };
+export default SubmitButton;
