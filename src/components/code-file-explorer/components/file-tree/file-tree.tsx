@@ -53,10 +53,14 @@ export function FileTree({
   };
 
   return (
-    <ScrollArea className="h-full rounded-md" type="always">
-      <div className="py-1 px-1" dir="ltr">
-        <SidebarMenu>{renderTreeItems(elements)}</SidebarMenu>
-      </div>
-    </ScrollArea>
+    <div className="h-full w-full overflow-hidden">
+      <ScrollArea className="h-full w-full" type="always">
+        <div className="py-2 px-1 w-full" dir="ltr">
+          <SidebarMenu className="space-y-1 w-full">
+            {renderTreeItems(elements)}
+          </SidebarMenu>
+        </div>
+      </ScrollArea>
+    </div>
   );
 }

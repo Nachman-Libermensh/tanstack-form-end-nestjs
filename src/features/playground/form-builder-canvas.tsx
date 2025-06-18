@@ -13,10 +13,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { useFormBuilder } from "./hooks/useFormBuilder";
 import { useDirection } from "@/i18n/direction";
+import { useTranslations } from "next-intl";
 import {
   Plus,
   Text,
@@ -26,6 +29,17 @@ import {
   CheckSquare,
   GripVertical,
   Trash,
+  Lock,
+  Calendar,
+  Clock,
+  Upload,
+  Sliders,
+  Link,
+  Phone,
+  Palette,
+  Edit3,
+  Copy,
+  Settings,
 } from "lucide-react";
 import {
   DndContext,
@@ -66,11 +80,40 @@ interface FieldItem {
   required?: boolean;
 }
 
+interface FieldTypeConfig {
+  type: string;
+  icon: React.ReactNode;
+  category: "basic" | "advanced" | "specialized";
+}
+
+const fieldTypeConfigs: FieldTypeConfig[] = [
+  // Basic fields
+  { type: "text", icon: <Text size={18} />, category: "basic" },
+  { type: "email", icon: <Mail size={18} />, category: "basic" },
+  { type: "password", icon: <Lock size={18} />, category: "basic" },
+  { type: "number", icon: <Hash size={18} />, category: "basic" },
+
+  // Advanced fields
+  { type: "textarea", icon: <Edit3 size={18} />, category: "advanced" },
+  { type: "select", icon: <ChevronDown size={18} />, category: "advanced" },
+  { type: "checkbox", icon: <CheckSquare size={18} />, category: "advanced" },
+
+  // Specialized fields
+  { type: "date", icon: <Calendar size={18} />, category: "specialized" },
+  { type: "time", icon: <Clock size={18} />, category: "specialized" },
+  { type: "file", icon: <Upload size={18} />, category: "specialized" },
+  { type: "range", icon: <Sliders size={18} />, category: "specialized" },
+  { type: "url", icon: <Link size={18} />, category: "specialized" },
+  { type: "tel", icon: <Phone size={18} />, category: "specialized" },
+  { type: "color", icon: <Palette size={18} />, category: "specialized" },
+];
+
 interface SortableFieldItemProps {
   field: FieldItem;
   selectedFieldId: string | null;
   selectField: (id: string) => void;
   removeField: (id: string) => void;
+  duplicateField?: (id: string) => void;
   isDragOverlay?: boolean;
   isDragTarget?: boolean;
   dragPosition?: "top" | "bottom" | null;
@@ -81,10 +124,13 @@ function SortableFieldItem({
   selectedFieldId,
   selectField,
   removeField,
+  duplicateField,
   isDragOverlay = false,
   isDragTarget = false,
   dragPosition = null,
 }: SortableFieldItemProps) {
+  const t = useTranslations("playground");
+
   const {
     attributes,
     listeners,
@@ -112,24 +158,24 @@ function SortableFieldItem({
       <li
         ref={setNodeRef}
         style={style}
-        className={`flex items-center gap-4 p-4 bg-white border rounded-xl shadow-sm 
-          transition-all duration-200 cursor-pointer ${
+        className={`group flex items-center gap-3 p-4 bg-card border rounded-xl shadow-sm 
+          transition-all duration-200 cursor-pointer hover:shadow-md ${
             selectedFieldId === field.id
-              ? "border-primary bg-primary/5"
-              : "border-gray-200 hover:border-primary/50"
+              ? "border-primary bg-primary/5 shadow-primary/10"
+              : "border-border hover:border-primary/50"
           } ${isDragging ? "opacity-40 border-dashed border-primary" : ""} ${
           isDragOverlay
-            ? "shadow-xl ring-2 ring-primary border-primary scale-[1.03] dark:bg-gray-800"
+            ? "shadow-xl ring-2 ring-primary border-primary scale-[1.03] bg-card"
             : ""
         }`}
         onClick={() => !isDragging && selectField(field.id)}
       >
         <div
-          className={`flex-shrink-0 text-muted-foreground 
+          className={`flex-shrink-0 text-muted-foreground transition-colors
             ${
               isDragOverlay
                 ? "cursor-grabbing text-primary"
-                : "cursor-grab hover:text-primary"
+                : "cursor-grab hover:text-primary group-hover:text-primary"
             }`}
           {...attributes}
           {...listeners}
@@ -137,31 +183,68 @@ function SortableFieldItem({
           <GripVertical size={isDragOverlay ? 20 : 18} />
         </div>
 
-        <div className="flex flex-col flex-1">
-          <span className="font-medium text-base">{field.label}</span>
-          <span className="text-sm text-muted-foreground">
-            {field.name} · {field.type}
-            {field.required && " · חובה"}
+        <div className="flex flex-col flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="font-medium text-base truncate">
+              {field.label}
+            </span>
+            {field.required && (
+              <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
+                {t("fieldEditor.fields.required")}
+              </Badge>
+            )}
+          </div>
+          <span className="text-sm text-muted-foreground truncate">
+            {field.name} · {t(`formBuilder.fieldTypes.${field.type}`)}
           </span>
         </div>
 
         <div
-          className={`transition-opacity duration-200 ${
+          className={`flex items-center gap-1 transition-opacity duration-200 ${
             selectedFieldId === field.id || isDragOverlay
               ? "opacity-100"
               : "opacity-0 group-hover:opacity-100"
           }`}
         >
+          {duplicateField && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 text-muted-foreground hover:text-primary"
+              onClick={(e) => {
+                e.stopPropagation();
+                duplicateField(field.id);
+              }}
+              title={t("actions.duplicate")}
+            >
+              <Copy size={14} />
+            </Button>
+          )}
+
           <Button
             variant="ghost"
             size="icon"
-            className="text-muted-foreground hover:text-destructive"
+            className="h-8 w-8 text-muted-foreground hover:text-primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              selectField(field.id);
+            }}
+            title={t("fieldEditor.title")}
+          >
+            <Settings size={14} />
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 text-muted-foreground hover:text-destructive"
             onClick={(e) => {
               e.stopPropagation();
               removeField(field.id);
             }}
+            title={t("actions.delete")}
           >
-            <Trash size={16} />
+            <Trash size={14} />
           </Button>
         </div>
       </li>
@@ -174,6 +257,7 @@ function SortableFieldItem({
 }
 
 export default function FormBuilderCanvas() {
+  const t = useTranslations("playground");
   const {
     fields,
     selectedFieldId,
@@ -257,169 +341,141 @@ export default function FormBuilderCanvas() {
     setDragPosition(null);
   };
 
-  // הוספת שדה חדש
-  const handleAddField = (fieldConfig: any) => {
-    addField(fieldConfig);
+  // הגדרות ברירת מחדל משופרות ליצירת שדות
+  const createFieldWithDefaults = (type: string) => {
+    const baseConfig = {
+      type,
+      label: t(`formBuilder.fieldTypes.${type}`),
+      placeholder: t(`fieldEditor.fields.placeholder`),
+    };
 
-    // גלילה חלקה אל השדה החדש
-    setTimeout(() => {
-      const element = document.getElementById("fields-container");
-      if (element) {
-        element.scrollTo({
-          top: element.scrollHeight,
-          behavior: "smooth",
-        });
-      }
-    }, 100);
+    // הגדרות ספציפיות לסוג שדה
+    switch (type) {
+      case "email":
+        return {
+          ...baseConfig,
+          validations: {
+            pattern: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+            message: t("fieldEditor.validation.customMessage"),
+          },
+        };
+      case "password":
+        return {
+          ...baseConfig,
+          validations: {
+            minLength: 8,
+            pattern: "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+          },
+          passwordOptions: {
+            showToggle: true,
+            showStrengthIndicator: true,
+          },
+        };
+      case "select":
+        return {
+          ...baseConfig,
+          options: [
+            {
+              label: t("fieldEditor.fields.defaultValue") + " 1",
+              value: "option1",
+            },
+            {
+              label: t("fieldEditor.fields.defaultValue") + " 2",
+              value: "option2",
+            },
+          ],
+        };
+      default:
+        return baseConfig;
+    }
   };
+
+  // הוספת שדה חדש
+  const handleAddField = (type: string) => {
+    const fieldConfig = createFieldWithDefaults(type);
+    addField(fieldConfig);
+  };
+
+  const duplicateField = (fieldId: string) => {
+    const field = fields.find((f) => f.id === fieldId);
+    if (field) {
+      const duplicatedField = {
+        ...field,
+        name: `${field.name}_copy`,
+        label: `${field.label} (Copy)`,
+      };
+      addField(duplicatedField);
+    }
+  };
+
+  // קבוצת סוגי שדות לפי קטגוריה
+  const groupedFieldTypes = fieldTypeConfigs.reduce((acc, config) => {
+    if (!acc[config.category]) acc[config.category] = [];
+    acc[config.category].push(config);
+    return acc;
+  }, {} as Record<string, FieldTypeConfig[]>);
 
   return (
     <Card className="border-muted shadow-lg">
       <CardHeader className="flex flex-col gap-3 pb-4">
         <div className="flex justify-between items-center">
           <div>
-            <CardTitle className="text-xl">בונה טפסים</CardTitle>
+            <CardTitle className="text-xl">{t("formBuilder.title")}</CardTitle>
             <CardDescription className="text-sm mt-1">
-              גרור שדות, סדר ונהל את טופסך בקלות
+              {t("formBuilder.subtitle")}
             </CardDescription>
           </div>
           <Badge
             variant="outline"
             className={`transition-colors ${
-              fields.length > 0 ? "bg-primary/10 text-primary" : ""
+              fields.length > 0
+                ? "bg-primary/10 text-primary border-primary/30"
+                : ""
             }`}
           >
-            {fields.length} שדות
+            {t("formBuilder.fieldsCount", { count: fields.length })}
           </Badge>
         </div>
 
         <div className="transition-transform duration-150 hover:scale-[1.01] active:scale-[0.98]">
           <DropdownMenu dir={dir}>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
               <Button className="w-full justify-center gap-2 font-medium shadow-sm">
-                <Plus size={16} /> הוסף שדה חדש
+                <Plus size={16} /> {t("formBuilder.addFieldButton")}
               </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="center" className="w-72 p-1">
-              <div className="grid grid-cols-1 gap-0.5 p-1">
-                {/* שדות בסיסיים */}
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({ type: "text", label: "שדה טקסט" })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <Text size={18} className="text-primary/80" /> שדה טקסט
-                </DropdownMenuItem>
+            <DropdownMenuContent align="center" className="w-80 p-2">
+              {Object.entries(groupedFieldTypes).map(([category, configs]) => (
+                <div key={category}>
+                  <DropdownMenuLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider px-2 py-1">
+                    {category === "basic"
+                      ? "Basic Fields"
+                      : category === "advanced"
+                      ? "Advanced Fields"
+                      : "Specialized Fields"}
+                  </DropdownMenuLabel>
 
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({ type: "email", label: "אימייל" })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <Mail size={18} className="text-primary/80" /> אימייל
-                </DropdownMenuItem>
+                  <div className="grid grid-cols-2 gap-1 mb-2">
+                    {configs.map((config) => (
+                      <DropdownMenuItem
+                        key={config.type}
+                        onClick={() => handleAddField(config.type)}
+                        className="cursor-pointer flex items-center gap-3 p-3 rounded-md hover:bg-primary/10 transition-colors"
+                      >
+                        <span className="text-primary/80">{config.icon}</span>
+                        <span className="text-sm font-medium">
+                          {t(`formBuilder.fieldTypes.${config.type}`)}
+                        </span>
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
 
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({ type: "password", label: "סיסמה" })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <i className="text-primary/80">🔒</i> סיסמה
-                </DropdownMenuItem>
-
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({ type: "number", label: "מספר" })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <Hash size={18} className="text-primary/80" /> מספר
-                </DropdownMenuItem>
-
-                {/* שדות מתקדמים */}
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({
-                      type: "textarea",
-                      label: "טקסט מרובה שורות",
-                    })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <i className="text-primary/80">📝</i> טקסט מרובה שורות
-                </DropdownMenuItem>
-
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({
-                      type: "select",
-                      label: "רשימת בחירה",
-                      options: [
-                        { label: "אפשרות 1", value: "option1" },
-                        { label: "אפשרות 2", value: "option2" },
-                      ],
-                    })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <ChevronDown size={18} className="text-primary/80" /> רשימת
-                  בחירה
-                </DropdownMenuItem>
-
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({ type: "checkbox", label: "תיבת סימון" })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <CheckSquare size={18} className="text-primary/80" /> תיבת
-                  סימון
-                </DropdownMenuItem>
-
-                {/* שדות תאריך וזמן */}
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({ type: "date", label: "תאריך" })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <i className="text-primary/80">📅</i> תאריך
-                </DropdownMenuItem>
-
-                <DropdownMenuItem
-                  onClick={() => handleAddField({ type: "time", label: "שעה" })}
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <i className="text-primary/80">🕒</i> שעה
-                </DropdownMenuItem>
-
-                {/* שדות נוספים */}
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({ type: "file", label: "העלאת קובץ" })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <i className="text-primary/80">📎</i> העלאת קובץ
-                </DropdownMenuItem>
-
-                <DropdownMenuItem
-                  onClick={() =>
-                    handleAddField({
-                      type: "range",
-                      label: "מחוון טווח",
-                      validations: { min: 0, max: 100 },
-                    })
-                  }
-                  className="cursor-pointer flex items-center gap-3 p-2.5 rounded-md hover:bg-primary/10 transition-colors"
-                >
-                  <i className="text-primary/80">⚖️</i> מחוון טווח
-                </DropdownMenuItem>
-              </div>
+                  {category !== "specialized" && (
+                    <DropdownMenuSeparator className="my-2" />
+                  )}
+                </div>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -428,9 +484,14 @@ export default function FormBuilderCanvas() {
       <CardContent className="px-4 pb-5">
         {fields.length === 0 ? (
           <div className="text-center py-12 px-6 border-2 border-dashed rounded-xl bg-muted/10 transition-all">
-            <p className="text-muted-foreground">
-              אין שדות בטופס. השתמש בכפתור להוספת שדות חדשים.
-            </p>
+            <div className="flex flex-col items-center gap-3">
+              <div className="p-3 rounded-full bg-muted/20">
+                <Plus size={24} className="text-muted-foreground" />
+              </div>
+              <p className="text-muted-foreground text-sm">
+                {t("formBuilder.noFields")}
+              </p>
+            </div>
           </div>
         ) : (
           <DndContext
@@ -446,7 +507,7 @@ export default function FormBuilderCanvas() {
             >
               <div
                 id="fields-container"
-                className="max-h-[60vh] overflow-y-auto pr-2 py-1"
+                className="max-h-[60vh] overflow-y-auto pr-2 py-1 space-y-1"
               >
                 <ul className="space-y-3 my-1 pb-1">
                   {fields.map((field) => (
@@ -456,6 +517,7 @@ export default function FormBuilderCanvas() {
                       selectedFieldId={selectedFieldId}
                       selectField={selectField}
                       removeField={removeField}
+                      duplicateField={duplicateField}
                       isDragTarget={overId === field.id}
                       dragPosition={overId === field.id ? dragPosition : null}
                     />

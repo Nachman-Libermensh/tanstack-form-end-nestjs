@@ -1,8 +1,8 @@
 {
-  "title": "מחקר ולימוד אינטגרציית TanStack Form עם NestJS",
-  "description": "גיבוש אסטרטגיה מקיפה לניהול טפסים מתקדמים",
+  "title": "בונה טפסים מתקדם עם TanStack Form",
+  "description": "צור טפסים מתקדמים בקלות ובמהירות",
   "technologiesTitle": "טכנולוגיות בשימוש",
-  "intro": "פרויקט זה עוסק במחקר ופיתוח שיטות עבודה מתקדמות לניהול טפסים, תוך שילוב:",
+  "intro": "בונה טפסים מתקדם המאפשר יצירת טפסים מורכבים בצורה ויזואלית, תוך שילוב:",
   "technologies": {
     "tanstack": {
       "name": "TanStack Form",
@@ -22,10 +22,10 @@
     }
   },
   "goals": {
-    "title": "מטרות המחקר",
+    "title": "יכולות המערכת",
     "items": {
       "unified_api": {
-        "title": "API אחיד וגנרי",
+        "title": "ממשק אחיד וגנרי",
         "description": "יצירת ממשק עבודה אחיד לטפסים שונים"
       },
       "consistent_validation": {
@@ -97,7 +97,7 @@
   "viewUserFormExample": "צפה בדוגמת טופס משתמש",
   "userFormWithTanStack": "טופס משתמש עם TanStack Form",
   "footer": {
-    "copyright": "פרויקט מחקר TanStack Form + NestJS",
+    "copyright": "בונה טפסים מתקדם עם TanStack Form",
     "documentation": "תיעוד",
     "contribute": "תרומה",
     "license": "רישיון"

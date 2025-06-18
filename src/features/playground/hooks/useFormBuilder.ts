@@ -1,9 +1,10 @@
-import { useCallback } from "react"; // Removed useState
+import { useCallback } from "react";
 import { useFormManager } from "./useFormManager";
 import { FieldConfig, FormSchema } from "../types";
 import { nanoid } from "nanoid";
 import { toast } from "sonner";
-import { useFormSchemaStore } from "../stores/form-schema.store"; // Added this import
+import { useFormSchemaStore } from "../stores/form-schema.store";
+import { useTranslations } from "next-intl";
 
 // ID קבוע לטופס הראשי
 const MAIN_FORM_ID = "main-form";
@@ -23,6 +24,8 @@ const DEFAULT_SCHEMA: FormSchema = {
 };
 
 export function useFormBuilder() {
+  const t = useTranslations("playground");
+
   const { schema, saveSchema, clear, data, saveData } = useFormManager(
     MAIN_FORM_ID,
     DEFAULT_SCHEMA,
@@ -42,7 +45,7 @@ export function useFormBuilder() {
         ...field,
         id: field.id || nanoid(6),
         name: field.name || `field_${field.type}_${nanoid(4)}`,
-        label: field.label || `שדה חדש`,
+        label: field.label || t(`formBuilder.fieldTypes.${field.type}`),
       } as FieldConfig;
 
       saveSchema({
@@ -53,11 +56,11 @@ export function useFormBuilder() {
       // בחר את השדה החדש אוטומטית
       selectField(newField.id);
 
-      toast.success("שדה נוסף", {
-        description: `נוסף שדה מסוג ${newField.type}`,
+      toast.success(t("notifications.fieldAdded"), {
+        description: t("notifications.fieldAddedDesc", { type: newField.type }),
       });
     },
-    [schema, fields, saveSchema, selectField]
+    [schema, fields, saveSchema, selectField, t]
   );
 
   const updateField = useCallback(
@@ -93,7 +96,9 @@ export function useFormBuilder() {
 
   const removeField = useCallback(
     (fieldId: string) => {
+      const fieldToRemove = fields.find((f) => f.id === fieldId);
       const updatedFields = fields.filter((field) => field.id !== fieldId);
+
       saveSchema({
         ...schema,
         fields: updatedFields,
@@ -104,11 +109,32 @@ export function useFormBuilder() {
         selectField(updatedFields.length > 0 ? updatedFields[0].id : null);
       }
 
-      toast.success("שדה נמחק", {
-        description: "השדה הוסר מהטופס",
+      toast.success(t("notifications.fieldRemoved"), {
+        description: t("notifications.fieldRemovedDesc"),
       });
     },
-    [schema, fields, saveSchema, selectedFieldId, selectField]
+    [schema, fields, saveSchema, selectedFieldId, selectField, t]
+  );
+
+  const duplicateField = useCallback(
+    (fieldId: string) => {
+      const field = fields.find((f) => f.id === fieldId);
+      if (field) {
+        const duplicatedField = {
+          ...field,
+          id: nanoid(6),
+          name: `${field.name}_copy_${nanoid(4)}`,
+          label: `${field.label} (עותק)`,
+        };
+
+        addField(duplicatedField);
+
+        toast.success("שדה שוכפל", {
+          description: `נוצר עותק של ${field.label}`,
+        });
+      }
+    },
+    [fields, addField]
   );
 
   const resetForm = useCallback(() => {
@@ -153,12 +179,13 @@ export function useFormBuilder() {
         fields: newFields,
       });
 
-      toast.success("סדר השדות שונה", {
-        description: "סדר השדות בטופס עודכן",
+      toast.success(t("notifications.fieldReordered"), {
+        description: t("notifications.fieldReorderedDesc"),
       });
     },
-    [schema, fields, saveSchema]
+    [schema, fields, saveSchema, t]
   );
+
   return {
     schema,
     fields,
@@ -167,6 +194,7 @@ export function useFormBuilder() {
     addField,
     updateField,
     removeField,
+    duplicateField,
     resetForm,
     exportFormAsJson,
     formData: data,

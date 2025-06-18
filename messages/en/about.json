@@ -1,11 +1,11 @@
 {
-  "pageTitle": "About | My App",
-  "title": "About the Application",
-  "description": "Our application is an innovative platform combining advanced authentication with multilingual support.",
+  "pageTitle": "About | Advanced Form Builder",
+  "title": "About the Form Builder",
+  "description": "Our form builder is an innovative platform that enables creating advanced forms visually with multilingual support.",
   "features": {
     "title": "Key Features",
     "item1": "Full Hebrew and English support",
-    "item2": "Secure authentication system",
-    "item3": "Modern and user-friendly interface"
+    "item2": "Visual form building with drag and drop",
+    "item3": "Modern and user-friendly form building interface"
   }
 }

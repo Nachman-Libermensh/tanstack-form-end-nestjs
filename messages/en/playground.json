@@ -1,6 +1,6 @@
 {
-  "title": "Playground",
-  "description": "Build and design forms visually",
+  "title": "Visual Form Builder",
+  "description": "Build and design advanced forms visually with TanStack Form",
   "librarySelector": "Select UI Library:",
   "libraries": {
     "shadcn": "Shadcn UI",
@@ -57,5 +57,105 @@
     "duplicate": "Duplicate",
     "copyCode": "Copy Code",
     "save": "Save as Template"
+  },
+  "formBuilder": {
+    "title": "Visual Form Builder",
+    "subtitle": "Drag fields, reorder and manage your form easily",
+    "addFieldButton": "Add New Field",
+    "fieldsCount": "{count} fields",
+    "noFields": "No fields in form. Use the button to add new fields.",
+    "dragAndDrop": "Drag and drop to reorder",
+    "selectedField": "Selected field",
+    "fieldTypes": {
+      "text": "Text Field",
+      "email": "Email",
+      "password": "Password",
+      "number": "Number",
+      "textarea": "Multi-line Text",
+      "select": "Select List",
+      "checkbox": "Checkbox",
+      "radio": "Radio Buttons",
+      "date": "Date",
+      "time": "Time",
+      "datetime": "Date & Time",
+      "file": "File Upload",
+      "range": "Range Slider",
+      "url": "URL",
+      "tel": "Phone Number",
+      "color": "Color Picker"
+    }
+  },
+  "fieldEditor": {
+    "title": "Field Settings",
+    "subtitle": "Modify the selected field properties",
+    "selectFieldPrompt": "Select a field to edit its properties",
+    "noFieldSelected": "Select a field from the list above to edit it",
+    "tabs": {
+      "basic": "Basic",
+      "validation": "Validation",
+      "appearance": "Appearance",
+      "advanced": "Advanced"
+    },
+    "fields": {
+      "label": "Field Label",
+      "name": "Field Name (for developers)",
+      "nameHint": "This name is used to identify the field in code",
+      "placeholder": "Placeholder Text",
+      "helperText": "Helper Text",
+      "helperTextHint": "This text will be displayed below the field as guidance",
+      "defaultValue": "Default Value",
+      "required": "Required Field",
+      "disabled": "Disabled Field",
+      "hidden": "Hidden Field",
+      "readonly": "Read Only"
+    },
+    "validation": {
+      "minLength": "Minimum Length",
+      "maxLength": "Maximum Length",
+      "min": "Minimum Value",
+      "max": "Maximum Value",
+      "pattern": "Pattern (Regex)",
+      "customMessage": "Custom Error Message"
+    }
+  },
+  "preview": {
+    "title": "Preview",
+    "subtitle": "Live preview of your built form",
+    "deviceViews": {
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "desktop": "Desktop"
+    },
+    "formTitle": "Live Form",
+    "formDescription": "Preview of your built form",
+    "submitButton": "Submit Form",
+    "noFieldsMessage": "No fields in form. Add fields to see the form in action.",
+    "formSubmitted": "Form submitted successfully ✅"
+  },
+  "codeGenerator": {
+    "title": "Generated Code",
+    "formats": {
+      "react": "React",
+      "next": "Next.js",
+      "formOnly": "Form Only"
+    },
+    "actions": {
+      "copy": "Copy",
+      "download": "Download",
+      "copied": "Copied to clipboard",
+      "downloaded": "Code downloaded successfully"
+    }
+  },
+  "notifications": {
+    "fieldAdded": "Field Added",
+    "fieldAddedDesc": "Added field of type {type}",
+    "fieldRemoved": "Field Removed",
+    "fieldRemovedDesc": "The field was removed from the form",
+    "fieldReordered": "Fields Reordered",
+    "fieldReorderedDesc": "Field order in form was updated",
+    "formReset": "Form Reset",
+    "formResetDesc": "All data was cleared",
+    "formExported": "Form Exported",
+    "formExportedDesc": "File was downloaded to your computer"
   }
 }

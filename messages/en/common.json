@@ -28,5 +28,11 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "formBuilder": {
+    "title": "Advanced Form Builder",
+    "poweredBy": "Powered by TanStack Form",
+    "buildForm": "Build Form",
+    "customizeForm": "Customize"
   }
 }

@@ -1,7 +1,7 @@
 {
   "login": {
     "title": "Login Form Example",
-    "description": "A simple yet powerful login form with client-side validation using TanStack Form and Zod.",
+    "description": "A simple yet powerful login form with client-side validation created using the advanced form builder and Zod.",
     "preview": "Preview",
     "code": "Code",
     "loginFormTitle": "Account Login",
@@ -59,7 +59,7 @@
   },
   "registration": {
     "title": "Registration Form Example",
-    "description": "Advanced registration form with features like password strength meter, field dependencies, and complex validation.",
+    "description": "Advanced registration form built with the form builder, featuring password strength meter, field dependencies, and complex validation.",
     "preview": "Preview",
     "code": "Code",
     "registrationFormTitle": "Create an Account",

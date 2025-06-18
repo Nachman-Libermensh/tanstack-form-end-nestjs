@@ -12,9 +12,9 @@ A powerful form builder and playground built specifically for TanStack Form. Thi
 
 בנאי טפסים חזק ומשטח נסיונות שנבנה במיוחד עבור TanStack Form. הפרויקט מספק פתרון מלא ליצירה, התאמה וניהול של טפסים עם תכונות מתקדמות כמו יצירת טפסים בגרירה ושחרור, ולידציה בזמן אמת ותאימות למסגרות עבודה מרובות. כיתרון נוסף, הוא יכול לייצר DTOs תואמים למסגרות שרת שונות כולל NestJS.
 
-<!-- 583222702 -->
+### Key Benefits | יתרונות מרכזיים
 
-Key benefits of this approach:
+**English:**
 
 - Visual form builder with drag-and-drop interface
 - Advanced TanStack Form features and patterns
@@ -23,7 +23,7 @@ Key benefits of this approach:
 - Reusable form components and templates
 - Live preview and testing capabilities
 
-יתרונות מרכזיים בגישה זו:
+**עברית:**
 
 - בנאי טפסים ויזואלי עם ממשק גרירה ושחרור
 - תכונות ודפוסים מתקדמים של TanStack Form
@@ -34,68 +34,69 @@ Key benefits of this approach:
 
 ## Technologies | טכנולוגיות
 
-### Core Technologies
+### Core Technologies | טכנולוגיות ליבה
 
-- **React** - UI library
+- **Next.js 15** - React framework with App Router
 - **TanStack Form** - Advanced form state management
-- **TypeScript** - Type safety and better DX
-- **TailwindCSS** - Modern styling framework
+- **TypeScript** - Type safety and enhanced developer experience
+- **Tailwind CSS** - Utility-first CSS framework
 
-### Form Builder Features
+### Form Builder Features | תכונות בנאי הטפסים
 
-- **React DnD** - Drag and drop functionality
-- **Monaco Editor** - Code editing capabilities
-- **Zod/Yup/Joi** - Schema validation support
-- **React Query** - Data fetching and caching
+- **React DnD Kit** - Modern drag and drop functionality
+- **Monaco Editor** - VSCode-like code editing capabilities
+- **Zod/Yup/Joi** - Comprehensive schema validation support
+- **TanStack Query** - Powerful data fetching and caching
 
-### Optional Backend Integration
+### Optional Backend Integration | אינטגרציה אופציונלית עם צד השרת
 
-- **DTO Generators** - For NestJS, Express, Fastify
-- **Validation Schema Export** - Multi-format support
-- **API Documentation** - Auto-generated endpoints
+- **DTO Generators** - Support for NestJS, Express, Fastify
+- **Validation Schema Export** - Multi-format schema export
+- **API Documentation** - Auto-generated API endpoints
 
 ## Features | תכונות
 
-### Form Builder Core
+### Form Builder Core | ליבת בנאי הטפסים
 
 - Visual drag-and-drop form builder
-- Real-time form preview
+- Real-time form preview and validation
 - Advanced field types and configurations
-- Custom validation rules
-- Form templates and presets
+- Custom validation rules and logic
+- Form templates and preset collections
 - Export/Import form definitions
 
-### TanStack Form Integration
+### TanStack Form Integration | אינטגרציה עם TanStack Form
 
-- Advanced field arrays and nested forms
-- Conditional field rendering
-- Cross-field validation
-- Optimized re-rendering
-- Form state persistence
-- Multi-step form wizard
+- Advanced field arrays and nested form structures
+- Conditional field rendering and dynamic forms
+- Cross-field validation and dependencies
+- Optimized re-rendering performance
+- Form state persistence and recovery
+- Multi-step form wizard implementation
 
-### Developer Experience
+### Developer Experience | חוויית מפתח
 
-- TypeScript code generation
-- Live code preview
-- Form testing playground
-- Component library integration
-- Custom theme support
+- TypeScript code generation and type safety
+- Live code preview and hot reloading
+- Integrated form testing playground
+- Multiple component library support
+- Customizable themes and styling
+- Comprehensive documentation and examples
 
-### Optional Backend Features
+### Optional Backend Features | תכונות אופציונליות לצד השרת
 
-- DTO generation for multiple frameworks
-- Validation schema export
-- API endpoint suggestions
-- Database schema hints
+- DTO generation for multiple backend frameworks
+- Validation schema export in various formats
+- API endpoint generation suggestions
+- Database schema hints and recommendations
 
 ## Getting Started | התחלה
 
 ### Prerequisites | דרישות מקדימות
 
-- Node.js (v16+)
-- npm or yarn
-- Modern web browser
+- **Node.js** v18+ (recommended v20+)
+- **npm**, **yarn**, or **pnpm** package manager
+- Modern web browser with ES2020+ support
 
 ### Installation | התקנה
 
@@ -108,29 +109,47 @@ cd tanstack-form-playground
 
 # Install dependencies
 npm install
+# or
+yarn install
+# or
+pnpm install
 
-# Start the form builder
+# Start the development server
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
+
+### Quick Start | התחלה מהירה
+
+1. Open your browser to `http://localhost:3000`
+2. Navigate to the Form Builder section
+3. Start building forms with drag-and-drop
+4. Preview and test your forms in real-time
+5. Export your form configurations or generated code
 
 ## Project Structure | מבנה הפרויקט
 
 ```
 tanstack-form-playground/
 ├── src/
-│   ├── components/        # Form builder components
-│   │   ├── builder/       # Drag-and-drop builder
-│   │   ├── preview/       # Form preview components
-│   │   └── fields/        # Form field components
-│   ├── forms/             # TanStack Form implementations
-│   ├── generators/        # Code and DTO generators
-│   ├── templates/         # Form templates
-│   └── playground/        # Testing and examples
-│
-├── shared/                # Common types and schemas
-├── examples/              # Form examples and demos
-├── docs/                  # Documentation
-└── README.md              # This file
+│   ├── app/                    # Next.js App Router pages
+│   ├── components/             # Reusable React components
+│   │   ├── ui/                # Base UI components (shadcn/ui)
+│   │   ├── forms/             # Form-specific components
+│   │   ├── builder/           # Form builder components
+│   │   ├── preview/           # Form preview components
+│   │   └── code-file-explorer/ # Code viewer components
+│   ├── lib/                   # Utility functions and configurations
+│   ├── hooks/                 # Custom React hooks
+│   ├── types/                 # TypeScript type definitions
+│   └── generators/            # Code and DTO generators
+├── public/                    # Static assets
+├── docs/                      # Documentation files
+├── examples/                  # Form examples and templates
+└── README.md                  # This file
 ```
 
 ## Usage | שימוש
@@ -258,7 +277,7 @@ We welcome contributions! Areas where you can help:
 אנו מברכים על תרומות! תחומים שבהם תוכלו לעזור:
 
 - קומפוננטות שדות טפסים חדשות
-- אינטגרציות ספריות ממשק נוספות
+- אינטגרציות ספריות ממשק נוסxxx
 - תבניות ודוגמאות טפסים
 - שיפורי תיעוד
 - תיקוני באגים ואופטימיזציות ביצועים

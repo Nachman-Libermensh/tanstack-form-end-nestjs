@@ -1,19 +1,19 @@
 {
   "site": {
-    "title": "מערכת טפסים מתקדמת | TanStack Form + NestJS",
-    "description": "מערכת לניהול טפסים מתקדמים באמצעות TanStack Form ו-NestJS עם תמיכה בצד לקוח וצד שרת"
+    "title": "בונה טפסים מתקדם | TanStack Form Builder",
+    "description": "מערכת לבניית טפסים מתקדמים באמצעות TanStack Form עם תמיכה בצד לקוח וצד שרת"
   },
   "home": {
-    "title": "בית | TanStack Form + NestJS",
-    "description": "מערכת לניהול טפסים מתקדמים - בית"
+    "title": "בית | בונה טפסים מתקדם",
+    "description": "מערכת לבניית טפסים מתקדמים - בית"
   },
   "playground": {
-    "title": "פלייגראונד | TanStack Form + NestJS",
+    "title": "פלייגראונד | בונה טפסים מתקדם",
     "description": "בנה טפסים בצורה ויזואלית באמצעות גרירה ושחרור"
   },
   "howItWorks": {
-    "title": "איך זה עובד | TanStack Form + NestJS",
-    "description": "הסבר מעמיק על הזרימה ועבודה עם TanStack Form ו-NestJS"
+    "title": "איך זה עובד | בונה טפסים מתקדם",
+    "description": "הסבר מעמיק על הזרימה ועבודה עם בונה הטפסים המתקדם"
   },
   "examples": {
     "basic": {

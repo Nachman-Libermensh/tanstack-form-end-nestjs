@@ -3,6 +3,8 @@ export type TreeViewElement = {
   name: string;
   isSelectable?: boolean;
   children?: TreeViewElement[];
+  icon?: React.ReactNode;
+  badge?: string | number;
 };
 
 export type FileMeta = {
@@ -10,6 +12,9 @@ export type FileMeta = {
   code: string;
   language?: string;
   highlightLines?: number[];
+  description?: string;
+  size?: number;
+  lastModified?: Date;
 };
 
 export type CodeFileExplorerProps = {
@@ -23,6 +28,14 @@ export type CodeFileExplorerProps = {
   height?: string | number;
   /** כיוון התצוגה - מימין לשמאל או משמאל לימין */
   direction?: "rtl" | "ltr";
+  /** הצגת מספרי שורות */
+  showLineNumbers?: boolean;
+  /** אפשרות העתקה */
+  allowCopy?: boolean;
+  /** כותרת מותאמת אישית */
+  title?: string;
+  /** מקסימום גובה הסיידבר */
+  maxSidebarHeight?: string | number;
 };
 
 export type FileItemProps = {

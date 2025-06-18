@@ -1,6 +1,6 @@
 {
-  "title": "פלייגראונד",
-  "description": "בנה ועצב טפסים בצורה ויזואלית",
+  "title": "בונה טפסים ויזואלי",
+  "description": "בנה ועצב טפסים מתקדמים בצורה ויזואלית עם TanStack Form",
   "librarySelector": "בחר ספריית UI:",
   "libraries": {
     "shadcn": "Shadcn UI",
@@ -57,5 +57,105 @@
     "duplicate": "שכפל",
     "copyCode": "העתק קוד",
     "save": "שמור כתבנית"
+  },
+  "formBuilder": {
+    "title": "בונה טפסים ויזואלי",
+    "subtitle": "גרור שדות, סדר ונהל את טופסך בקלות",
+    "addFieldButton": "הוסף שדה חדש",
+    "fieldsCount": "{count} שדות",
+    "noFields": "אין שדות בטופס. השתמש בכפתור להוספת שדות חדשים.",
+    "dragAndDrop": "גרור ושחרר כדי לסדר מחדש",
+    "selectedField": "שדה נבחר",
+    "fieldTypes": {
+      "text": "שדה טקסט",
+      "email": "אימייל",
+      "password": "סיסמה",
+      "number": "מספר",
+      "textarea": "טקסט מרובה שורות",
+      "select": "רשימת בחירה",
+      "checkbox": "תיבת סימון",
+      "radio": "כפתורי רדיו",
+      "date": "תאריך",
+      "time": "שעה",
+      "datetime": "תאריך ושעה",
+      "file": "העלאת קובץ",
+      "range": "מחוון טווח",
+      "url": "כתובת אתר",
+      "tel": "מספר טלפון",
+      "color": "בוחר צבע"
+    }
+  },
+  "fieldEditor": {
+    "title": "הגדרות שדה",
+    "subtitle": "שנה את מאפייני השדה הנבחר",
+    "selectFieldPrompt": "בחר שדה כדי לערוך את המאפיינים שלו",
+    "noFieldSelected": "בחר שדה מהרשימה למעלה כדי לערוך אותו",
+    "tabs": {
+      "basic": "בסיסי",
+      "validation": "אימות",
+      "appearance": "עיצוב",
+      "advanced": "מתקדם"
+    },
+    "fields": {
+      "label": "כותרת השדה",
+      "name": "שם השדה (למפתחים)",
+      "nameHint": "שם זה משמש לזיהוי השדה בקוד",
+      "placeholder": "טקסט מקום שמור",
+      "helperText": "טקסט עזרה",
+      "helperTextHint": "טקסט זה יוצג מתחת לשדה כהנחיה למשתמש",
+      "defaultValue": "ערך ברירת מחדל",
+      "required": "שדה חובה",
+      "disabled": "שדה מושבת",
+      "hidden": "שדה מוסתר",
+      "readonly": "קריאה בלבד"
+    },
+    "validation": {
+      "minLength": "אורך מינימלי",
+      "maxLength": "אורך מקסימלי",
+      "min": "ערך מינימלי",
+      "max": "ערך מקסימלי",
+      "pattern": "תבנית (Regex)",
+      "customMessage": "הודעת שגיאה מותאמת"
+    }
+  },
+  "preview": {
+    "title": "תצוגה מקדימה",
+    "subtitle": "תצוגה מקדימה של הטופס שבנית",
+    "deviceViews": {
+      "mobile": "נייד",
+      "tablet": "טאבלט",
+      "desktop": "מחשב"
+    },
+    "formTitle": "טופס חי",
+    "formDescription": "תצוגה מקדימה של הטופס שבנית",
+    "submitButton": "שלח טופס",
+    "noFieldsMessage": "אין שדות בטופס. הוסף שדות כדי לראות את הטופס בפעולה.",
+    "formSubmitted": "הטופס נשלח בהצלחה ✅"
+  },
+  "codeGenerator": {
+    "title": "קוד מוכן",
+    "formats": {
+      "react": "React",
+      "next": "Next.js",
+      "formOnly": "טופס בלבד"
+    },
+    "actions": {
+      "copy": "העתק",
+      "download": "הורד",
+      "copied": "הועתק ללוח",
+      "downloaded": "הקוד הורד בהצלחה"
+    }
+  },
+  "notifications": {
+    "fieldAdded": "שדה נוסף",
+    "fieldAddedDesc": "נוסף שדה מסוג {type}",
+    "fieldRemoved": "שדה נמחק",
+    "fieldRemovedDesc": "השדה הוסר מהטופס",
+    "fieldReordered": "סדר השדות שונה",
+    "fieldReorderedDesc": "סדר השדות בטופס עודכן",
+    "formReset": "הטופס אופס",
+    "formResetDesc": "כל הנתונים נמחקו",
+    "formExported": "הטופס יוצא",
+    "formExportedDesc": "הקובץ הורד למחשב שלך"
   }
 }

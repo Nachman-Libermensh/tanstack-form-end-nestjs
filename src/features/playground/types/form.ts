@@ -11,10 +11,16 @@ export const FIELD_TYPES = [
   "email",
   "select",
   "checkbox",
+  "radio",
   "textarea",
   "date",
-  "radio",
+  "time",
+  "datetime",
   "file",
+  "url",
+  "tel",
+  "range",
+  "color",
 ] as const;
 
 export type FieldType = (typeof FIELD_TYPES)[number];
@@ -26,7 +32,7 @@ export type PasswordOptions = {
   strengthIndicatorType: "basic" | "advanced";
 };
 
-// הגדרת כללי וולידציה
+// הגדרת כללי וולידציה משופרת
 export type ValidationRules = {
   required?: boolean;
   min?: number;
@@ -36,4 +42,8 @@ export type ValidationRules = {
   pattern?: string;
   custom?: string; // פונקציה מותאמת אישית
   message?: string; // הודעת שגיאה
+  minDate?: string;
+  maxDate?: string;
+  fileTypes?: string[];
+  maxFileSize?: number;
 };

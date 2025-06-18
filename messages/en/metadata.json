@@ -1,19 +1,19 @@
 {
   "site": {
-    "title": "Advanced Form System | TanStack Form + NestJS",
-    "description": "Advanced form management system using TanStack Form and NestJS with client and server support"
+    "title": "Advanced Form Builder | TanStack Form Builder",
+    "description": "Advanced form building system using TanStack Form with client and server support"
   },
   "home": {
-    "title": "Home | TanStack Form + NestJS",
-    "description": "Advanced form management system - Home"
+    "title": "Home | Advanced Form Builder",
+    "description": "Advanced form building system - Home"
   },
   "playground": {
-    "title": "Playground | TanStack Form + NestJS",
+    "title": "Playground | Advanced Form Builder",
     "description": "Build forms visually using drag and drop"
   },
   "howItWorks": {
-    "title": "How It Works | TanStack Form + NestJS",
-    "description": "Deep explanation of the flow and working with TanStack Form and NestJS"
+    "title": "How It Works | Advanced Form Builder",
+    "description": "Deep explanation of the flow and working with the advanced form builder"
   },
   "examples": {
     "basic": {

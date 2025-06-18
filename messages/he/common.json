@@ -28,5 +28,11 @@
     "light": "בהיר",
     "dark": "כהה",
     "system": "מערכת"
+  },
+  "formBuilder": {
+    "title": "בונה טפסים מתקדם",
+    "poweredBy": "מופעל על ידי TanStack Form",
+    "buildForm": "בנה טופס",
+    "customizeForm": "התאם אישית"
   }
 }
