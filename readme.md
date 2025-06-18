@@ -1,213 +1,267 @@
-# TanStack Form with NestJS Backend
+# TanStack Form Builder & Playground
 
 ## Research Purpose | מטרת המחקר
 
-This project was developed as part of a research initiative to formulate a strategy for rapid form creation in modern web applications. By exploring the integration between TanStack Form and NestJS, we aim to establish best practices and patterns that significantly reduce development time for complex forms.
+This project was developed as part of a research initiative to create a comprehensive form builder solution for modern web applications. By focusing on TanStack Form capabilities and providing rapid form creation tools, we aim to establish best practices and patterns that significantly reduce development time for complex forms across different frameworks.
 
-פרויקט זה פותח כחלק ממחקר לגיבוש אסטרטגיה ליצירת טפסים במהירות ביישומי אינטרנט מודרניים. באמצעות בחינת האינטגרציה בין TanStack Form ו-NestJS, אנו שואפים לבסס שיטות עבודה מומלצות ודפוסים שמפחיתים משמעותית את זמן הפיתוח של טפסים מורכבים.
+פרויקט זה פותח כחלק ממחקר ליצירת פתרון מקיף לבנאי טפסים עבור יישומי אינטרנט מודרניים. על ידי התמקדות ביכולות TanStack Form ומתן כלים ליצירת טפסים במהירות, אנו שואפים לבסס שיטות עבודה מומלצות ודפוסים שמפחיתים משמעותית את זמן הפיתוח של טפסים מורכבים בין מסגרות עבודה שונות.
 
 ## Overview | סקירה כללית
 
-A modern full-stack application that combines TanStack Form for frontend form management with NestJS as a robust backend framework. This project demonstrates a complete form handling solution with validation, submission, and data processing.
+A powerful form builder and playground built specifically for TanStack Form. This project provides a complete solution for creating, customizing, and managing forms with advanced features like drag-and-drop form creation, real-time validation, and multi-framework compatibility. As an added benefit, it can generate DTOs compatible with various backend frameworks including NestJS.
+
+בנאי טפסים חזק ומשטח נסיונות שנבנה במיוחד עבור TanStack Form. הפרויקט מספק פתרון מלא ליצירה, התאמה וניהול של טפסים עם תכונות מתקדמות כמו יצירת טפסים בגרירה ושחרור, ולידציה בזמן אמת ותאימות למסגרות עבודה מרובות. כיתרון נוסף, הוא יכול לייצר DTOs תואמים למסגרות שרת שונות כולל NestJS.
 
 <!-- 583222702 -->
 
 Key benefits of this approach:
 
-- Rapid form development with less boilerplate
-- Type-safety throughout the entire stack
-- Consistent validation between frontend and backend
-- Reusable components and patterns
-
-אפליקציית פול-סטאק מודרנית המשלבת את TanStack Form לניהול טפסים בצד הלקוח יחד עם NestJS כמסגרת עבודה חזקה בצד השרת. הפרויקט מדגים פתרון מלא לטיפול בטפסים הכולל ולידציה, שליחה ועיבוד נתונים.
+- Visual form builder with drag-and-drop interface
+- Advanced TanStack Form features and patterns
+- Type-safety throughout form creation and usage
+- Multi-framework DTO generation (NestJS, Express, Fastify)
+- Reusable form components and templates
+- Live preview and testing capabilities
 
 יתרונות מרכזיים בגישה זו:
 
-- פיתוח מהיר של טפסים עם פחות קוד תבנית
-- בטיחות טיפוסים לאורך כל המערכת
-- ולידציה עקבית בין צד לקוח לצד שרת
-- רכיבים ודפוסים ניתנים לשימוש חוזר
+- בנאי טפסים ויזואלי עם ממשק גרירה ושחרור
+- תכונות ודפוסים מתקדמים של TanStack Form
+- בטיחות טיפוסים לאורך יצירה ושימוש בטפסים
+- יצירת DTO עבור מסגרות עבודה מרובות (NestJS, Express, Fastify)
+- רכיבי טפסים ותבניות ניתנים לשימוש חוזר
+- יכולות תצוגה מקדימה ובדיקה בזמן אמת
 
 ## Technologies | טכנולוגיות
 
-### Frontend
+### Core Technologies
 
 - **React** - UI library
-- **TanStack Form** - Form state management
-- **TypeScript** - Type safety
-- **TailwindCSS** - Styling (optional)
+- **TanStack Form** - Advanced form state management
+- **TypeScript** - Type safety and better DX
+- **TailwindCSS** - Modern styling framework
 
-### Backend
+### Form Builder Features
 
-- **NestJS** - Progressive Node.js framework
-- **TypeScript** - Type safety
-- **Validation Pipe** - Input validation
-- **TypeORM/Mongoose** - Database integration
+- **React DnD** - Drag and drop functionality
+- **Monaco Editor** - Code editing capabilities
+- **Zod/Yup/Joi** - Schema validation support
+- **React Query** - Data fetching and caching
+
+### Optional Backend Integration
+
+- **DTO Generators** - For NestJS, Express, Fastify
+- **Validation Schema Export** - Multi-format support
+- **API Documentation** - Auto-generated endpoints
 
 ## Features | תכונות
 
-- Type-safe form handling
-- Server-side validation
-- Real-time form feedback
-- Efficient data processing
-- REST API endpoints
-- Full TypeScript integration
+### Form Builder Core
+
+- Visual drag-and-drop form builder
+- Real-time form preview
+- Advanced field types and configurations
+- Custom validation rules
+- Form templates and presets
+- Export/Import form definitions
+
+### TanStack Form Integration
+
+- Advanced field arrays and nested forms
+- Conditional field rendering
+- Cross-field validation
+- Optimized re-rendering
+- Form state persistence
+- Multi-step form wizard
+
+### Developer Experience
+
+- TypeScript code generation
+- Live code preview
+- Form testing playground
+- Component library integration
+- Custom theme support
+
+### Optional Backend Features
+
+- DTO generation for multiple frameworks
+- Validation schema export
+- API endpoint suggestions
+- Database schema hints
 
 ## Getting Started | התחלה
 
 ### Prerequisites | דרישות מקדימות
 
-- Node.js (v14+)
+- Node.js (v16+)
 - npm or yarn
-- Git
+- Modern web browser
 
 ### Installation | התקנה
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/tanstack-form-end-nestjs.git
+git clone https://github.com/yourusername/tanstack-form-playground.git
 
 # Navigate to project directory
-cd tanstack-form-end-nestjs
+cd tanstack-form-playground
 
 # Install dependencies
 npm install
 
-# Start development servers
+# Start the form builder
 npm run dev
 ```
 
 ## Project Structure | מבנה הפרויקט
 
 ```
-tanstack-form-end-nestjs/
-├── client/                # Frontend React application
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── forms/         # TanStack Form implementations
-│   │   └── api/           # API integration
-│   └── ...
+tanstack-form-playground/
+├── src/
+│   ├── components/        # Form builder components
+│   │   ├── builder/       # Drag-and-drop builder
+│   │   ├── preview/       # Form preview components
+│   │   └── fields/        # Form field components
+│   ├── forms/             # TanStack Form implementations
+│   ├── generators/        # Code and DTO generators
+│   ├── templates/         # Form templates
+│   └── playground/        # Testing and examples
 │
-├── server/                # NestJS backend
-│   ├── src/
-│   │   ├── modules/       # Feature modules
-│   │   ├── dto/           # Data Transfer Objects
-│   │   └── validation/    # Validation schemas
-│   └── ...
-│
+├── shared/                # Common types and schemas
+├── examples/              # Form examples and demos
+├── docs/                  # Documentation
 └── README.md              # This file
 ```
 
 ## Usage | שימוש
 
-1. Define your form schema using TanStack Form
-2. Create corresponding DTOs in NestJS
-3. Implement form submission and validation
-4. Process form data in NestJS controllers
-5. Return responses to update UI state
+### Basic Form Creation
+
+1. Open the form builder interface
+2. Drag and drop fields from the component palette
+3. Configure field properties and validation
+4. Preview your form in real-time
+5. Export form definition or generate code
+
+### Advanced Features
+
+1. Create multi-step forms with conditional logic
+2. Set up complex validation rules
+3. Design reusable form templates
+4. Test forms in the integrated playground
+5. Generate backend DTOs when needed
 
 ## Architecture | ארכיטקטורה
 
-This project is built with **Next.js** on the client side and **NestJS** on the server side, with shared types and schemas stored in a common directory.
+This project is built as a comprehensive TanStack Form development environment with modular architecture supporting various use cases and integrations.
 
-הפרויקט בנוי באמצעות **Next.js** בצד הלקוח ו-**NestJS** בצד השרת, כאשר הטיפוסים והסכימות המשותפים מאוחסנים בתיקייה משותפת.
+הפרויקט בנוי כסביבת פיתוח מקיפה עבור TanStack Form עם ארכיטקטורה מודולרית התומכת במקרי שימוש ואינטגרציות שונות.
 
-### Shared Directory | תיקייה משותפת
+### Form Builder Engine | מנוע בנאי הטפסים
 
-The `shared` directory contains all common types, interfaces, and schemas used by both frontend and backend:
+The core form builder provides:
 
-```
-tanstack-form-end-nestjs/
-├── shared/
-│   ├── types/         # Common TypeScript interfaces
-│   ├── schemas/       # Validation schemas
-│   ├── constants/     # Shared constants
-│   └── utils/         # Shared utility functions
-```
+- Drag-and-drop interface for form creation
+- Real-time form preview and validation
+- Advanced field configuration options
+- Template system for reusable forms
 
-To use the shared directory:
+מנוע בנאי הטפסים המרכזי מספק:
 
-1. Navigate to the shared directory and build it:
+- ממשק גרירה ושחרור ליצירת טפסים
+- תצוגה מקדימה ואימות בזמן אמת
+- אפשרויות תצורה מתקדמות לשדות
+- מערכת תבניות לטפסים ניתנים לשימוש חוזר
 
-```bash
-cd shared
-npm run build
-```
+### Code Generation | יצירת קוד
 
-2. Link the shared package:
+Multiple output formats supported:
 
-```bash
-npm link
-```
+- Pure TanStack Form components
+- TypeScript interfaces and types
+- Validation schemas (Zod, Yup, Joi)
+- Optional backend DTOs
 
-3. Link to the shared package from both client and server:
+פורמטי פלט מרובים נתמכים:
 
-```bash
-# In client directory
-cd ../client
-npm link @project/shared
-
-# In server directory
-cd ../server
-npm link @project/shared
-```
-
-תיקיית `shared` מכילה את כל הטיפוסים, הממשקים והסכימות המשותפים המשמשים הן את צד הלקוח והן את צד השרת. כדי להשתמש בתיקייה המשותפת, יש לבצע build בתיקייה ולקשר אותה באמצעות npm link כמתואר למעלה.
-
-## Multilingual Support | תמיכה ברב-לשוניות
-
-The application supports multiple languages. Language files are stored in the `messages` directory in the root folder. To add a new language, create a new JSON file in this directory.
-
-האפליקציה תומכת במספר שxxx. קבצי השפה מאוחסנים בתיקיית `messages` בתיקיית השורש. להוספת שפה חדשה, יש ליצור קובץ JSON חדש בתיקייה זו.
-
-```
-messages/
-├── en.json      # English translations
-├── he.json      # Hebrew translations
-└── fr.json      # French translations (example)
-```
+- קומפוננטות TanStack Form טהורות
+- ממשקים וטיפוסים של TypeScript
+- סכימות ולידציה (Zod, Yup, Joi)
+- DTOs אופציונליים לצד השרת
 
 ## Component Libraries | ספריות קומפוננטות
 
-The form components support switching between different UI libraries:
+The form builder supports multiple UI component libraries:
 
 - **RizzUI** - Modern, customizable component library
-- **shadcn/ui** - High-quality, accessible components built with Radix UI and Tailwind CSS
+- **shadcn/ui** - High-quality, accessible components
+- **Material-UI** - Google's Material Design components
+- **Ant Design** - Enterprise-class UI design language
+- **Chakra UI** - Modular and accessible component library
 
-To switch between libraries, use the provided configuration options in the form components.
+בנאי הטפסים תומך במספר ספריות קומפוננטות:
 
-קומפוננטות הטפסים מאפשרות מעבר בין ספריות ממשק משתמש שונות:
+- **RizzUI** - ספריית קומפוננטות מודרנית וניתנת להתאמה
+- **shadcn/ui** - קומפוננטות איכותיות ונגישות
+- **Material-UI** - קומפוננטות עיצוב חומרי של גוגל
+- **Ant Design** - שפת עיצוב ממדרגת ארגונית
+- **Chakra UI** - ספריית קומפוננטות מודולרית ונגישה
 
-- **RizzUI** - ספריית קומפוננטות מודרנית וניתנת להתאמה אישית
-- **shadcn/ui** - קומפוננטות איכותיות ונגישות שנבנו עם Radix UI ו-Tailwind CSS
+## Form Examples | דוגמאות טפסים
 
-למעבר בין הספריות, יש להשתמש באפשרויות התצורה המסופקות בקומפוננטות הטפסים.
+The playground includes comprehensive examples:
 
-## Upcoming Features | תכונות עתידיות
+- Contact forms and user registration
+- Multi-step wizards and surveys
+- Dynamic forms with conditional fields
+- Data tables with inline editing
+- File upload and media forms
+- E-commerce checkout flows
+- Complex business forms
 
-### Form Generator | מחולל טפסים
+המשטח כולל דוגמאות מקיפות:
 
-The project will include a form generator that allows creating forms using drag-and-drop and simple configurations. This will significantly speed up form development.
-
-הפרויקט יכלול בהמשך מחולל טפסים המאפשר יצירת טפסים באמצעות גרירה ושחרור והגדרות פשוטות. זה יאיץ משמעותית את פיתוח הטפסים.
-
-### Form Examples | דוגמאות טפסים
-
-A wide range of form examples will be included to demonstrate various use cases and implementation patterns.
-
-מגוון רחב של דוגמאות טפסים ייכלל בפרויקט כדי להדגים מקרי שימוש שונים ודפוסי מימוש.
+- טפסי יצירת קשר ורישום משתמשים
+- אשפי צעדים מרובים וסקרים
+- טפסים דינמיים עם שדות מותנים
+- טבלאות נתונים עם עריכה מוטבעת
+- טפסי העלאת קבצים ומדיה
+- זרימות קנייה של מסחר אלקטרוני
+- טפסים עסקיים מורכבים
 
 ## API Documentation | תיעוד API
 
-The API documentation is available at `/api/docs` when the server is running.
+Comprehensive documentation available:
 
-תיעוד ה-API זמין בכתובת `/api/docs` כאשר השרת פועל.
+- Form Builder API reference
+- TanStack Form integration guides
+- Component customization examples
+- Backend integration patterns
+
+תיעוד מקיף זמין:
+
+- מדריך API של בנאי הטפסים
+- מדריכי אינטגרציה עם TanStack Form
+- דוגמאות התאמה אישית של קומפוננטות
+- דפוסי אינטגרציה עם צד השרת
 
 ## Contributing | תרומה לפרויקט
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions! Areas where you can help:
 
-תרומות יתקבלו בברכה! אל תהססו להגיש בקשת משיכה.
+- New form field components
+- Additional UI library integrations
+- Form templates and examples
+- Documentation improvements
+- Bug fixes and performance optimizations
+
+אנו מברכים על תרומות! תחומים שבהם תוכלו לעזור:
+
+- קומפוננטות שדות טפסים חדשות
+- אינטגרציות ספריות ממשק נוספות
+- תבניות ודוגמאות טפסים
+- שיפורי תיעוד
+- תיקוני באגים ואופטימיזציות ביצועים
 
 ## License | רישיון
 
