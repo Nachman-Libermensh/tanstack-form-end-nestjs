@@ -58,7 +58,7 @@ export function SyntaxHighlighterWrapper({
         "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', 'Liberation Mono', monospace",
       lineHeight: 1.6,
       fontWeight: 400,
-      boxSizing: "border-box",
+      boxSizing: "border-box" as React.CSSProperties["boxSizing"],
       padding: 0,
       margin: 0,
     },
